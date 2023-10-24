@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1987743201508909792}
   - component: {fileID: 1308248889888464907}
   - component: {fileID: 8641569399977256828}
+  - component: {fileID: 536020704578643851}
   m_Layer: 0
   m_Name: road11
   m_TagString: Untagged
@@ -83,6 +84,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &536020704578643851
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1635259761846545643}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1714304541939429932, guid: e9390ae0e432be447bf637e4bac268ae, type: 3}
 --- !u!1 &4107836324439312080
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,7 +115,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1106388555970655427}
-  - component: {fileID: -7912227750924820153}
   m_Layer: 0
   m_Name: road11
   m_TagString: Untagged
@@ -116,25 +138,3 @@ Transform:
   - {fileID: 1987743201508909792}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &-7912227750924820153
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4107836324439312080}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}

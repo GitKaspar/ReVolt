@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6347684416541107168}
   - component: {fileID: 7191123379210110849}
   - component: {fileID: 7490542358177933602}
+  - component: {fileID: 1490302844063493475}
   m_Layer: 0
   m_Name: road16bisbis
   m_TagString: Untagged
@@ -83,6 +84,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &1490302844063493475
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4308053771690743437}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5404421243010964081, guid: 4cf314ffbb393c24fb42dcafe27a91bf, type: 3}
 --- !u!1 &8161285363179188874
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,7 +115,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5123385625134039193}
-  - component: {fileID: -6149106375036990817}
   m_Layer: 0
   m_Name: road16bisbis
   m_TagString: Untagged
@@ -116,25 +138,3 @@ Transform:
   - {fileID: 6347684416541107168}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &-6149106375036990817
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8161285363179188874}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
