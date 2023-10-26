@@ -40,8 +40,8 @@ public class StateDrone
 
     // Kui mängija on 10 ühiku kaugusel ja 30 kraadi ulatuses, siis teda nähakse. Kui mängija on 7 ühiku kaugusel, siis npc tulistab.
 
-    float visDist = 10.0f;
-    float visAngle = 45.0f; // NPC näeb tegelikult kaks korda sama palju
+    float visDist = 20.0f;
+    float visAngle = 60.0f; // NPC näeb tegelikult kaks korda sama palju
     float shootDist = 3.0f;
 
         public StateDrone(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player)
@@ -149,7 +149,7 @@ public class Patrol : StateDrone
         : base(_npc, _agent, _anim, _player)
     {
         name = STATE.PATROL;
-        agent.speed = 2.0f;
+        agent.speed = 4.0f;
         agent.isStopped = false;
         
     }
@@ -226,7 +226,7 @@ public class Pursue : StateDrone
         : base(_npc, _agent, _anim, _player)
     {
         name = STATE.PURSUE;
-        agent.speed = 5.0f;
+        agent.speed = 8.0f;
         agent.isStopped = false;
     }
 
