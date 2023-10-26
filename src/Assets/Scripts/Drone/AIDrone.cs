@@ -7,11 +7,9 @@ public class AIDrone : MonoBehaviour
 {
     NavMeshAgent agent;
     Animator anim;
-    public Transform player;
     StateDrone currentState;
-    public static Transform Checkpoint;
-    public Transform guardPoint;
-
+    
+    public Transform player;
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +17,6 @@ public class AIDrone : MonoBehaviour
         agent = this.GetComponent<NavMeshAgent>();
         anim = this.GetComponent<Animator>();
         currentState = new Idle(this.gameObject, agent, anim, player);
-        Checkpoint = guardPoint;
     }
 
     // Update is called once per frame

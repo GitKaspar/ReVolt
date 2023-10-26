@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-
 /*
  * Loome Singleton'i. Klass hõlmab checkpoint'e - kui neid pole, luuakse need stseenist vastavat silti otsides ("Checkpoint")
  */
@@ -19,9 +18,7 @@ public sealed class GameEnvironment
             if (instance == null)
             {
                 instance = new GameEnvironment();
-                instance.Checkpoints.AddRange(
-                    GameObject.FindGameObjectsWithTag("Checkpoint"));
-
+                instance.Checkpoints.AddRange(GameObject.FindGameObjectsWithTag("Checkpoint"));
                 instance.checkpoints = instance.checkpoints.OrderBy(waypoint => waypoint.name).ToList(); // Seab tähestikulisse kasvavasse järjekorda
             }
             return instance;

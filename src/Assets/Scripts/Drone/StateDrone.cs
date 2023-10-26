@@ -16,11 +16,18 @@ public class StateDrone
      * Pıgenemine? Vıib-olla
      */
     public enum STATE { 
-        IDLE, PATROL, PURSUE, ATTACK, SLEEP, RUNAWAY
+        IDLE, 
+        PATROL, 
+        PURSUE, 
+        ATTACK, 
+        SLEEP, 
+        RUNAWAY
     };
 
     public enum EVENT { 
-        ENTER, UPDATE, EXIT
+        ENTER, 
+        UPDATE, 
+        EXIT
     };
 
     public STATE name;
@@ -36,16 +43,14 @@ public class StateDrone
     float visDist = 10.0f;
     float visAngle = 45.0f; // NPC n‰eb tegelikult kaks korda sama palju
     float shootDist = 3.0f;
-    float fleeDist = 2.0f;
-  
 
         public StateDrone(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player)
     {
         npc = _npc;
         agent = _agent;
         anim = _anim;
-        stage = EVENT.ENTER;
         player = _player;
+        stage = EVENT.ENTER;
     }
 
     public virtual void Enter() { stage = EVENT.UPDATE; }
@@ -90,7 +95,7 @@ public class StateDrone
     {
         Vector3 direction = npc.transform.position - player.position; // Siin muutus.
         float angle = Vector3.Angle(direction, npc.transform.forward);
-        if (direction.magnitude < fleeDist  && angle < visAngle)
+        if (direction.magnitude < 2.0f  && angle < visAngle)
         {
             return true;
         }
@@ -100,7 +105,6 @@ public class StateDrone
 
 public class Idle : StateDrone
 {
-
 
     public Idle(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player) 
         : base(_npc, _agent, _anim, _player)
@@ -122,7 +126,7 @@ public class Idle : StateDrone
             stage = EVENT.EXIT;
         }
 
-        else if (Random.Range(0, 100) < 10) // See, et t¸¸p hakkab patrullima, on juhuslik, 10% tıen‰osus
+        else if (Random.Range(0, 100) < 10) // See, et t¸¸p hakkab patrullima, on juhuslik, 10% tıen‰osus Tıstame 50 peale?
         {
             nextState = new Patrol(npc, agent, anim, player);
             stage = EVENT.EXIT;
@@ -145,52 +149,67 @@ public class Patrol : StateDrone
         : base(_npc, _agent, _anim, _player)
     {
         name = STATE.PATROL;
-        agent.speed = 2;
+        agent.speed = 2.0f;
         agent.isStopped = false;
         
     }
 
     public override void Enter()
     {
-        // Esimese versiooni tehisaru ei patrulli. L¸litan ajautiselt patrullimiskoodi v‰lja - ei tˆˆta ka hetkel.
-        /*
+       /*
         float lastDist = Mathf.Infinity;
+
+        
         for (int i = 0; i < GameEnvironment.Singleton.Checkpoints.Count; i++)
         {
-            GameObject thisWP = GameEnvironment.Singleton.Checkpoints[i];
-            float distance = Vector3.Distance(npc.transform.position, thisWP.transform.position);
-
+            
+            GameObject thisWP = GameEnvironment.Singleton.Checkpoints[i]; // antud checkpoint'i GameObject
+            float distance = Vector3.Distance(npc.transform.position, thisWP.transform.position); // vahemaa antud checkpoint'i ja NPC vahel
+            // Kui antud checkpoint on l‰hemal kui eelmine l‰him (alguses lıpmatus), siis 
             if(distance < lastDist)
             {
                 currentIndex = i - 1;
                 lastDist = distance;
             }
-        }
+        }*/
         // anim.SetTrigger("isWalking");
-        */
+        currentIndex = 0;
         base.Enter();
     }   
     public override void Update()
     {
-        /* Ka v‰lja l¸litatud, kuna esialgu droon vaid seisab.
+        // Siin peaks vahetuma sihtkoht. Kui oleme sihile l‰hemal kui 1 ¸hik, siis kui meil on list l‰bi k‰idud, alustame uuesti, kui ei, kasvatame indeksit.
+        // IF remainingDistance, is unknown, the value is infinity (greater than 1) - remainingDisntace is not unknown.
         if(agent.remainingDistance < 1)
         {
+            Debug.Log("Checkpoint reached."); // This is triggered even before we reach the first checkpoint...
             if (currentIndex >= GameEnvironment.Singleton.Checkpoints.Count - 1)
+            {
                 currentIndex = 0;
+                Debug.Log("Index reset to 0."); // This is never triggered.
+            }
             else
+            {
                 currentIndex = currentIndex++;
-
+                Debug.Log("Raised index by 1. Current index: " + currentIndex); // Index remains 0 throughout. Problem? Global value resets index to -1? Works in FSM project, though.
+            }
+            // See siin peaks olema uus siht.
             agent.SetDestination(GameEnvironment.Singleton.Checkpoints[currentIndex].transform.position);
+            Debug.Log("Off to next checkpoint.");
+
+            // Amount of checkpoints is correct(size of list = 5)
+
         }
-        */
-        if (agent.transform.position != AIDrone.Checkpoint.position)
-        {
-            agent.SetDestination(AIDrone.Checkpoint.position);
-        }
+
 
         if (CanSeePlayer())
         {
             nextState = new Pursue(npc, agent, anim, player);
+            stage = EVENT.EXIT;
+        }
+        else if (IsScared())
+        {
+            nextState = new RunAway(npc, agent, anim, player);
             stage = EVENT.EXIT;
         }
     }  
@@ -207,7 +226,7 @@ public class Pursue : StateDrone
         : base(_npc, _agent, _anim, _player)
     {
         name = STATE.PURSUE;
-        agent.speed = 5;
+        agent.speed = 5.0f;
         agent.isStopped = false;
     }
 
@@ -232,11 +251,6 @@ public class Pursue : StateDrone
                 nextState = new Patrol(npc, agent, anim, player);
                 stage = EVENT.EXIT;
             }
-            else if (IsScared())
-            {
-                nextState = new RunAway(npc, agent, anim, player);
-                stage = EVENT.EXIT;
-            }
         }
     }
 
@@ -250,14 +264,14 @@ public class Pursue : StateDrone
 public class Attack : StateDrone
 {
     float rotationSpeed = 2.0f;
-    AudioSource shoot;
+    // AudioSource shoot;
 
     public Attack(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player)
         : base(_npc, _agent, _anim, _player)
 
     {
         name = STATE.ATTACK;
-        shoot = npc.GetComponent<AudioSource>();
+        // shoot = npc.GetComponent<AudioSource>();
     }
 
     public override void Enter()
@@ -272,7 +286,7 @@ public class Attack : StateDrone
     {
         Vector3 direction = player.position - npc.transform.position;
         float angle = Vector3.Angle(direction,npc.transform.forward);
-        direction.y = 0;
+        direction.y = 0.0f;
 
         npc.transform.rotation = Quaternion.Slerp(npc.transform.rotation,
             Quaternion.LookRotation(direction),
@@ -281,6 +295,7 @@ public class Attack : StateDrone
         if (!CanAttackPlayer())
         {
             nextState = new Idle(npc, agent, anim, player); // Seda saab siin muuta, et anda talle teine k‰itumine. Idle on turvaline, kuna viib kıigi teisteni.
+            // shoot.Stop();
             stage = EVENT.EXIT;
         }
     }
@@ -288,7 +303,6 @@ public class Attack : StateDrone
     public override void Exit()
     {
         // anim.ResetTrigger("isShooting");
-        // shoot.Stop();
         base.Exit();
     }
 }
@@ -297,7 +311,6 @@ public class RunAway : StateDrone
 
 {
     GameObject safeBox; // Oleks s‰‰stlikum panna see GameEnvironment klassi ja kutsuda sealt.
-    float rotationSpeed = 2.0f;
 
     public RunAway(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player)
        : base(_npc, _agent, _anim, _player)
@@ -319,7 +332,7 @@ public class RunAway : StateDrone
 
     public override void Update()
     {
-        if(agent.remainingDistance < 1)
+        if(agent.remainingDistance < 1.0f)
         {
             nextState = new Idle(npc, agent, anim, player);
             stage = EVENT.EXIT;
