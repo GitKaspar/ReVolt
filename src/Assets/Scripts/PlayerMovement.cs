@@ -101,7 +101,7 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = Vector3.ClampMagnitude(rb.velocity, MaxSpeed);
         }
 
-        Debug.Log("speed: " + currentSpeed);
+        //Debug.Log("speed: " + currentSpeed);
     }
 
 

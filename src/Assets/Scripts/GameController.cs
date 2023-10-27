@@ -8,24 +8,37 @@ public class GameController : MonoBehaviour
     public GameObject EndPanel;
     public TextMeshProUGUI ResultText;
 
+    public Drop[] Drops;
+    private int numDropsDone = 0;
+
     private void Awake()
     {
         EndPanel.SetActive(false);
 
         Events.OnEndGame += OnEndGame;
+        Events.OnDropDone += OnDropDone;
     }
 
     private void OnDestroy()
     {
         Events.OnEndGame -= OnEndGame;
+        Events.OnDropDone -= OnDropDone;
     }
 
-    private void Update()
+    public void OnDropDone(Drop drop)
     {
-        if (Time.timeSinceLevelLoad > 2f)
-            Events.EndGame(true);
-    }
+        numDropsDone++;
+        Debug.Log(drop.transform.position);
+        foreach (Drop d in Drops)
+        {
+            Debug.Log(d.done);
+        }
 
+        if (numDropsDone == Drops.Length)
+        {
+            Events.EndGame(true);
+        }
+    }
 
     public void OnEndGame(bool isWin)
     {

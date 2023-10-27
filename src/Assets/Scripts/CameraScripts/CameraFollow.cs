@@ -12,7 +12,7 @@ namespace UnityStandardAssets.Utility
         Vector3 currentVelocity;
         void LateUpdate()
         {
-            Vector3 target = player.position + (-player.transform.forward * distance);
+            Vector3 target = player.transform.position + (-player.transform.forward * distance);
             target += Vector3.up * height;
             transform.position = Vector3.SmoothDamp(transform.position, target, ref currentVelocity, smoothTime);
             transform.LookAt(player);

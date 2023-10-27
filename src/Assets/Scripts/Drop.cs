@@ -5,7 +5,8 @@ using UnityEngine;
 public class Drop : MonoBehaviour
 {
     private bool droppable;
-    private bool done;
+    [HideInInspector]
+    public bool done;
 
     // Update is called once per frame
     void Update()
@@ -38,6 +39,8 @@ public class Drop : MonoBehaviour
     private void DoDrop()
     {
         done = true;
+        Events.DropDone(this);
+
         Renderer[] renderers = GetComponentsInChildren<Renderer>();
 
         foreach (var rend in renderers)
