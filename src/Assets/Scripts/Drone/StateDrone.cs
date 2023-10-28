@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using System;
 
 public class StateDrone
 {
@@ -126,7 +127,7 @@ public class Idle : StateDrone
             stage = EVENT.EXIT;
         }
 
-        else if (Random.Range(0, 100) < 10) // See, et tüüp hakkab patrullima, on juhuslik, 10% tõenäosus Tõstame 50 peale?
+        else if (UnityEngine.Random.Range(0, 100) < 10) // See, et tüüp hakkab patrullima, on juhuslik, 10% tõenäosus Tõstame 50 peale?
         {
             nextState = new Patrol(npc, agent, anim, player);
             stage = EVENT.EXIT;
@@ -264,6 +265,8 @@ public class Pursue : StateDrone
 public class Attack : StateDrone
 {
     float rotationSpeed = 2.0f;
+
+    public static event Action catchPlayer; // End game event tied to the Attack class, because drone attacking driggers game end.
     // AudioSource shoot;
 
     public Attack(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player)
@@ -279,6 +282,7 @@ public class Attack : StateDrone
         // anim.SetTrigger("isShooting");
         agent.isStopped = true;
         // shoot.Play();
+        catchPlayer?.Invoke(); // Action is invoked, when we enter the Attack state.
         base.Enter();
     }
 

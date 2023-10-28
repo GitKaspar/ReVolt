@@ -11,6 +11,24 @@ public class GameController : MonoBehaviour
     public Drop[] Drops;
     private int numDropsDone = 0;
 
+    // Kaspar added the following 3 methods for the lose event. Attack.catchPlayer is invoked, when the drone begins attacking.
+
+    private void OnEnable()
+    {
+        Attack.catchPlayer += EndGame;
+    }
+
+    private void OnDisable()
+    {
+        Attack.catchPlayer -= EndGame;
+    }
+
+    public void EndGame()
+    {
+        ResultText.text = "Busted";
+        EndPanel.SetActive(true);
+    }
+
     private void Awake()
     {
         EndPanel.SetActive(false);
@@ -40,6 +58,8 @@ public class GameController : MonoBehaviour
         }
     }
 
+
+
     public void OnEndGame(bool isWin)
     {
         if (isWin)
@@ -49,4 +69,7 @@ public class GameController : MonoBehaviour
 
         EndPanel.SetActive(true);
     }
+
+ 
+
 }
