@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -71,6 +72,15 @@ public class GameController : MonoBehaviour
         EndPanel.SetActive(true);
     }
 
- 
+    public void BackToMain()
+    {
+        SceneManager.LoadSceneAsync("MainMenu");
+    }
+
+    private void OnLevelWasLoaded(int level)
+    {
+        Time.timeScale = 1;
+    }
+
 
 }
