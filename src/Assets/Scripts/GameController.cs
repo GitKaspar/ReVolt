@@ -27,6 +27,7 @@ public class GameController : MonoBehaviour
     {
         ResultText.text = "Busted";
         EndPanel.SetActive(true);
+        Time.timeScale = 0;
     }
 
     private void Awake()
