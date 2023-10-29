@@ -13,9 +13,9 @@ public class CameraLookAround : MonoBehaviour
         if (Input.GetMouseButton(1))
         {
             horizontalRotation += Input.GetAxis("Mouse X") * rotationSpeed;
-            horizontalRotation = Mathf.Clamp(horizontalRotation, -90f, 90f);
+            horizontalRotation = Mathf.Clamp(horizontalRotation, -150f, 150f);
 
-            verticalRotation += Input.GetAxis("Mouse Y") * rotationSpeed;
+            verticalRotation += Input.GetAxis("Mouse Y") * rotationSpeed * 0.5f;
             verticalRotation = Mathf.Clamp(verticalRotation, -90f, 90f);
         }
 

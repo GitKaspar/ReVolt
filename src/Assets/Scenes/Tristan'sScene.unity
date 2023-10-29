@@ -18800,7 +18800,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -32273,6 +32273,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa20547dfc1c8104e9a4bb855c15ca97, type: 3}
+--- !u!4 &964853419 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7263266457101584797, guid: ab36c67cbe901ce459351c31852e101a, type: 3}
+  m_PrefabInstance: {fileID: 1453124045227707344}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &965623228
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -47424,7 +47429,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -71787,6 +71792,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerScooter
       objectReference: {fileID: 0}
+    - target: {fileID: 4156500767967589158, guid: ab36c67cbe901ce459351c31852e101a, type: 3}
+      propertyPath: HandleBar
+      value: 
+      objectReference: {fileID: 964853419}
     - target: {fileID: 4156500767967589158, guid: ab36c67cbe901ce459351c31852e101a, type: 3}
       propertyPath: m_Topspeed
       value: 20

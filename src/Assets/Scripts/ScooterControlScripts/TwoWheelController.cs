@@ -49,6 +49,9 @@ public class TwoWheelController : MonoBehaviour
     public float MaxSpeed{get { return m_Topspeed; }}
     public float Revs { get; private set; }
 
+
+    public Transform HandleBar;
+
     // Use this for initialization
     private void Start()
     {
@@ -90,6 +93,9 @@ public class TwoWheelController : MonoBehaviour
         float speedPenaltySteering = 0.4f + 0.6f * (m_Topspeed - CurrentSpeed) / m_Topspeed;
         m_SteerAngle = steering*m_MaximumSteerAngle * speedPenaltySteering;
         m_WheelColliders[0].steerAngle = m_SteerAngle;
+
+        //Handlebar turn
+        //HandleBar.transform.rotation = Quaternion.Euler(0, m_SteerAngle, 0) * Quaternion.Euler(0, -90, 0);
 
         /*
         //Code for manual leaning
