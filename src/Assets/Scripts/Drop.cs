@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Drop : MonoBehaviour
 {
+    public Color ColorDropped;
+    public Color ColorOpen;
     private bool droppable;
     [HideInInspector]
     public bool done;
@@ -22,6 +24,7 @@ public class Drop : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Hello");
         if (other.CompareTag("Player"))
         {
             droppable = true;
@@ -38,6 +41,7 @@ public class Drop : MonoBehaviour
 
     private void DoDrop()
     {
+        Debug.Log("Drop done");
         done = true;
         Events.DropDone(this);
 
@@ -45,7 +49,7 @@ public class Drop : MonoBehaviour
 
         foreach (var rend in renderers)
         {
-            rend.material.color = Color.green;
+            rend.material.color = ColorDropped;
         }
     }
 }

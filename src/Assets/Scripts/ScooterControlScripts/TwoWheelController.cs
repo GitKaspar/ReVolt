@@ -126,7 +126,7 @@ public class TwoWheelController : MonoBehaviour
             var hbTorque = handbrake*m_MaxHandbrakeTorque;
             m_WheelColliders[0].brakeTorque = hbTorque;
             m_WheelColliders[1].brakeTorque = hbTorque;
-            Debug.Log("HB" + "Target: " + m_targetSpeed + ", Current: " + CurrentSpeed + "; Motor: " + m_WheelColliders[0].motorTorque + ", Brake:" + m_WheelColliders[0].brakeTorque);
+            //Debug.Log("HB" + "Target: " + m_targetSpeed + ", Current: " + CurrentSpeed + "; Motor: " + m_WheelColliders[0].motorTorque + ", Brake:" + m_WheelColliders[0].brakeTorque);
         }
 
         //Traction calculations
@@ -207,7 +207,7 @@ public class TwoWheelController : MonoBehaviour
             }
         }
 
-        Debug.Log("Target: " + m_targetSpeed + ", Current: " + CurrentSpeed + "; Motor: " + m_WheelColliders[0].motorTorque + ", Brake:" + m_WheelColliders[0].brakeTorque);
+        //Debug.Log("Target: " + m_targetSpeed + ", Current: " + CurrentSpeed + "; Motor: " + m_WheelColliders[0].motorTorque + ", Brake:" + m_WheelColliders[0].brakeTorque);
     }
 
     void Stabilizer(float h)
