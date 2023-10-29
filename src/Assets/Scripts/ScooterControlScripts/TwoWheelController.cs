@@ -76,7 +76,7 @@ public class TwoWheelController : MonoBehaviour
             Vector3 position;
             m_WheelColliders[i].GetWorldPose(out position, out quat);
             m_WheelMeshes[i].transform.position = position;
-            m_WheelMeshes[i].transform.rotation = quat;// * Quaternion.Euler(0, 0, 90); //Multiplication with (0,0,90) only needed for make-shift cylinder wheels
+            m_WheelMeshes[i].transform.rotation = quat * Quaternion.Euler(0, -90, 0);
         }
         
 
@@ -87,7 +87,7 @@ public class TwoWheelController : MonoBehaviour
 
         //Set the steer on the front wheel
         //Assuming that wheel 0 is the front wheel (Scooter only steers with front wheel
-        float speedPenaltySteering = 0.5f + 0.5f * (m_Topspeed - CurrentSpeed) / m_Topspeed;
+        float speedPenaltySteering = 0.4f + 0.6f * (m_Topspeed - CurrentSpeed) / m_Topspeed;
         m_SteerAngle = steering*m_MaximumSteerAngle * speedPenaltySteering;
         m_WheelColliders[0].steerAngle = m_SteerAngle;
 
@@ -215,7 +215,7 @@ public class TwoWheelController : MonoBehaviour
         var deltaQuat = Quaternion.FromToRotation(m_Rigidbody.transform.up, Vector3.up);
         deltaQuat.ToAngleAxis(out var angle, out var axis);
         m_Rigidbody.AddTorque(-m_Rigidbody.angularVelocity * 1f, ForceMode.Acceleration);
-        angle = Mathf.LerpAngle(0, angle/2, Time.fixedDeltaTime);
+        angle = Mathf.LerpAngle(0, angle, Time.fixedDeltaTime);
         m_Rigidbody.AddTorque(axis.normalized * angle * 1f, ForceMode.Acceleration);
     }
 
