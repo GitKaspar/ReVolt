@@ -4882,7 +4882,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1.15
+  m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4529596943617896157
 MonoBehaviour:
@@ -4896,8 +4896,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0e4df547ce89384b9ded1a41c000db8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ColorDropped: {r: 0.28235295, g: 1, b: 0.07450981, a: 1}
-  ColorOpen: {r: 1, g: 0.20392157, b: 0.9607843, a: 1}
+  MatDropped: {fileID: 2100000, guid: d58b212acb9879142b6e11601db7157c, type: 2}
+  MatOpen: {fileID: 2100000, guid: b2bf438340b459442bb3913a7288c420, type: 2}
   done: 0
 --- !u!1 &8273111594421150933
 GameObject:

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Drop : MonoBehaviour
 {
-    public Color ColorDropped;
-    public Color ColorOpen;
+    public Material MatDropped;
+    public Material MatOpen;
     private bool droppable;
     [HideInInspector]
     public bool done;
@@ -49,7 +49,7 @@ public class Drop : MonoBehaviour
 
         foreach (var rend in renderers)
         {
-            rend.material.color = ColorDropped;
+            rend.material = MatDropped;
         }
     }
 }
