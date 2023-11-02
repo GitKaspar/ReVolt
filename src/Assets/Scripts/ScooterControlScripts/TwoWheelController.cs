@@ -24,7 +24,11 @@ public class TwoWheelController : MonoBehaviour
     [SerializeField] private float m_ReverseTorque;
     [SerializeField] private float m_MaxHandbrakeTorque;
     [SerializeField] private float m_Downforce = 100f;
-    [SerializeField] private float m_Topspeed = 200;
+
+    public float TopSpeed;
+    public float BatteryLowSpeed;
+
+    private float m_Topspeed = 20;
     [SerializeField] private static int NoOfGears = 5;
     [SerializeField] private float m_RevRangeBoundary = 1f;
     [SerializeField] private float m_SlipLimit;
@@ -51,6 +55,29 @@ public class TwoWheelController : MonoBehaviour
 
 
     public Transform HandleBar;
+
+    private void Awake()
+    {
+        Events.OnRequestCurrentSpeed += OnRequestCurrentSpeed;
+        Events.OnRequestTopSpeed += OnRequestTopSpeed;
+        Events.OnSetTopSpeed += OnSetTopSpeed;
+        Events.OnBatteryLow += OnBatteryLow;
+
+        m_Topspeed = TopSpeed;
+    }
+
+    private void OnDestroy()
+    {
+        Events.OnRequestCurrentSpeed -= OnRequestCurrentSpeed;
+        Events.OnRequestTopSpeed -= OnRequestTopSpeed;
+        Events.OnSetTopSpeed -= OnSetTopSpeed;
+        Events.OnBatteryLow -= OnBatteryLow;
+    }
+    public float OnRequestCurrentSpeed() => CurrentSpeed;
+    public float OnRequestTopSpeed() => CurrentSpeed;
+    public void OnSetTopSpeed(float speed) => m_Topspeed = speed;
+    public void OnBatteryLow(bool isLow) => m_Topspeed = isLow ? BatteryLowSpeed : TopSpeed;
+
 
     // Use this for initialization
     private void Start()

@@ -24,7 +24,6 @@ public class Drop : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Hello");
         if (other.CompareTag("Player"))
         {
             droppable = true;
@@ -41,7 +40,6 @@ public class Drop : MonoBehaviour
 
     private void DoDrop()
     {
-        Debug.Log("Drop done");
         done = true;
         Events.DropDone(this);
 
