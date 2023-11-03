@@ -55,6 +55,7 @@ public class TwoWheelController : MonoBehaviour
 
 
     public Transform HandleBar;
+    private float m_previousSteerAngle;
 
     private void Awake()
     {
@@ -122,7 +123,8 @@ public class TwoWheelController : MonoBehaviour
         m_WheelColliders[0].steerAngle = m_SteerAngle;
 
         //Handlebar turn
-        HandleBar.transform.rotation = Quaternion.Euler(0, (transform.rotation.eulerAngles.y - 90 + m_SteerAngle), 0);
+        HandleBar.transform.Rotate(0, m_SteerAngle - m_previousSteerAngle, 0, Space.Self);
+        m_previousSteerAngle = m_SteerAngle;
 
         /*
         //Code for manual leaning
@@ -141,7 +143,7 @@ public class TwoWheelController : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, transform.eulerAngles.y, 0f);
         }
         */
-        
+
 
         //Helps with reducing sudden direction changes
         SteerHelper(); 
