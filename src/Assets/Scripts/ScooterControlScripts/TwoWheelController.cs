@@ -122,7 +122,7 @@ public class TwoWheelController : MonoBehaviour
         m_WheelColliders[0].steerAngle = m_SteerAngle;
 
         //Handlebar turn
-        //HandleBar.transform.rotation = Quaternion.Euler(0, m_SteerAngle, 0) * Quaternion.Euler(0, -90, 0);
+        HandleBar.transform.rotation = Quaternion.Euler(0, (transform.rotation.eulerAngles.y - 90 + m_SteerAngle), 0);
 
         /*
         //Code for manual leaning
