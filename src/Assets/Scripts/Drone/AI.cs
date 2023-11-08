@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class AIDrone : MonoBehaviour
+public class AI : MonoBehaviour
 {
     NavMeshAgent agent;
     Animator anim;
-    StateDrone currentState;
+    State currentState;
     
     public Transform player;
+    public Checkpoint InitialCheckpoint;
 
     // Start is called before the first frame update
     void Start()
