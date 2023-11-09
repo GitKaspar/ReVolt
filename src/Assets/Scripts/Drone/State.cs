@@ -295,6 +295,7 @@ public class RunAway : State
     {
         // anim.SetTrigger("isRunning");
         agent.isStopped = false;
+        droneLight.color = Color.yellow;
         agent.speed = 15;
         agent.SetDestination(safeBox.transform.position); // Asukoha m‰‰rab juba siin - mitte Update meetodis
         base.Enter();
