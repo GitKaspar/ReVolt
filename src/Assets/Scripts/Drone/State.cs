@@ -28,18 +28,20 @@ public class State
     protected Transform player;
     protected State nextState;
     protected NavMeshAgent agent;
+    protected Light droneLight;
 
-    float visDist = 10.0f;
-    float visAngle = 45.0f; // NPC n‰eb tegelikult kaks korda sama palju
+    float visDist = 20.0f;
+    float visAngle = 60.0f; // NPC n‰eb tegelikult kaks korda sama palju
     float shootDist = 3.0f;
 
 
-    public State(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player)
+    public State(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player, Light _droneLight)
     {
         npc = _npc;
         agent = _agent;
         anim = _anim;
         player = _player;
+        droneLight = _droneLight;
         stage = EVENT.ENTER;
     }
 
@@ -96,8 +98,8 @@ public class State
 public class Idle : State
 {
 
-    public Idle(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player) 
-        : base(_npc, _agent, _anim, _player)
+    public Idle(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player, Light _droneLight) 
+        : base(_npc, _agent, _anim, _player, _droneLight)
     {
         name = STATE.IDLE;
     }
@@ -105,6 +107,7 @@ public class Idle : State
     public override void Enter()
     {
         anim.SetTrigger("isIdle");
+        droneLight.color = Color.cyan;
         base.Enter();
     }
 
@@ -112,13 +115,13 @@ public class Idle : State
     {
         if (CanSeePlayer())
         {
-            nextState = new Pursue(npc, agent, anim, player);
+            nextState = new Pursue(npc, agent, anim, player, droneLight);
             stage = EVENT.EXIT;
         }
 
         else if (UnityEngine.Random.Range(0, 100) < 10) // See, et t¸¸p hakkab patrullima, on juhuslik, 10% tıen‰osus
         {
-            nextState = new Patrol(npc, agent, anim, player);
+            nextState = new Patrol(npc, agent, anim, player, droneLight);
             stage = EVENT.EXIT;
         }
 
@@ -136,11 +139,11 @@ public class Patrol : State
     private AI droneAI;
     private Checkpoint checkpoint;
 
-    public Patrol(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player)
-        : base(_npc, _agent, _anim, _player)
+    public Patrol(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player, Light _droneLight)
+        : base(_npc, _agent, _anim, _player, _droneLight)
     {
         name = STATE.PATROL;
-        agent.speed = 2.0f;
+        agent.speed = 8.0f;
         agent.isStopped = false;
     }
 
@@ -148,6 +151,7 @@ public class Patrol : State
     {
         droneAI = agent.GetComponent<AI>();
         checkpoint = droneAI.InitialCheckpoint;
+        droneLight.color = Color.cyan;
 
         base.Enter();
     }
@@ -166,12 +170,12 @@ public class Patrol : State
 
         if (CanSeePlayer())
         {
-            nextState = new Pursue(npc, agent, anim, player);
+            nextState = new Pursue(npc, agent, anim, player, droneLight);
             stage = EVENT.EXIT;
         }
         else if (IsScared())
         {
-            nextState = new RunAway(npc, agent, anim, player);
+            nextState = new RunAway(npc, agent, anim, player, droneLight);
             stage = EVENT.EXIT;
         }
     }
@@ -184,17 +188,18 @@ public class Patrol : State
 
 public class Pursue : State
 {
-    public Pursue(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player)
-        : base(_npc, _agent, _anim, _player)
+    public Pursue(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player, Light _droneLight)
+        : base(_npc, _agent, _anim, _player, _droneLight)
     {
         name = STATE.PURSUE;
-        agent.speed = 5.0f;
+        agent.speed = 15.0f;
         agent.isStopped = false;
     }
 
     public override void Enter()
     {
         // anim.SetTrigger("isRunning");
+        droneLight.color = Color.red;
         base.Enter();
     }
 
@@ -205,12 +210,12 @@ public class Pursue : State
         {
             if (CanAttackPlayer())
             {
-                nextState = new Attack(npc, agent, anim, player);
+                nextState = new Attack(npc, agent, anim, player, droneLight);
                 stage = EVENT.EXIT;
             }
             else if (!CanSeePlayer())
             {
-                nextState = new Patrol(npc, agent, anim, player);
+                nextState = new Patrol(npc, agent, anim, player, droneLight);
                 stage = EVENT.EXIT;
             }
         }
@@ -230,8 +235,8 @@ public class Attack : State
 
     public static event Action catchPlayer;
 
-    public Attack(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player)
-        : base(_npc, _agent, _anim, _player)
+    public Attack(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player, Light _droneLight)
+        : base(_npc, _agent, _anim, _player, _droneLight)
 
     {
         name = STATE.ATTACK;
@@ -259,7 +264,7 @@ public class Attack : State
 
         if (!CanAttackPlayer())
         {
-            nextState = new Idle(npc, agent, anim, player); // Seda saab siin muuta, et anda talle teine k‰itumine. Idle on turvaline, kuna viib kıigi teisteni.
+            nextState = new Idle(npc, agent, anim, player, droneLight); // Seda saab siin muuta, et anda talle teine k‰itumine. Idle on turvaline, kuna viib kıigi teisteni.
             // shoot.Stop();
             stage = EVENT.EXIT;
         }
@@ -277,8 +282,8 @@ public class RunAway : State
 {
     GameObject safeBox;
 
-    public RunAway(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player)
-       : base(_npc, _agent, _anim, _player)
+    public RunAway(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player, Light _droneLight)
+        : base(_npc, _agent, _anim, _player, _droneLight)
 
     {
         name = STATE.RUNAWAY;
@@ -290,7 +295,7 @@ public class RunAway : State
     {
         // anim.SetTrigger("isRunning");
         agent.isStopped = false;
-        agent.speed = 6;
+        agent.speed = 15;
         agent.SetDestination(safeBox.transform.position); // Asukoha m‰‰rab juba siin - mitte Update meetodis
         base.Enter();
     }
@@ -299,7 +304,7 @@ public class RunAway : State
     {
         if(agent.remainingDistance < 1.0f)
         {
-            nextState = new Idle(npc, agent, anim, player);
+            nextState = new Idle(npc, agent, anim, player, droneLight);
             stage = EVENT.EXIT;
         }
     }
