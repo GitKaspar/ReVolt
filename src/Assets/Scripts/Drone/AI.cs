@@ -8,6 +8,7 @@ public class AI : MonoBehaviour
     NavMeshAgent agent;
     Animator anim;
     State currentState;
+    Light droneLight;
     
     public Transform player;
     public Checkpoint InitialCheckpoint;
@@ -17,7 +18,8 @@ public class AI : MonoBehaviour
     {
         agent = this.GetComponent<NavMeshAgent>();
         anim = this.GetComponent<Animator>();
-        currentState = new Idle(this.gameObject, agent, anim, player);
+        droneLight = this.GetComponentInChildren<Light>();
+        currentState = new Idle(this.gameObject, agent, anim, player, droneLight);
     }
 
     // Update is called once per frame
