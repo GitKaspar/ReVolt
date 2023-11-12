@@ -64,7 +64,8 @@ public class TwoWheelController : MonoBehaviour
         Events.OnSetTopSpeed += OnSetTopSpeed;
         Events.OnBatteryLow += OnBatteryLow;
 
-        m_Topspeed = TopSpeed;
+        // m_Topspeed = TopSpeed; //Gets value from Inspector for TwoWheelController
+        m_Topspeed = UpgradeStats.Instance.GetCurrentValue(StatName.Speed); //Gets value from upgrade system
     }
 
     private void OnDestroy()

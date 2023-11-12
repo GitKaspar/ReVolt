@@ -10,6 +10,11 @@ public class Battery : MonoBehaviour
     [HideInInspector]
     public float CurrentCapacity;
 
+    private void Awake()
+    {
+        MaxCapacity = UpgradeStats.Instance.GetCurrentValue(StatName.Battery);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
