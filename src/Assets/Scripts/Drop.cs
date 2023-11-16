@@ -9,6 +9,14 @@ public class Drop : MonoBehaviour
     private bool droppable;
     [HideInInspector]
     public bool done;
+    // Kaspar's addition
+    private AudioSource source;
+
+    private void Awake()
+    {
+        source = GetComponent<AudioSource>();
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -41,6 +49,8 @@ public class Drop : MonoBehaviour
     private void DoDrop()
     {
         done = true;
+        AudioClip chosenClip = SoundController.SoundInstance.Drops.Clips[Random.Range(0, SoundController.SoundInstance.Drops.Clips.Count)];
+        source.PlayOneShot(chosenClip);
         Events.DropDone(this);
 
         Renderer[] renderers = GetComponentsInChildren<Renderer>();
