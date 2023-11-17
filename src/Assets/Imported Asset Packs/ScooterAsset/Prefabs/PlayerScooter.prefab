@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4697704054988717436}
-  - component: {fileID: 5132801897930379257}
   - component: {fileID: 7614643114934312325}
   - component: {fileID: 4156500767967589158}
   - component: {fileID: 3158178314729901627}
@@ -41,27 +40,6 @@ Transform:
   - {fileID: 6981156366622354049}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5132801897930379257
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 27806118869586007}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0fb71b8a18e808469647048d45329ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  axleInfos:
-  - wheel: {fileID: 6960201306642079681}
-    motor: 1
-    steering: 1
-  - wheel: {fileID: 976937549204340007}
-    motor: 1
-    steering: 0
-  maxMotorTorque: 400
-  maxSteeringAngle: 30
 --- !u!54 &7614643114934312325
 Rigidbody:
   m_ObjectHideFlags: 0
