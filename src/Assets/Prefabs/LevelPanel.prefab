@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 10
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3c04702309cbb854da18e2dae0d258f7, type: 2}
-  m_sharedMaterial: {fileID: 1718362622444993031, guid: 3c04702309cbb854da18e2dae0d258f7, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: db8ae264f6df24b45804672ad30e9a71, type: 2}
+  m_sharedMaterial: {fileID: 1718362622444993031, guid: db8ae264f6df24b45804672ad30e9a71, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.75686276}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

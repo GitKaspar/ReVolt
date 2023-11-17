@@ -785,6 +785,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerScooter
       objectReference: {fileID: 0}
+    - target: {fileID: 4156500767967589158, guid: ab36c67cbe901ce459351c31852e101a, type: 3}
+      propertyPath: TopSpeed
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4156500767967589158, guid: ab36c67cbe901ce459351c31852e101a, type: 3}
+      propertyPath: m_CentreOfMassOffset.y
+      value: -2
+      objectReference: {fileID: 0}
     - target: {fileID: 4697704054988717436, guid: ab36c67cbe901ce459351c31852e101a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.059052
@@ -824,6 +832,10 @@ PrefabInstance:
     - target: {fileID: 4697704054988717436, guid: ab36c67cbe901ce459351c31852e101a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7614643114934312325, guid: ab36c67cbe901ce459351c31852e101a, type: 3}
+      propertyPath: m_AngularDrag
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8654443622611683556, guid: ab36c67cbe901ce459351c31852e101a, type: 3}
       propertyPath: m_Camera

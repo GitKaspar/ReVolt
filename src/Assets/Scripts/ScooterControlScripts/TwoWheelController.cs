@@ -86,8 +86,8 @@ public class TwoWheelController : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        // m_Topspeed = TopSpeed; //Gets value from Inspector for TwoWheelController
-        m_Topspeed = UpgradeStats.Instance.GetCurrentValue(StatName.Speed); //Gets value from upgrade system
+         m_Topspeed = TopSpeed; //Gets value from Inspector for TwoWheelController
+        //m_Topspeed = UpgradeStats.Instance.GetCurrentValue(StatName.Speed); //Gets value from upgrade system
 
         m_WheelMeshLocalRotations = new Quaternion[2];
         for (int i = 0; i < 2; i++)

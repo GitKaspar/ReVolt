@@ -58,11 +58,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-  m_Name: Electrolize-Regular SDF 1
+  m_Name: white_glow_electrolize
   m_EditorClassIdentifier: 
-  hashCode: -150314453
+  hashCode: 1425571944
   material: {fileID: 1718362622444993031}
-  materialHashCode: -1006411477
+  materialHashCode: -1009989176
   m_Version: 1.1.0
   m_SourceFontFileGUID: 13d186524d2503d42adaf9a0b13bb6a4
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 13d186524d2503d42adaf9a0b13bb6a4, type: 3}
