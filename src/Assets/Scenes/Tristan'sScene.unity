@@ -39607,7 +39607,7 @@ GameObject:
   - component: {fileID: 1272421567}
   - component: {fileID: 1272421566}
   m_Layer: 5
-  m_Name: Result
+  m_Name: ResultText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39622,14 +39622,14 @@ RectTransform:
   m_GameObject: {fileID: 1272421564}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.012, y: 0.01451881, z: 0.013372242}
+  m_LocalScale: {x: 0.012000001, y: 0.014518811, z: 0.013372243}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1462340004}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.15, y: 1.73}
+  m_AnchoredPosition: {x: -2.1500244, y: 1.6831818}
   m_SizeDelta: {x: 500, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1272421566
