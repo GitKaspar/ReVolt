@@ -11,12 +11,28 @@ public class SoundController : MonoBehaviour
     public AudioClipGroup Lasers;
     public AudioClip Scan1;
     public AudioClip Alarm1;
+    public AudioClipGroup AmbientMusic;
+
+    public AudioClip MenuTheme;
+    public AudioClipGroup ButtonClicks;
 
     private void Awake()
     {
-            SoundInstance = this;
+        DontDestroyOnLoad(gameObject);
+        SoundInstance = this;
+     
     }
 
-  
+    public void ButtonClick()
+    {
+        ButtonClicks.Play();
+    }
+
+    private void OnLevelWasLoaded(int level)
+    {
+        if(level == 1) AmbientMusic.Play();
+    }
+
+
 
 }
