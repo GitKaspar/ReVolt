@@ -38661,6 +38661,22 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3120294483147126068, guid: 29fc01f27bf9a9849a3365336401a694, type: 3}
+      propertyPath: Drops.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3120294483147126068, guid: 29fc01f27bf9a9849a3365336401a694, type: 3}
+      propertyPath: Drops.Array.data[0]
+      value: 
+      objectReference: {fileID: 453492654}
+    - target: {fileID: 3120294483147126068, guid: 29fc01f27bf9a9849a3365336401a694, type: 3}
+      propertyPath: Drops.Array.data[1]
+      value: 
+      objectReference: {fileID: 309703821}
+    - target: {fileID: 3120294483147126068, guid: 29fc01f27bf9a9849a3365336401a694, type: 3}
+      propertyPath: Drops.Array.data[2]
+      value: 
+      objectReference: {fileID: 283263447}
+    - target: {fileID: 3120294483147126068, guid: 29fc01f27bf9a9849a3365336401a694, type: 3}
       propertyPath: SoundControllerPrefab
       value: 
       objectReference: {fileID: 3068327992774510635, guid: fcbce94991db7ec4b89fe8ac31bcf684, type: 3}
@@ -38742,6 +38758,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3967120089728407123, guid: 29fc01f27bf9a9849a3365336401a694, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878498472344571905, guid: 29fc01f27bf9a9849a3365336401a694, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878498472344571905, guid: 29fc01f27bf9a9849a3365336401a694, type: 3}
+      propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9212653634758829477, guid: 29fc01f27bf9a9849a3365336401a694, type: 3}
