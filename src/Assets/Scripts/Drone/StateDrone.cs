@@ -183,20 +183,20 @@ public class Patrol : StateDrone
         // IF remainingDistance, is unknown, the value is infinity (greater than 1) - remainingDisntace is not unknown.
         if(agent.remainingDistance < 1)
         {
-            Debug.Log("Checkpoint reached."); // This is triggered even before we reach the first checkpoint...
+            //Debug.Log("Checkpoint reached."); // This is triggered even before we reach the first checkpoint...
             if (currentIndex >= GameEnvironment.Singleton.Checkpoints.Count - 1)
             {
                 currentIndex = 0;
-                Debug.Log("Index reset to 0."); // This is never triggered.
+                //Debug.Log("Index reset to 0."); // This is never triggered.
             }
             else
             {
                 currentIndex = currentIndex++;
-                Debug.Log("Raised index by 1. Current index: " + currentIndex); // Index remains 0 throughout. Problem? Global value resets index to -1? Works in FSM project, though.
+                //Debug.Log("Raised index by 1. Current index: " + currentIndex); // Index remains 0 throughout. Problem? Global value resets index to -1? Works in FSM project, though.
             }
             // See siin peaks olema uus siht.
             agent.SetDestination(GameEnvironment.Singleton.Checkpoints[currentIndex].transform.position);
-            Debug.Log("Off to next checkpoint.");
+            //Debug.Log("Off to next checkpoint.");
 
             // Amount of checkpoints is correct(size of list = 5)
 

@@ -18,4 +18,5 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
         UnityEngine.Debug.Log("Quit the game");
     }
+
 }
