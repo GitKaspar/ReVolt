@@ -7,11 +7,28 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
     public GameObject EndPanel;
+    public GameObject PausePanel;
     public TextMeshProUGUI ResultText;
     public GameObject SoundControllerPrefab;
 
     public Drop[] Drops;
     private int numDropsDone = 0;
+
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Time.timeScale = 0;
+            PausePanel.SetActive(true);
+        }
+    }
+
+    public void BackToGame()
+    {
+        PausePanel.SetActive(false);
+        Time.timeScale = 1;
+    }
 
     public void EndGame()
     {
@@ -23,6 +40,7 @@ public class GameController : MonoBehaviour
     private void Awake()
     {
         EndPanel.SetActive(false);
+        PausePanel.SetActive(false);
 
         Events.OnEndGame += OnEndGame;
         Events.OnDropDone += OnDropDone;
@@ -68,7 +86,7 @@ public class GameController : MonoBehaviour
         EndPanel.SetActive(true);
     }
 
-    public void BackToMain()
+    public void BackToMainMenu()
     {
         SoundController.SoundInstance.ButtonClick();
         SceneManager.LoadSceneAsync("MainMenu");
