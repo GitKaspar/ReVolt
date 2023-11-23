@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
 {
     public GameObject EndPanel;
     public TextMeshProUGUI ResultText;
+    public GameObject SoundControllerPrefab;
 
     public Drop[] Drops;
     private int numDropsDone = 0;
@@ -26,6 +27,11 @@ public class GameController : MonoBehaviour
         Events.OnEndGame += OnEndGame;
         Events.OnDropDone += OnDropDone;
         Attack.catchPlayer += EndGame;
+
+        if (SoundController.SoundInstance == null)
+        {
+            GameObject.Instantiate(SoundControllerPrefab, transform);
+        }
     }
 
     private void OnDestroy()
@@ -64,6 +70,7 @@ public class GameController : MonoBehaviour
 
     public void BackToMain()
     {
+        SoundController.SoundInstance.ButtonClick();
         SceneManager.LoadSceneAsync("MainMenu");
     }
 
