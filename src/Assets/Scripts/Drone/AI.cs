@@ -9,20 +9,20 @@ public class AI : MonoBehaviour
     Animator anim;
     State currentState;
     Light droneLight;
-    
+    AudioSource audioSource;
+
     public Transform player;
     public Checkpoint InitialCheckpoint;
 
-    // Start is called before the first frame update
     void Start()
     {
         agent = this.GetComponent<NavMeshAgent>();
         anim = this.GetComponent<Animator>();
         droneLight = this.GetComponentInChildren<Light>();
-        currentState = new Idle(this.gameObject, agent, anim, player, droneLight);
+        audioSource = this.GetComponent<AudioSource>();
+        currentState = new Idle(this.gameObject, agent, anim, player, droneLight, audioSource);
     }
 
-    // Update is called once per frame
     void Update()
     {
         currentState = currentState.Process();
