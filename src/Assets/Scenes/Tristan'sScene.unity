@@ -38760,6 +38760,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6556418234344165745, guid: 29fc01f27bf9a9849a3365336401a694, type: 3}
+      propertyPath: m_fontSize
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 6556418234344165745, guid: 29fc01f27bf9a9849a3365336401a694, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 8261775778837587822, guid: 29fc01f27bf9a9849a3365336401a694, type: 3}
+      propertyPath: m_fontSize
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 8261775778837587822, guid: 29fc01f27bf9a9849a3365336401a694, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 8878498472344571905, guid: 29fc01f27bf9a9849a3365336401a694, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
