@@ -108,5 +108,11 @@ public class GameController : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    public void ToWorkshop()
+    {
+        SoundController.SoundInstance.ButtonClick();
+        SceneManager.LoadSceneAsync("UpgradeScreen");
+    }
+
 
 }

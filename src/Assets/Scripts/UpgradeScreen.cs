@@ -12,7 +12,7 @@ public class UpgradeScreen : MonoBehaviour
         UpgradeStats.Instance.UpgradeStat(StatName.Speed);
         Debug.Log("Vroooom vroooom! New value: " + UpgradeStats.Instance.GetCurrentValue(StatName.Speed));
         PlayAudio();
-        //SceneManager.LoadSceneAsync("SampleScene");
+        SceneManager.LoadSceneAsync("Tristan'sScene");
     }
 
     public void OnBatteryUpgradeClick()
@@ -20,7 +20,7 @@ public class UpgradeScreen : MonoBehaviour
         UpgradeStats.Instance.UpgradeStat(StatName.Battery);
         Debug.Log("Powerbank docked! New value: " + UpgradeStats.Instance.GetCurrentValue(StatName.Battery));
         PlayAudio();
-        //SceneManager.LoadSceneAsync("SampleScene");
+        SceneManager.LoadSceneAsync("Tristan'sScene");
     }
 
 
