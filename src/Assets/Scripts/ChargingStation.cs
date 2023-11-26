@@ -30,6 +30,7 @@ public class ChargingStation : MonoBehaviour
         {
             if (Input.GetButton("Charge"))
             {
+                Debug.Log("Charging.");
                 Charge();
             }
         }
