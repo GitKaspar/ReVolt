@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class MainMenu : MonoBehaviour
 {
     public GameObject InstructionsPanel;
     public GameObject Story;
     public GameObject Keys;
+
+    public TextMeshProUGUI Play;
+
 
     private void Awake()
     {
