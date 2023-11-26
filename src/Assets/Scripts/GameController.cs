@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class GameController : MonoBehaviour
     public GameObject EndPanel;
     public GameObject PausePanel;
     public GameObject KeyPanel;
+    public GameObject WorkshopButton;
     public TextMeshProUGUI ResultText;
     public GameObject SoundControllerPrefab;
 
@@ -52,6 +54,7 @@ public class GameController : MonoBehaviour
         PromtPanel.SetActive(false);
         KeyPanel.SetActive(false);
         menuActive = false;
+        WorkshopButton.SetActive(false);
 
         Events.OnEndGame += OnEndGame;
         Events.OnDropDone += OnDropDone;
@@ -91,9 +94,15 @@ public class GameController : MonoBehaviour
     {
         Time.timeScale = 0;
         if (isWin)
+        {
             ResultText.text = "Win";
+            WorkshopButton.SetActive(true);
+        }
         else
             ResultText.text = "Busted";
+            
+
+
 
         EndPanel.SetActive(true);
     }

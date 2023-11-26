@@ -75279,6 +75279,7 @@ MonoBehaviour:
   EndPanel: {fileID: 131225684}
   PausePanel: {fileID: 1870703446}
   KeyPanel: {fileID: 2345557644552776442}
+  WorkshopButton: {fileID: 641942219}
   ResultText: {fileID: 6556418235504526469}
   SoundControllerPrefab: {fileID: 3068327992774510635, guid: fcbce94991db7ec4b89fe8ac31bcf684, type: 3}
   PromtPanel: {fileID: 22229284}
