@@ -16,11 +16,12 @@ public class SoundController : MonoBehaviour
     public AudioClip MenuTheme;
     public AudioClipGroup ButtonClicks;
 
+    public AudioClipGroup Charge;
+
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
         SoundInstance = this;
-     
     }
 
     public void ButtonClick()

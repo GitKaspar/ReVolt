@@ -28,12 +28,15 @@ public class ChargingStation : MonoBehaviour
     {
         if (playerInRange)
         {
+
             if (Input.GetButton("Charge"))
             {
-                Debug.Log("Charging.");
+                SoundController.SoundInstance.Charge.Play();
                 Charge();
             }
         }
+    
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -42,6 +45,8 @@ public class ChargingStation : MonoBehaviour
         {
             playerInRange = true;
             battery = other.GetComponent<Battery>();
+            GameController.GameControllerInstance.PromtText.text = "press 'c' to charge";
+            GameController.GameControllerInstance.PromtPanel.SetActive(true);
         }
     }
 
@@ -51,6 +56,7 @@ public class ChargingStation : MonoBehaviour
         {
             playerInRange = false;
             battery = null;
+            GameController.GameControllerInstance.PromtPanel.SetActive(false);
         }
     }
 

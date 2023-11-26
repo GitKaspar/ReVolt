@@ -6,10 +6,15 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
+    public static GameController GameControllerInstance;
+
     public GameObject EndPanel;
     public GameObject PausePanel;
     public TextMeshProUGUI ResultText;
     public GameObject SoundControllerPrefab;
+
+    public GameObject PromtPanel;
+    public TextMeshProUGUI PromtText;
 
     public Drop[] Drops;
     private int numDropsDone = 0;
@@ -50,8 +55,10 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
+        GameControllerInstance = this;
         EndPanel.SetActive(false);
         PausePanel.SetActive(false);
+        PromtPanel.SetActive(false);
 
         Events.OnEndGame += OnEndGame;
         Events.OnDropDone += OnDropDone;
