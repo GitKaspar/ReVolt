@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
 
     public GameObject EndPanel;
     public GameObject PausePanel;
+    public GameObject KeyPanel;
     public TextMeshProUGUI ResultText;
     public GameObject SoundControllerPrefab;
 
@@ -26,17 +27,7 @@ public class GameController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (!menuActive)
-            {
-                Time.timeScale = 0;
-                PausePanel.SetActive(true);
-                menuActive = true;
-            }
-            else
-            {
-                menuActive = false;
-                BackToGame();
-            }
+            Pause(menuActive);
         }
     }
 
@@ -59,6 +50,8 @@ public class GameController : MonoBehaviour
         EndPanel.SetActive(false);
         PausePanel.SetActive(false);
         PromtPanel.SetActive(false);
+        KeyPanel.SetActive(false);
+        menuActive = false;
 
         Events.OnEndGame += OnEndGame;
         Events.OnDropDone += OnDropDone;
@@ -96,6 +89,7 @@ public class GameController : MonoBehaviour
 
     public void OnEndGame(bool isWin)
     {
+        Time.timeScale = 0;
         if (isWin)
             ResultText.text = "Win";
         else
@@ -120,6 +114,33 @@ public class GameController : MonoBehaviour
         SoundController.SoundInstance.ButtonClick();
         SceneManager.LoadSceneAsync("UpgradeScreen");
     }
+
+    public void Instructions()
+    {
+        KeyPanel.SetActive(true);
+        PausePanel.SetActive(false);
+        menuActive = false;
+    }
+
+    public void Pause(bool menuActive)
+    {
+        if (!menuActive)
+        {
+            menuActive = true;
+            Time.timeScale = 0;
+            KeyPanel.SetActive(false);
+            PausePanel.SetActive(true);
+            
+        }
+        else
+        {
+            Debug.Log(menuActive);
+            BackToGame();
+            menuActive = false;
+
+        }
+    }
+
 
     private void Start()
     {
