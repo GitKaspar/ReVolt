@@ -121,5 +121,13 @@ public class GameController : MonoBehaviour
         SceneManager.LoadSceneAsync("UpgradeScreen");
     }
 
+    private void Start()
+    {
+        if(SceneManager.GetActiveScene().name == "MainMenu")
+        {
+            SoundController.SoundInstance.MenuMusic.Play();
+        }
+    }
+
 
 }

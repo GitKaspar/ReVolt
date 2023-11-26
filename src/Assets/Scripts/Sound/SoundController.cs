@@ -13,10 +13,11 @@ public class SoundController : MonoBehaviour
     public AudioClip Alarm1;
     public AudioClipGroup AmbientMusic;
 
-    public AudioClip MenuTheme;
     public AudioClipGroup ButtonClicks;
 
     public AudioClipGroup Charge;
+
+    public AudioClipGroup MenuMusic;
 
     private void Awake()
     {
@@ -31,7 +32,22 @@ public class SoundController : MonoBehaviour
 
     private void OnLevelWasLoaded(int level)
     {
-        if(level == 1) AmbientMusic.Play();
+        switch (level)
+        {
+            case 0:
+                {
+                    // MenuMusic.Play(); // Does not work...
+                    Debug.Log("Menu Music playing");
+                    break;
+                }
+            case 1:
+                {
+                    AmbientMusic.Play();
+                    Debug.Log("Ambient music playing.");
+                    break;
+                }
+            default: return;
+        }
     }
 
 
