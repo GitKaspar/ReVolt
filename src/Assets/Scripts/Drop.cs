@@ -36,7 +36,6 @@ public class Drop : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             droppable = true;
-            Debug.Log("Peaks nägema prompt'i");
             GameController.GameControllerInstance.PromtText.text = "press 'e' to drop";
             GameController.GameControllerInstance.PromtPanel.SetActive(true);
         }

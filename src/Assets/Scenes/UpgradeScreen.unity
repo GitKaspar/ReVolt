@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.43667546, g: 0.48427135, b: 0.5645225, a: 1}
+  m_IndirectSpecularColor: {r: 0.43667564, g: 0.48427135, b: 0.5645232, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -930,6 +930,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5161164222938356012, guid: 844a1816776cf9347a229f2854756284, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 32d730bdb4b34d64b897296ce8cc1ff8, type: 2}
     - target: {fileID: -4216859302048453862, guid: 844a1816776cf9347a229f2854756284, type: 3}
       propertyPath: m_LocalScale.x
       value: 4
@@ -986,10 +990,26 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -1200362000583358351, guid: 844a1816776cf9347a229f2854756284, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9227bdd5c2e636d42b7de052af255437, type: 2}
     - target: {fileID: -927199367670048503, guid: 844a1816776cf9347a229f2854756284, type: 3}
       propertyPath: m_Name
       value: ElectricScooter
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 844a1816776cf9347a229f2854756284, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6496361690123618521, guid: 844a1816776cf9347a229f2854756284, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9227bdd5c2e636d42b7de052af255437, type: 2}
+    - target: {fileID: 7166214206194758486, guid: 844a1816776cf9347a229f2854756284, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9227bdd5c2e636d42b7de052af255437, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
