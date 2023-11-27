@@ -9,9 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 932e045b5ed02484f908eb556f6ed796
   - enabled: 1
-    path: Assets/Scenes/Tristan'sScene.unity
-    guid: 2c2f5da9665d2de49944f2c61cfe3e2b
+    path: Assets/Scenes/milestone2Scene.unity
+    guid: 11a4dd94eb567cf4ea03896e47859983
   - enabled: 1
     path: Assets/Scenes/UpgradeScreen.unity
     guid: 7d7db81ca330fd248bf590d7291cce53
+  - enabled: 1
+    path: Assets/Scenes/Tristan'sScene.unity
+    guid: 2c2f5da9665d2de49944f2c61cfe3e2b
   m_configObjects: {}
