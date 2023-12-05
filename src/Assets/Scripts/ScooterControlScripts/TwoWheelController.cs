@@ -12,39 +12,61 @@ internal enum DriveType
     
 public class TwoWheelController : MonoBehaviour
 {
-    [SerializeField] private DriveType m_CarDriveType = DriveType.AllWheelDrive;
+    [Header("Object References")]
     [SerializeField] private WheelCollider[] m_WheelColliders = new WheelCollider[2];
     [SerializeField] private GameObject[] m_WheelMeshes = new GameObject[2];
+    public Transform HandleBar;
     //[SerializeField] private WheelEffects[] m_WheelEffects = new WheelEffects[2];
-    [SerializeField] private Vector3 m_CentreOfMassOffset;
-    [SerializeField] private float m_MaximumSteerAngle;
-    [Range(0, 1)] [SerializeField] private float m_SteerHelper; // 0 is raw physics , 1 the car will grip in the direction it is facing
-    [Range(0, 1)] [SerializeField] private float m_TractionControl; // 0 is no traction control, 1 is full interference
+
+    [Space]
+    [Header("Speed Settings")]
+    [Tooltip("Determines whether scooter's top speed should be taken from editor (true) or from stat attribute (false, default)")]
+    public bool UseSpeedFromEditor = false;
+    public float TopSpeed;
+    [Tooltip("The scooter's top speed when its battery is empty")]
+    public float BatteryLowSpeed;
     [SerializeField] private float m_AccelerationTorqueOverAllWheels;
+    [SerializeField] private float m_SpeedStabilizationDelta;
+    [Header("Braking/Reversing Settings")]
     [SerializeField] private float m_ReverseTorque;
+    [Tooltip("Upper Speed Threshold for which reversing is possible")]
+    [SerializeField] private float k_ReversingThreshold = 0.01f;
     [SerializeField] private float m_MaxHandbrakeTorque;
+    [SerializeField] private float m_DecelerationTorque;
+
+    [Space]
+    [Header("Handling Settings")]
+    [SerializeField] private DriveType m_CarDriveType = DriveType.AllWheelDrive;
+    [SerializeField] private float m_MaximumSteerAngle;
+    [Tooltip("Proportion by which the max steer angle is reduced when going full speed. Is applied linearly as scooter goes faster. 0 means no penalty, increasing values mean bigger penalty")]
+    [Range(0, 0.75f)][SerializeField] private float HandlingPenalty;
+    [SerializeField] private Vector3 m_CentreOfMassOffset;
+    [Tooltip("0 is raw physics , 1 the scooter will grip in the direction it is facing")]
+    [Range(0, 1)][SerializeField] private float m_SteerHelper; // 0 is raw physics , 1 the car will grip in the direction it is facing
+    [Tooltip("0 is no traction control, 1 is full interference")]
+    [Range(0, 1)][SerializeField] private float m_TractionControl; // 0 is no traction control, 1 is full interference
     [SerializeField] private float m_Downforce = 100f;
 
-    public float TopSpeed;
-    public float BatteryLowSpeed;
 
-    private float m_Topspeed = 20;
-    [SerializeField] private static int NoOfGears = 5;
-    [SerializeField] private float m_RevRangeBoundary = 1f;
-    [SerializeField] private float m_SlipLimit;
-    [SerializeField] private float m_DecelerationTorque;
-    [SerializeField] private float m_SpeedStabilizationDelta;
-
+    //Stuff that is only used for effects that we don't use
+    private static int NoOfGears = 5;
+    private float m_RevRangeBoundary = 1f;
+    [Tooltip("Only used for effects, does not affect slipping behavior")]
+    private float m_SlipLimit = 0.6f;
+    
+    //Internal state controlling variables
     private Quaternion[] m_WheelMeshLocalRotations;
     private Vector3 m_Prevpos, m_Pos;
+    private float m_Topspeed = 20;
     private float m_SteerAngle;
+    private float m_previousSteerAngle;
     private float m_targetSpeed = 0;
     private int m_GearNum;
     private float m_GearFactor;
     private float m_OldRotation;
     private float m_CurrentTorque;
     private Rigidbody m_Rigidbody;
-    private const float k_ReversingThreshold = 0.01f;
+   
 
     public bool Skidding { get; private set; }
     public float DriveInput { get; private set; }
@@ -53,9 +75,6 @@ public class TwoWheelController : MonoBehaviour
     public float MaxSpeed{get { return m_Topspeed; }}
     public float Revs { get; private set; }
 
-
-    public Transform HandleBar;
-    private float m_previousSteerAngle;
 
     private void Awake()
     {
@@ -87,7 +106,7 @@ public class TwoWheelController : MonoBehaviour
     private void Start()
     {
          //m_Topspeed = TopSpeed; //Gets value from Inspector for TwoWheelController
-        m_Topspeed = UpgradeStats.Instance.GetCurrentValue(StatName.Speed); //Gets value from upgrade system
+        m_Topspeed = UseSpeedFromEditor ? TopSpeed : UpgradeStats.Instance.GetCurrentValue(StatName.Speed); //Gets value from upgrade system
 
         m_WheelMeshLocalRotations = new Quaternion[2];
         for (int i = 0; i < 2; i++)
@@ -124,7 +143,7 @@ public class TwoWheelController : MonoBehaviour
 
         //Set the steer on the front wheel
         //Assuming that wheel 0 is the front wheel (Scooter only steers with front wheel
-        float speedPenaltySteering = 0.4f + 0.6f * (m_Topspeed - CurrentSpeed) / m_Topspeed;
+        float speedPenaltySteering = (1-HandlingPenalty) + HandlingPenalty * (m_Topspeed - CurrentSpeed) / m_Topspeed;
         m_SteerAngle = steering*m_MaximumSteerAngle * speedPenaltySteering;
         m_WheelColliders[0].steerAngle = m_SteerAngle;
 
