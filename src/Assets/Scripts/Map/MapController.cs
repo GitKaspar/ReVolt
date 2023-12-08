@@ -28,8 +28,9 @@ public class MapController : MonoBehaviour
         // Kui seadsin väärtused madalaks, siis töötas veidi. LIIGUB! NEGATIIVSED KOORDINAADID OLI PROBLEEM?
         // On raske ratast ja kaarti kattuma saada. Näib, nagu oleks ikka suurte muutujate küsimus. Saab noole kaardile, kui multiplyer on väga väike (alla nulli)
         // Samas usun, et  abiks võiks olla see, kui ratta koordinaadid võimalikult väiksed oleks.
+        float zMultiplier = multiplyer * 0.75f;
        _playerRepresentation.style.translate = new Translate(Player.transform.position.x * multiplyer,
-            Player.transform.position.z * -multiplyer, 0);
+            Player.transform.position.z * -zMultiplier, 0);
         _playerRepresentation.style.rotate = new Rotate(
             new Angle(Player.transform.rotation.eulerAngles.y));
     }
