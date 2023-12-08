@@ -1,11 +1,11 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/Scripts/Map/MapStyles.uss?fileID=7433441132597879392&amp;guid=54f0129aef30dd04ea9c0dd68e83fda9&amp;type=3#MapStyles" />
-    <ui:VisualElement name="Container" class="root-container-full" style="flex-grow: 1;">
-        <ui:VisualElement name="Map" class="map-container" style="flex-grow: 1;">
-            <ui:VisualElement name="Image" class="map-img" style="flex-grow: 1;">
-                <ui:VisualElement name="Player" class="player-container" style="flex-grow: 1;">
-                    <ui:VisualElement name="Cone" class="player-cone" style="flex-grow: 1;">
-                        <ui:VisualElement name="Arrow" class="player-arrow" style="flex-grow: 1;" />
+    <ui:VisualElement name="Container" class="root-container-mini" style="flex-grow: 1;">
+        <ui:VisualElement name="Map" class="map-container" style="flex-grow: 0; align-self: auto; flex-direction: column;">
+            <ui:VisualElement name="Image" class="map-image" style="flex-grow: 0;">
+                <ui:VisualElement name="Player" class="player-container" style="flex-grow: 0; position: relative; font-size: 12px;">
+                    <ui:VisualElement name="Cone" class="player-cone" style="flex-grow: 0;">
+                        <ui:VisualElement name="Arrow" class="player-arrow" style="flex-grow: 0;" />
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>

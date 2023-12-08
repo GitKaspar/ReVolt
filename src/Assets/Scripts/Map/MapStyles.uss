@@ -1,32 +1,28 @@
-:root {
-    --map-border-color: rgb(255, 255, 255);
-}
-
-.map-img {
-    height: 100%;
-    width: 115%;
-    background-image: url('project://database/Assets/Graphics/bw_blur_workshop.png?fileID=21300000&guid=629e3088af3ba574ba7f84c4247ec369&type=3#bw_blur_workshop');
-    -unity-background-scale-mode: scale-and-crop;
-    align-items: center;
+.root-container-full {
+    flex-grow: 1;
     justify-content: center;
-    position: absolute;
-    -unity-background-image-tint-color: rgb(255, 255, 255);
+    align-items: center;
+    margin-top: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
 }
 
 .map-container {
     width: 50%;
     height: 90%;
     overflow: hidden;
+    justify-content: center;
+    align-items: center;
 }
 
-.root-container-full {
-    flex-grow: 1;
+.map-image {
+    position: absolute;
     align-items: center;
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-top: 5px;
-    margin-bottom: 5px;
     justify-content: center;
+    width: 115%;
+    height: 100%;
+    background-image: url('project://database/Assets/Scripts/Map/Spirtes/map2.png?fileID=21300000&guid=124ae3559e2e48d4aa0441be9641eeb6&type=3#map2');
 }
 
 .root-container-mini {
@@ -46,10 +42,10 @@
     border-right-width: 2px;
     border-top-width: 2px;
     border-bottom-width: 2px;
-    border-left-color: rgb(255, 255, 255);
-    border-right-color: rgb(255, 255, 255);
-    border-top-color: rgb(255, 255, 255);
-    border-bottom-color: rgb(255, 255, 255);
+    border-left-color: rgba(255, 255, 255, 255);
+    border-right-color: rgba(255, 255, 255, 255);
+    border-top-color: rgba(255, 255, 255, 255);
+    border-bottom-color: rgba(255, 255, 255, 255);
 }
 
 .root-container-mini #Image {
@@ -65,7 +61,7 @@
 }
 
 .player-cone {
-    background-image: url('project://database/Assets/Scripts/Map/Spirtes/playerCone.png?fileID=21300000&guid=0474f680ae98d884a8bf7ed7a1836229&type=3#playerCone');
+    background-image: url('project://database/Assets/Sprites/playerCone.png?fileID=21300000&guid=0474f680ae98d884a8bf7ed7a1836229&type=3#playerCone');
     width: 80px;
     height: 60px;
     -unity-background-scale-mode: scale-to-fit;
@@ -80,7 +76,7 @@
 .player-arrow {
     width: 10px;
     height: 10px;
-    background-image: url('project://database/Assets/Scripts/Map/Spirtes/player_arrow.png?fileID=2800000&guid=3e620c7728093c44e811a73f5fb61640&type=3#player_arrow');
+    background-image: url('project://database/Assets/Sprites/player_arrow.png?fileID=2800000&guid=3e620c7728093c44e811a73f5fb61640&type=3#player_arrow');
     -unity-background-image-tint-color: rgb(255, 50, 73);
     top: 4px;
 }
