@@ -787,7 +787,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4156500767967589158, guid: ab36c67cbe901ce459351c31852e101a, type: 3}
       propertyPath: TopSpeed
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4156500767967589158, guid: ab36c67cbe901ce459351c31852e101a, type: 3}
       propertyPath: m_CentreOfMassOffset.y
@@ -835,7 +835,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7614643114934312325, guid: ab36c67cbe901ce459351c31852e101a, type: 3}
       propertyPath: m_AngularDrag
-      value: 3
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 8654443622611683556, guid: ab36c67cbe901ce459351c31852e101a, type: 3}
       propertyPath: m_Camera
@@ -1005,28 +1005,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04b40d2b15bbf9246bdede3ad2a6afdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CarDriveType: 2
   m_WheelColliders:
   - {fileID: 1021725745}
   - {fileID: 729778263}
   m_WheelMeshes:
   - {fileID: 4630207634483797878}
   - {fileID: 7211235813152451924}
-  m_CentreOfMassOffset: {x: 0, y: -2, z: 0}
-  m_MaximumSteerAngle: 30
-  m_SteerHelper: 0.696
-  m_TractionControl: 0.616
-  m_AccelerationTorqueOverAllWheels: 7000
-  m_ReverseTorque: 1000
-  m_MaxHandbrakeTorque: 100000000
-  m_Downforce: 100
+  HandleBar: {fileID: 0}
+  UseSpeedFromEditor: 0
   TopSpeed: 0
   BatteryLowSpeed: 0
-  m_RevRangeBoundary: 1
-  m_SlipLimit: 0.6
-  m_DecelerationTorque: 5000
+  m_AccelerationTorqueOverAllWheels: 7000
   m_SpeedStabilizationDelta: 0.3
-  HandleBar: {fileID: 0}
+  m_ReverseTorque: 1000
+  k_ReversingThreshold: 0.01
+  m_MaxHandbrakeTorque: 100000000
+  m_DecelerationTorque: 5000
+  m_CarDriveType: 2
+  m_MaximumSteerAngle: 30
+  HandlingPenalty: 0
+  m_CentreOfMassOffset: {x: 0, y: -2, z: 0}
+  m_SteerHelper: 0.696
+  m_TractionControl: 0.616
+  m_Downforce: 100
 --- !u!1 &981324660
 GameObject:
   m_ObjectHideFlags: 0
@@ -2719,6 +2720,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 10
+  rotateBackSpeed: 3
 --- !u!1 &1969316474
 GameObject:
   m_ObjectHideFlags: 0

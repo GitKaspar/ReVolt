@@ -33,9 +33,10 @@ public class Drop : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (!done && other.CompareTag("Player"))
         {
             droppable = true;
+
             GameController.GameControllerInstance.PromtText.text = "press 'e' to drop";
             GameController.GameControllerInstance.PromtPanel.SetActive(true);
         }

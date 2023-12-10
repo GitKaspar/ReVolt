@@ -205,32 +205,46 @@ public class TwoWheelController : MonoBehaviour
     {
         if (drive > 0.5f) 
         {
-            m_targetSpeed += 2 * SpeedAdjustment;
+            m_targetSpeed += SpeedAdjustment;
             m_targetSpeed = Mathf.Clamp(m_targetSpeed, 0f, m_Topspeed);
 
             if (SpeedsClose(m_targetSpeed, CurrentSpeed, m_SpeedStabilizationDelta) & handbrake < float.Epsilon)
             {
+                for (int i = 0; i < 2; i++)
+                {
+                    m_WheelColliders[i].motorTorque = 0f;
+                    m_WheelColliders[i].brakeTorque = 0f;
+                }
+
                 m_Rigidbody.velocity = m_targetSpeed * m_Rigidbody.velocity.normalized;
             }
             else if (CurrentSpeed < m_targetSpeed) //Accelerate
             {
+                if (m_targetSpeed - CurrentSpeed > 5f) //to quicken long accelerations
+                {
+                    Vector3 accelVector = m_Rigidbody.transform.forward.normalized;
+                    accelVector.y = -0.1f; //traction
+                    m_Rigidbody.AddForce(accelVector, ForceMode.Acceleration);
+                }
+
+                m_WheelColliders[0].brakeTorque = 0f;
+                m_WheelColliders[1].brakeTorque = 0f;
+
+
                 switch (m_CarDriveType)
                 {
                     case DriveType.AllWheelDrive:
                         for (int i = 0; i < 2; i++)
                         {
-                            m_WheelColliders[i].brakeTorque = 0f;
                             m_WheelColliders[i].motorTorque = m_CurrentTorque / 2f;
                         }
                         break;
 
                     case DriveType.FrontWheelDrive:
-                        m_WheelColliders[0].brakeTorque = 0f;
                         m_WheelColliders[0].motorTorque = m_CurrentTorque;
                         break;
 
                     case DriveType.RearWheelDrive:
-                        m_WheelColliders[1].brakeTorque = 0f;
                         m_WheelColliders[1].motorTorque = m_CurrentTorque;
                         break;
                 }
@@ -263,11 +277,11 @@ public class TwoWheelController : MonoBehaviour
             for (int i = 0; i < 2; i++)
             {
                 m_WheelColliders[i].brakeTorque = 0f;
-                m_WheelColliders[i].motorTorque = -m_ReverseTorque;
+                m_WheelColliders[i].motorTorque = -m_ReverseTorque / 2;
             }
         }
 
-        //Debug.Log("Target: " + m_targetSpeed + ", Current: " + CurrentSpeed + "; Motor: " + m_WheelColliders[0].motorTorque + ", Brake:" + m_WheelColliders[0].brakeTorque);
+        Debug.Log("Motor0: " + m_WheelColliders[0].motorTorque + ", Brake0:" + m_WheelColliders[0].brakeTorque + "Motor1: " + m_WheelColliders[1].motorTorque + ", Brake1:" + m_WheelColliders[1].brakeTorque);
     }
 
     void Stabilizer(float h)
