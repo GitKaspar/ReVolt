@@ -35,7 +35,7 @@ public class MapController : MonoBehaviour
                 return;
             }
 
-            Color end = !_mapFaded ? Color.white.WithAlpha(.5f) : Color.white;
+            Color end = !_mapFaded ? Color.white.WithAlpha(.5f) : Color.white; // Siit kohandab kaardi hägustumist.
 
             _mapImage.experimental.animation.Start(
                 _mapImage.style.unityBackgroundImageTintColor.value, end, 500,

@@ -14,6 +14,14 @@
     overflow: hidden;
     justify-content: center;
     align-items: center;
+	border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    border-left-color: #30B81C;
+    border-right-color: #30B81C;
+    border-top-color: #30B81C;
+    border-bottom-color: #30B81C;
 }
 
 .map-image {
@@ -22,6 +30,7 @@
     justify-content: center;
     width: 115%;
     height: 100%;
+
     background-image: url('project://database/Assets/Scripts/Map/Spirtes/map2.png?fileID=21300000&guid=124ae3559e2e48d4aa0441be9641eeb6&type=3#map2');
 }
 
@@ -33,6 +42,7 @@
     margin-top: 5px;
     margin-bottom: 5px;
     justify-content: flex-start;
+
 }
 
 .root-container-mini #Map {
@@ -42,10 +52,10 @@
     border-right-width: 2px;
     border-top-width: 2px;
     border-bottom-width: 2px;
-    border-left-color: rgba(255, 255, 255, 255);
-    border-right-color: rgba(255, 255, 255, 255);
-    border-top-color: rgba(255, 255, 255, 255);
-    border-bottom-color: rgba(255, 255, 255, 255);
+    border-left-color: #30B81C;
+    border-right-color: #30B81C;
+    border-top-color: #30B81C;
+    border-bottom-color: #30B81C;
 }
 
 .root-container-mini #Image {
