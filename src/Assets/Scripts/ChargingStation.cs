@@ -7,12 +7,15 @@ public class ChargingStation : MonoBehaviour
     public float ChargingRate;
     private bool playerInRange;
     private Battery battery;
+    private bool isCharging;
+    private AudioSource source;
 
     private bool batteryLow = false;
 
     private void Awake()
     {
         Events.OnBatteryLow += OnBatteryLow;
+        isCharging = false;
     }
 
     private void OnDestroy()
@@ -29,13 +32,24 @@ public class ChargingStation : MonoBehaviour
         if (playerInRange)
         {
 
-            if (Input.GetButton("Charge"))
+            if (Input.GetButtonDown("Charge") && !isCharging)
             {
-                SoundController.SoundInstance.Charge.Play();
+                isCharging = true;
+                source = SoundController.SoundInstance.Charge.Play();
+            }
+
+            if (isCharging)
+            {
                 Charge();
             }
+
         }
-    
+
+        if (Input.GetButtonUp("Charge"))
+        {
+            isCharging = false;
+            if (source != null) source.Stop();
+        }
 
     }
 
@@ -57,6 +71,7 @@ public class ChargingStation : MonoBehaviour
             playerInRange = false;
             battery = null;
             GameController.GameControllerInstance.PromtPanel.SetActive(false);
+            isCharging = false;
         }
     }
 

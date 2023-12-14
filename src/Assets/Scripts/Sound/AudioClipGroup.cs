@@ -26,19 +26,19 @@ public class AudioClipGroup : ScriptableObject
     {
         timestamp = 0;
     }
-    public void Play()
+    public AudioSource Play()
     {
-        if (AudioSourcePool.Instance == null) return;
-        Play(AudioSourcePool.Instance.GetSource());
+        if (AudioSourcePool.Instance == null) return null;
+        return Play(AudioSourcePool.Instance.GetSource());
     }
 
-    public void Play(AudioSource source)
+    public AudioSource Play(AudioSource source)
     {
         if (timestamp > Time.time)
         {
-            return;
+            return null;
         }
-        if (Clips.Count <= 0) return;
+        if (Clips.Count <= 0) return null;
         timestamp = Time.time + Cooldown;
 
         source.volume = Random.Range(VolumeMin, VolumeMax);
@@ -46,7 +46,19 @@ public class AudioClipGroup : ScriptableObject
         source.clip = Clips[Random.Range(0, Clips.Count)];
         source.loop = Loop;
         source.Play();
+        return source;
+    }
 
+    public void Stop(AudioSource source)
+    {
+        if (source.isPlaying) 
+        { source.Stop(); }
+        
+    }
 
+    public void Stop()
+    {
+        if (AudioSourcePool.Instance == null) return;
+        Stop(AudioSourcePool.Instance.GetSource());
     }
 }
