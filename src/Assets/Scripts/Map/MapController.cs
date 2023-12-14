@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -20,21 +21,45 @@ public class MapController : MonoBehaviour
     private VisualElement _mapContainer;
     private VisualElement _mapImage;
 
+    private Rigidbody _playerRigidbody;
+
+    private bool _mapFaded;
+    public bool MapFaded
+    {
+        get => _mapFaded;
+
+        set
+        {
+            if (_mapFaded == value)
+            {
+                return;
+            }
+
+            Color end = !_mapFaded ? Color.white.WithAlpha(.5f) : Color.white;
+
+            _mapImage.experimental.animation.Start(
+                _mapImage.style.unityBackgroundImageTintColor.value, end, 500,
+                (elm, val) => { elm.style.unityBackgroundImageTintColor = val; });
+
+            _mapFaded = value;
+        }
+    }
+
     void Start()
     {
         _root = GetComponent<UIDocument>().rootVisualElement.Q<VisualElement>("Container");
         _playerRepresentation = _root.Q<VisualElement>("Player");
         _mapImage = _root.Q<VisualElement>("Image");
         _mapContainer = _root.Q<VisualElement>("Map");
+
+        _playerRigidbody = Player.GetComponent<Rigidbody>();
     }
     private void LateUpdate()
     {
         float multiplyer = IsMapOpen ? fullMultiplyer : miniMultiplyer;
-        // SIIN ON KALA. Järgmine rida töötab, aga tegelase liigutamine kaardil kaotab ta kaardilt.
-        // Probleem pule muutujates: ka fikseeritud suurusega pole seda näha. Kolmanda muutuja suurendamine või kahandamine (-1000 kuni 1000) ei teinud midagi
-        // Kui seadsin väärtused madalaks, siis töötas veidi. LIIGUB! NEGATIIVSED KOORDINAADID OLI PROBLEEM?
+   
         // On raske ratast ja kaarti kattuma saada. Näib, nagu oleks ikka suurte muutujate küsimus. Saab noole kaardile, kui multiplyer on väga väike (alla nulli)
-        // Samas usun, et  abiks võiks olla see, kui ratta koordinaadid võimalikult väiksed oleks.
+
         float zMultiplier = multiplyer * 0.75f;
        _playerRepresentation.style.translate = new Translate(Player.transform.position.x * multiplyer,
             Player.transform.position.z * -zMultiplier, 0);
@@ -44,6 +69,7 @@ public class MapController : MonoBehaviour
 
         // Mini-map. Kuvab hetkel pilti vigaselt
         // Liiga kiire. Kõrguse ja laiuse jagamistehe kaotada? Hoopis toplet?
+        // HETKEL SIIN KALA.
 
         if (!IsMapOpen)
         {
@@ -65,6 +91,8 @@ public class MapController : MonoBehaviour
         }
         // Alternate solution
         //_mapImage.style.translate = new Translate(Player.transform.position.x * -multiplyer, Player.transform.position.z * zMultiplier, 0);
+
+        MapFaded = IsMapOpen && _playerRigidbody.velocity.sqrMagnitude > 1;
     }
 
     void Update()
