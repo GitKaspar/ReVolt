@@ -4,8 +4,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-
-
 public class MapController : MonoBehaviour
 {
     private VisualElement _root;
@@ -60,7 +58,7 @@ public class MapController : MonoBehaviour
    
         // On raske ratast ja kaarti kattuma saada. Näib, nagu oleks ikka suurte muutujate küsimus. Saab noole kaardile, kui multiplyer on väga väike (alla nulli)
 
-        float zMultiplier = multiplyer * 0.75f;
+        float zMultiplier = multiplyer * 0.725f;
        _playerRepresentation.style.translate = new Translate(Player.transform.position.x * multiplyer,
             Player.transform.position.z * -zMultiplier, 0);
         _playerRepresentation.style.rotate = new Rotate(

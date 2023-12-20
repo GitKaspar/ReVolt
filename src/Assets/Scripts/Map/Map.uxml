@@ -2,7 +2,7 @@
     <Style src="project://database/Assets/Scripts/Map/MapStyles.uss?fileID=7433441132597879392&amp;guid=54f0129aef30dd04ea9c0dd68e83fda9&amp;type=3#MapStyles" />
     <ui:VisualElement name="Container" class="root-container-mini" style="flex-grow: 1; border-left-color: rgba(255, 255, 255, 0); border-right-color: rgba(255, 255, 255, 0); border-top-color: rgba(255, 255, 255, 0); border-bottom-color: rgba(255, 255, 255, 0);">
         <ui:VisualElement name="Map" class="map-container" style="flex-grow: 0; align-self: auto; flex-direction: column;">
-            <ui:VisualElement name="Image" class="map-image" style="flex-grow: 0;">
+            <ui:VisualElement name="Image" class="map-image" style="flex-grow: 0; background-image: url(&apos;project://database/Assets/Scripts/Map/Spirtes/fullscreenMapCropped2.png?fileID=21300000&amp;guid=bc0e0cde0a17bd240b5667db43c6500f&amp;type=3#fullscreenMapCropped2&apos;);">
                 <ui:VisualElement name="Player" class="player-container" style="flex-grow: 0; position: relative; font-size: 12px; rotate: 180deg;">
                     <ui:VisualElement name="Cone" class="player-cone" style="flex-grow: 0;">
                         <ui:VisualElement name="Arrow" class="player-arrow" style="flex-grow: 0; flex-direction: column; -unity-background-image-tint-color: rgb(120, 34, 160);" />
