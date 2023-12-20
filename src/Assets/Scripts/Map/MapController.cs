@@ -14,6 +14,7 @@ public class MapController : MonoBehaviour
     public float miniMultiplyer = 5.3f;
     [Range(0, 15)]
     public float fullMultiplyer = 7f;
+    public float SetMiniOffset;
     private VisualElement _playerRepresentation;
 
     private VisualElement _mapContainer;
@@ -55,11 +56,12 @@ public class MapController : MonoBehaviour
     private void LateUpdate()
     {
         float multiplyer = IsMapOpen ? fullMultiplyer : miniMultiplyer;
+        float miniOffset = IsMapOpen ? 0 : SetMiniOffset;
    
         // On raske ratast ja kaarti kattuma saada. Näib, nagu oleks ikka suurte muutujate küsimus. Saab noole kaardile, kui multiplyer on väga väike (alla nulli)
 
         float zMultiplier = multiplyer * 0.73f;
-       _playerRepresentation.style.translate = new Translate(Player.transform.position.x * multiplyer,
+       _playerRepresentation.style.translate = new Translate(Player.transform.position.x * multiplyer * miniOffset,
             Player.transform.position.z * -zMultiplier, 0);
         _playerRepresentation.style.rotate = new Rotate(
             new Angle(Player.transform.rotation.eulerAngles.y));
