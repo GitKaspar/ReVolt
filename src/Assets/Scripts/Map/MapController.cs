@@ -58,7 +58,7 @@ public class MapController : MonoBehaviour
    
         // On raske ratast ja kaarti kattuma saada. Näib, nagu oleks ikka suurte muutujate küsimus. Saab noole kaardile, kui multiplyer on väga väike (alla nulli)
 
-        float zMultiplier = multiplyer * 0.725f;
+        float zMultiplier = multiplyer * 0.73f;
        _playerRepresentation.style.translate = new Translate(Player.transform.position.x * multiplyer,
             Player.transform.position.z * -zMultiplier, 0);
         _playerRepresentation.style.rotate = new Rotate(
@@ -71,10 +71,13 @@ public class MapController : MonoBehaviour
 
         if (!IsMapOpen)
         {
+            /*
             var clampWidth = _mapImage.worldBound.width / 2 -
                 _mapContainer.worldBound.width / 2;
+            Debug.Log(clampWidth);
             var clampHeight = _mapImage.worldBound.height / 2 -
                 _mapContainer.worldBound.height / 2;
+            Debug.Log(clampHeight);
 
             var xPos = Mathf.Clamp(Player.transform.position.x * -multiplyer,
                 -clampWidth, clampWidth);
@@ -82,6 +85,8 @@ public class MapController : MonoBehaviour
                 -clampHeight, clampHeight);
 
             _mapImage.style.translate = new Translate(xPos, yPos, 0);
+            */
+            _mapImage.style.translate = new Translate(Player.transform.position.x * -multiplyer, Player.transform.position.z * zMultiplier, 0);
         }
         else
         {
