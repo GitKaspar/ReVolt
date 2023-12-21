@@ -3,7 +3,27 @@ guid: 6631b8116c29e614aa6ef9c4e07aaf49
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: db3b3700c00f504489a7aa7b2ef3d4f0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.002
+    second: {fileID: 2100000, guid: 8dbd2099a558ccb4ca5eea39c0e11e94, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: barbe_ wire
+    second: {fileID: 2100000, guid: 41a9b48b7235744498543b2544732663, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: metal_wire
+    second: {fileID: 2100000, guid: 1ea4ddea2bd073741892fbf29d31e443, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
