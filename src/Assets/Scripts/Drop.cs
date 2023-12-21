@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Drop : MonoBehaviour
 {
+    private PlayerControls.PlayerActions actions;
+
     public Material MatDropped;
     public Material MatOpen;
     private bool droppable;
@@ -12,22 +15,20 @@ public class Drop : MonoBehaviour
     // Kaspar's addition
     private AudioSource source;
 
-    private void Awake()
+    private void Start()
     {
         source = GetComponent<AudioSource>();
+
+        actions = ControlsInstance.GetActions();
+        actions.Drop.performed += OnDrop;
     }
 
-
-    // Update is called once per frame
-    void Update()
+    public void OnDrop(InputAction.CallbackContext ctx)
     {
         if (droppable && !done)
         {
-            if (Input.GetButtonDown("Drop"))
-            {
-                DoDrop();
-                GameController.GameControllerInstance.PromtPanel.SetActive(false);
-            }
+            DoDrop();
+            GameController.GameControllerInstance.PromtPanel.SetActive(false);
         }
     }
 
