@@ -26,6 +26,8 @@ public class GameController : MonoBehaviour
     public GameObject PromtPanel;
     public TextMeshProUGUI PromtText;
 
+    public TextMeshProUGUI dropIndicatorText;
+
     public Drop[] Drops;
     private int numDropsDone = 0;
 
@@ -40,6 +42,8 @@ public class GameController : MonoBehaviour
         KeyPanel.SetActive(false);
         isPaused = false;
         WorkshopButton.SetActive(false);
+
+        dropIndicatorText.text = numDropsDone.ToString() + " of " + Drops.Length.ToString();
 
         actions = ControlsInstance.GetActions();
         actions.Pause.performed += Pause_performed;
@@ -94,12 +98,7 @@ public class GameController : MonoBehaviour
     public void OnDropDone(Drop drop)
     {
         numDropsDone++;
-        Debug.Log(drop.transform.position);
-        foreach (Drop d in Drops)
-        {
-            Debug.Log(d.done);
-        }
-
+        dropIndicatorText.text = numDropsDone.ToString() + " of " + Drops.Length.ToString();
         if (numDropsDone == Drops.Length)
         {
             Events.EndGame(true);
