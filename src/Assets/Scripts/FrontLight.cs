@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class FrontLight : MonoBehaviour
 {
@@ -13,13 +14,9 @@ public class FrontLight : MonoBehaviour
         Light.enabled = _enabled;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnFlashlight()
     {
-        if (Input.GetButtonDown("Flashlight"))
-        {
-            _enabled = !_enabled;
-            Light.enabled = _enabled;
-        }
+        _enabled = !_enabled;
+        Light.enabled = _enabled;
     }
 }

@@ -1,9 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ChargingStation : MonoBehaviour
 {
+    private PlayerControls.PlayerActions actions;
+
     public float ChargingRate;
     private bool playerInRange;
     private Battery battery;
@@ -16,7 +17,13 @@ public class ChargingStation : MonoBehaviour
     {
         Events.OnBatteryLow += OnBatteryLow;
         isCharging = false;
+
+        actions = ControlsInstance.GetActions();
+        actions.Charge.started += Charge_started;
+        actions.Charge.canceled += Charge_canceled;
     }
+
+
 
     private void OnDestroy()
     {
@@ -25,10 +32,32 @@ public class ChargingStation : MonoBehaviour
 
     public void OnBatteryLow(bool isLow) => batteryLow = isLow;
 
+    private void Charge_started(InputAction.CallbackContext ctx)
+    {
+        if (playerInRange && !isCharging)
+        {
+            isCharging = true;
+            source = SoundController.SoundInstance.Charge.Play();
+        }
+    }
+
+    private void Charge_canceled(InputAction.CallbackContext octx)
+    {
+        isCharging = false;
+        if (source != null) source.Stop();
+    }
+
+
 
     // Update is called once per frame
     void Update()
     {
+        if (isCharging)
+        {
+            Charge();
+        }
+
+        /*
         if (playerInRange)
         {
 
@@ -50,6 +79,7 @@ public class ChargingStation : MonoBehaviour
             isCharging = false;
             if (source != null) source.Stop();
         }
+        */
 
     }
 
@@ -72,6 +102,7 @@ public class ChargingStation : MonoBehaviour
             battery = null;
             GameController.GameControllerInstance.PromtPanel.SetActive(false);
             isCharging = false;
+            if (source != null) source.Stop();
         }
     }
 
