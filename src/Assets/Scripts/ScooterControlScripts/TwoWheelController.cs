@@ -143,7 +143,9 @@ public class TwoWheelController : MonoBehaviour
 
         //Set the steer on the front wheel
         //Assuming that wheel 0 is the front wheel (Scooter only steers with front wheel
-        float speedPenaltySteering = (1-HandlingPenalty) + HandlingPenalty * (m_Topspeed - CurrentSpeed) / m_Topspeed;
+        float speedPenaltySteering = 1;
+        if (m_Topspeed != BatteryLowSpeed)
+            speedPenaltySteering = (1-HandlingPenalty) + HandlingPenalty * (m_Topspeed - CurrentSpeed) / m_Topspeed;
         m_SteerAngle = steering*m_MaximumSteerAngle * speedPenaltySteering;
         m_WheelColliders[0].steerAngle = m_SteerAngle;
 
