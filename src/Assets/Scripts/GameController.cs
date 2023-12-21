@@ -149,14 +149,12 @@ public class GameController : MonoBehaviour
             Time.timeScale = 0;
             KeyPanel.SetActive(false);
             PausePanel.SetActive(true);
-            
         }
         else
         {
             Debug.Log(menuActive);
             BackToGame();
             menuActive = false;
-
         }
     }
 
@@ -168,6 +166,4 @@ public class GameController : MonoBehaviour
             SoundController.SoundInstance.MenuMusic.Play();
         }
     }
-
-
 }
