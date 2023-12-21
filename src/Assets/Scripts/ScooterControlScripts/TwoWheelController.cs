@@ -203,7 +203,7 @@ public class TwoWheelController : MonoBehaviour
     // Key method that controls forward/backward drive force
     private void ApplyDrive(float drive, float SpeedAdjustment, float handbrake)
     {
-        if (drive > 0.5f) 
+        if (drive > 0.1f) 
         {
             m_targetSpeed += SpeedAdjustment;
             m_targetSpeed = Mathf.Clamp(m_targetSpeed, 0f, m_Topspeed);
@@ -280,8 +280,6 @@ public class TwoWheelController : MonoBehaviour
                 m_WheelColliders[i].motorTorque = -m_ReverseTorque / 2;
             }
         }
-
-        Debug.Log("Motor0: " + m_WheelColliders[0].motorTorque + ", Brake0:" + m_WheelColliders[0].brakeTorque + "Motor1: " + m_WheelColliders[1].motorTorque + ", Brake1:" + m_WheelColliders[1].brakeTorque);
     }
 
     void Stabilizer(float h)
