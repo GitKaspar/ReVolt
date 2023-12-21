@@ -175,7 +175,7 @@ public class TwoWheelController : MonoBehaviour
         //Main forward drive
         ApplyDrive(drive, speedAdjustment, handbrake);
         //Limits top speed
-        CapSpeed();
+        //CapSpeed(); //not needed -> smoothens deceleration
         //Stabilizes bike in upwards direction
         Stabilizer(steering);
 
