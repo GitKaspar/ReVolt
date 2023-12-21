@@ -15,6 +15,9 @@ public class Drop : MonoBehaviour
     // Kaspar's addition
     private AudioSource source;
 
+    public GameObject NewspaperPrefab;
+    private Transform player;
+
     private void Start()
     {
         source = GetComponent<AudioSource>();
@@ -37,6 +40,7 @@ public class Drop : MonoBehaviour
         if (!done && other.CompareTag("Player"))
         {
             droppable = true;
+            player = other.transform;
 
             GameController.GameControllerInstance.PromtText.text = "press 'e' to drop";
             GameController.GameControllerInstance.PromtPanel.SetActive(true);
@@ -48,6 +52,7 @@ public class Drop : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             droppable = false;
+            player = null;
             GameController.GameControllerInstance.PromtPanel.SetActive(false);
         }
     }
@@ -59,11 +64,15 @@ public class Drop : MonoBehaviour
         source.PlayOneShot(chosenClip);
         Events.DropDone(this);
 
+        GameObject newspaper = Instantiate(NewspaperPrefab, player.position + Vector3.up * 1.5f, Quaternion.Euler(90,0,0));
+        newspaper.GetComponent<Rigidbody>().AddForce((transform.position - player.position + Vector3.up) * 20, ForceMode.Impulse); //throw newspaper at drop
+
         Renderer[] renderers = GetComponentsInChildren<Renderer>();
 
         foreach (var rend in renderers)
         {
-            rend.material = MatDropped;
+            rend.enabled = false;
+            //rend.material = MatDropped;
         }
     }
 }
