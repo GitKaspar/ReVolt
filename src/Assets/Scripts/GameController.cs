@@ -19,6 +19,9 @@ public class GameController : MonoBehaviour
     public GameObject PromtPanel;
     public TextMeshProUGUI PromtText;
 
+    private string currentScene;
+    private Battery playerBattery;
+
     public Drop[] Drops;
     private int numDropsDone = 0;
 
@@ -59,6 +62,13 @@ public class GameController : MonoBehaviour
         Events.OnEndGame += OnEndGame;
         Events.OnDropDone += OnDropDone;
         Attack.catchPlayer += EndGame;
+
+        currentScene = SceneManager.GetActiveScene().name;
+        if (currentScene == "TutorialScene")
+        {
+            playerBattery = FindObjectOfType<Battery>();
+            playerBattery.DepletionRate = 1;
+        }
 
         if (SoundController.SoundInstance == null)
         {
