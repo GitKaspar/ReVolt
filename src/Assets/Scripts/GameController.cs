@@ -43,7 +43,6 @@ public class GameController : MonoBehaviour
         KeyPanel.SetActive(false);
         isPaused = false;
         WorkshopButton.SetActive(false);
-        RetryButton.SetActive(false);
 
         dropIndicatorText.text = numDropsDone.ToString() + " of " + Drops.Length.ToString();
 
@@ -116,9 +115,9 @@ public class GameController : MonoBehaviour
         {
             ResultText.text = "Win";
             WorkshopButton.SetActive(true);
+            RetryButton.SetActive(false);
         }
         else
-            RetryButton.SetActive(true);
             ResultText.text = "Busted";
             
 
