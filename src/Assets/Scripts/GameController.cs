@@ -20,6 +20,7 @@ public class GameController : MonoBehaviour
     public GameObject PausePanel;
     public GameObject KeyPanel;
     public GameObject WorkshopButton;
+    public GameObject RetryButton;
     public TextMeshProUGUI ResultText;
     public GameObject SoundControllerPrefab;
 
@@ -42,6 +43,7 @@ public class GameController : MonoBehaviour
         KeyPanel.SetActive(false);
         isPaused = false;
         WorkshopButton.SetActive(false);
+        RetryButton.SetActive(false);
 
         dropIndicatorText.text = numDropsDone.ToString() + " of " + Drops.Length.ToString();
 
@@ -116,7 +118,9 @@ public class GameController : MonoBehaviour
             WorkshopButton.SetActive(true);
         }
         else
+            RetryButton.SetActive(true);
             ResultText.text = "Busted";
+            
 
 
 
@@ -160,6 +164,7 @@ public class GameController : MonoBehaviour
         else
         {
             BackToGame();
+            KeyPanel.SetActive(false);
         }
     }
 
@@ -170,6 +175,11 @@ public class GameController : MonoBehaviour
         {
             SoundController.SoundInstance.MenuMusic.Play();
         }
+    }
+
+    public void Reset()
+    {
+        SceneManager.LoadSceneAsync(1);
     }
 
 
