@@ -21,7 +21,10 @@ public class Jump : MonoBehaviour
     {
         if (Time.time - timeLast >= Cooldown)
         {
-            rb.AddForce(transform.forward * forwardForce + Vector3.up * upForce, ForceMode.VelocityChange);
+            Vector3 fwd = transform.forward;
+            fwd.y = 0;
+            fwd = fwd.normalized;
+            rb.AddForce(fwd * forwardForce + Vector3.up * upForce, ForceMode.VelocityChange);
             timeLast = Time.time;
         }
     }
