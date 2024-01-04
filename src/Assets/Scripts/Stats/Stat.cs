@@ -35,6 +35,15 @@ public class Stat : ScriptableObject
 
     public void ResetLevel() => currentLevel = 0;
 
+    public void SetLevel(int level)
+    {
+        if (level < Levels.Count && level >= 0)
+        {
+            currentLevel = level;
+        }
+    }
+
+
     /*
     public Stat(StatName name, List<float> levels)
     {

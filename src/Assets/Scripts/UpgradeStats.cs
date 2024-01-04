@@ -74,4 +74,29 @@ public class UpgradeStats : MonoBehaviour
             }
         }
     }
+
+    public void SetCurrentLevel(StatName name, int level)
+    {
+        foreach (Stat stat in StatList)
+        {
+            if (stat.Name == name)
+            {
+                stat.SetLevel(level);
+            }
+        }
+    }
+
+    public int GetCurrentLevel(StatName name)
+    {
+        foreach (Stat stat in StatList)
+        {
+            if (stat.Name == name)
+            {
+                return stat.currentLevel;            
+            }
+        }
+
+        Debug.Log("Stat not found");
+        return -1;
+    }
 }
