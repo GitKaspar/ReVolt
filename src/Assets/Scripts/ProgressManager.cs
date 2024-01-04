@@ -57,4 +57,9 @@ public class ProgressManager : MonoBehaviour
         currentLevel++;
     }
     
+
+    public void ResetProgress()
+    {
+        currentLevel = -1;
+    }
 }

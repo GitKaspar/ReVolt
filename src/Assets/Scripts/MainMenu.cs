@@ -10,8 +10,9 @@ public class MainMenu : MonoBehaviour
     public GameObject InstructionsPanel;
     public GameObject Story;
     public GameObject Keys;
+    public GameObject ContinueButton;
+    public TextMeshProUGUI PlayText;
 
-    public TextMeshProUGUI Play;
 
     public static int sceneLoadedNum = 0;
 
@@ -25,8 +26,24 @@ public class MainMenu : MonoBehaviour
         sceneLoadedNum++;
     }
 
+    private void Start()
+    {
+        if (ProgressManager.Instance.currentLevel != -1)
+        {
+            ContinueButton.SetActive(true);
+            PlayText.text = "play new";
+        }
+    }
+
+    public void ContinueGame()
+    {
+        SoundController.SoundInstance.ButtonClick();
+        SceneManager.LoadSceneAsync(ProgressManager.Instance.GetNextLevelName());
+    }
+
     public void PlayGame()
     {
+        /*
         SoundController.SoundInstance.ButtonClick();
         if (sceneLoadedNum < 2)
         {
@@ -39,7 +56,15 @@ public class MainMenu : MonoBehaviour
             UnityEngine.Debug.Log("Play");
             SceneManager.LoadSceneAsync(ProgressManager.Instance.GetNextLevelName());
         }
-       
+        */
+
+        SoundController.SoundInstance.ButtonClick();
+        ProgressManager.Instance.ResetProgress();
+        InstructionsPanel.SetActive(true);
+        Story.SetActive(true);
+        Keys.SetActive(false);
+
+
     }
 
     public void PlayButton()
