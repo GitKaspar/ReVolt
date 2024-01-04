@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour
 
     private PlayerControls.PlayerActions actions;
 
+    private bool isRunning;
     private bool isPaused;
 
     public GameObject EndPanel;
@@ -51,29 +52,23 @@ public class GameController : MonoBehaviour
 
         Events.OnEndGame += OnEndGame;
         Events.OnDropDone += OnDropDone;
-        Attack.catchPlayer += EndGame;
 
         if (SoundController.SoundInstance == null)
         {
             GameObject.Instantiate(SoundControllerPrefab, transform);
         }
+
+        isRunning = true;
     }
 
     private void Pause_performed(InputAction.CallbackContext obj)
     {
-        isPaused = !isPaused;
-        Pause();
-    }
-
-    /*
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (isRunning)
         {
-            Pause(isPaused);
+            isPaused = !isPaused;
+            Pause();
         }
     }
-    */
 
     public void BackToGame()
     {
@@ -81,6 +76,7 @@ public class GameController : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    //kala
     public void EndGame()
     {
         ResultText.text = "Busted";
@@ -93,7 +89,6 @@ public class GameController : MonoBehaviour
     {
         Events.OnEndGame -= OnEndGame;
         Events.OnDropDone -= OnDropDone;
-        Attack.catchPlayer -= EndGame;
     }
 
     public void OnDropDone(Drop drop)
@@ -110,7 +105,10 @@ public class GameController : MonoBehaviour
 
     public void OnEndGame(bool isWin)
     {
+        isRunning = false;
         Time.timeScale = 0;
+        ControlsInstance.Disable(); //Disable player input actions
+
         if (isWin)
         {
             ResultText.text = "Win";
@@ -119,11 +117,7 @@ public class GameController : MonoBehaviour
         }
         else
             ResultText.text = "Busted";
-            
-
-
-
-        ControlsInstance.Disable(); //Disable player input actions
+        
         EndPanel.SetActive(true);
     }
 

@@ -263,6 +263,8 @@ public class Attack : State
         audioSource.Play();
         // shoot.Play();
         base.Enter();
+
+        Events.EndGame(false);
     }
 
     public override void Update()
