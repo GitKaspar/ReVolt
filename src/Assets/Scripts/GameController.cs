@@ -48,6 +48,7 @@ public class GameController : MonoBehaviour
         dropIndicatorText.text = numDropsDone.ToString() + " of " + Drops.Length.ToString();
 
         actions = ControlsInstance.GetActions();
+        ControlsInstance.Enable();
         actions.Pause.performed += Pause_performed;
 
         Events.OnEndGame += OnEndGame;
@@ -75,15 +76,6 @@ public class GameController : MonoBehaviour
         PausePanel.SetActive(false);
         Time.timeScale = 1;
     }
-
-    //kala
-    public void EndGame()
-    {
-        ResultText.text = "Busted";
-        EndPanel.SetActive(true);
-        Time.timeScale = 0;
-    }
-
 
     private void OnDestroy()
     {
@@ -114,6 +106,10 @@ public class GameController : MonoBehaviour
             ResultText.text = "Win";
             WorkshopButton.SetActive(true);
             RetryButton.SetActive(false);
+
+            //Set up what to load next
+            ProgressManager.Instance.workshopVisited = false;
+            Events.LevelBeat();
         }
         else
             ResultText.text = "Busted";
@@ -170,9 +166,10 @@ public class GameController : MonoBehaviour
         }
     }
 
+    //Retry level after failing it
     public void Reset()
     {
-        SceneManager.LoadSceneAsync(1);
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
     }
 
 

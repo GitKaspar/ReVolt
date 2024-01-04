@@ -9,6 +9,9 @@ public static class Events
     public static event Action<bool> OnEndGame;
     public static void EndGame(bool isWin) => OnEndGame?.Invoke(isWin);
 
+    public static event Action OnLevelBeat;
+    public static void LevelBeat() => OnLevelBeat?.Invoke();
+
 
     //Requesting and Setting Attributes
     public static event Func<float> OnRequestCurrentSpeed;

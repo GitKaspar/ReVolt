@@ -37,7 +37,7 @@ public class MainMenu : MonoBehaviour
         else
         {
             UnityEngine.Debug.Log("Play");
-            SceneManager.LoadSceneAsync(1);
+            SceneManager.LoadSceneAsync(ProgressManager.Instance.GetNextLevelName());
         }
        
     }
@@ -46,7 +46,7 @@ public class MainMenu : MonoBehaviour
     {
         SoundController.SoundInstance.ButtonClick();
         UnityEngine.Debug.Log("Play");
-        SceneManager.LoadSceneAsync(1);
+        SceneManager.LoadSceneAsync(ProgressManager.Instance.GetNextLevelName());
     }
 
 

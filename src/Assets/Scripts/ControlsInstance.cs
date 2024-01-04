@@ -27,4 +27,12 @@ public static class ControlsInstance
             playerActions.Disable();
         }
     }
+
+    public static void Enable()
+    {
+        if (instance != null)
+        {
+            playerActions.Enable();
+        }
+    }
 }
