@@ -1,29 +1,49 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Drop : MonoBehaviour
 {
-    private bool droppable;
-    private bool done;
+    private PlayerControls.PlayerActions actions;
 
-    // Update is called once per frame
-    void Update()
+    public Material MatDropped;
+    public Material MatOpen;
+    private bool droppable;
+    [HideInInspector]
+    public bool done;
+    // Kaspar's addition
+    private AudioSource source;
+
+    public GameObject NewspaperPrefab;
+    private Transform player;
+
+    private void Start()
+    {
+        source = GetComponent<AudioSource>();
+
+        actions = ControlsInstance.GetActions();
+        actions.Drop.performed += OnDrop;
+    }
+
+    public void OnDrop(InputAction.CallbackContext ctx)
     {
         if (droppable && !done)
         {
-            if (Input.GetButtonDown("Drop"))
-            {
-                DoDrop();
-            }
+            DoDrop();
+            GameController.GameControllerInstance.PromtPanel.SetActive(false);
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (!done && other.CompareTag("Player"))
         {
             droppable = true;
+            player = other.transform;
+
+            GameController.GameControllerInstance.PromtText.text = "press 'e' to drop";
+            GameController.GameControllerInstance.PromtPanel.SetActive(true);
         }
     }
 
@@ -32,17 +52,27 @@ public class Drop : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             droppable = false;
+            player = null;
+            GameController.GameControllerInstance.PromtPanel.SetActive(false);
         }
     }
 
     private void DoDrop()
     {
         done = true;
+        AudioClip chosenClip = SoundController.SoundInstance.Drops.Clips[Random.Range(0, SoundController.SoundInstance.Drops.Clips.Count)];
+        source.PlayOneShot(chosenClip);
+        Events.DropDone(this);
+
+        GameObject newspaper = Instantiate(NewspaperPrefab, player.position + Vector3.up * 1.5f, Quaternion.Euler(90,0,0));
+        newspaper.GetComponent<Rigidbody>().AddForce((transform.position - player.position + Vector3.up) * 20, ForceMode.Impulse); //throw newspaper at drop
+
         Renderer[] renderers = GetComponentsInChildren<Renderer>();
 
         foreach (var rend in renderers)
         {
-            rend.material.color = Color.green;
+            rend.enabled = false;
+            //rend.material = MatDropped;
         }
     }
 }

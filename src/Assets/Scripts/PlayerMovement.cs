@@ -93,18 +93,14 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, transform.eulerAngles.y, 0f);
         }
 
-
-
         //Clamp velocity to not exceed MaxSpeed
         if (rb.velocity.magnitude > MaxSpeed)
         {
             rb.velocity = Vector3.ClampMagnitude(rb.velocity, MaxSpeed);
         }
 
-        Debug.Log("speed: " + currentSpeed);
+        //Debug.Log("speed: " + currentSpeed);
     }
-
-
     private bool SpeedsClose(float currentSpeed, float targetSpeed, float delta)
     {
         float diff = Mathf.Abs(currentSpeed - targetSpeed);
