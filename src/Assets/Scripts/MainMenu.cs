@@ -24,6 +24,8 @@ public class MainMenu : MonoBehaviour
         Keys.SetActive(false);
 
         sceneLoadedNum++;
+
+        Time.timeScale = 1f; //bruh, otherwise game frozen
     }
 
     private void Start()
@@ -37,7 +39,7 @@ public class MainMenu : MonoBehaviour
 
     public void ContinueGame()
     {
-        SoundController.SoundInstance.ButtonClick();
+        //SoundController.SoundInstance.ButtonClick(); //sound triggered in animated button script
         SceneManager.LoadSceneAsync(ProgressManager.Instance.GetNextLevelName());
     }
 
@@ -58,7 +60,7 @@ public class MainMenu : MonoBehaviour
         }
         */
 
-        SoundController.SoundInstance.ButtonClick();
+        //SoundController.SoundInstance.ButtonClick();
         ProgressManager.Instance.ResetProgress();
         InstructionsPanel.SetActive(true);
         Story.SetActive(true);
@@ -69,7 +71,7 @@ public class MainMenu : MonoBehaviour
 
     public void PlayButton()
     {
-        SoundController.SoundInstance.ButtonClick();
+        //SoundController.SoundInstance.ButtonClick(); //sound triggered in animated button script
         UnityEngine.Debug.Log("Play");
         SceneManager.LoadSceneAsync(ProgressManager.Instance.GetNextLevelName());
     }
@@ -77,14 +79,14 @@ public class MainMenu : MonoBehaviour
 
     public void QuitGame()
     {
-        SoundController.SoundInstance.ButtonClick();
+        //SoundController.SoundInstance.ButtonClick(); //sound triggered in animated button script
         Application.Quit();
         UnityEngine.Debug.Log("Quit the game");
     }
 
     public void Instructions()
     {
-        SoundController.SoundInstance.ButtonClick();
+        //SoundController.SoundInstance.ButtonClick(); //sound triggered in animated button script
         if (sceneLoadedNum < 2)
         {
             InstructionsPanel.SetActive(true);
@@ -100,7 +102,7 @@ public class MainMenu : MonoBehaviour
 
     public void Next()
     {
-        SoundController.SoundInstance.ButtonClick();
+        //SoundController.SoundInstance.ButtonClick(); //sound triggered in animated button script
         InstructionsPanel.SetActive(true);
         Story.SetActive(false);
         Keys.SetActive(true);
@@ -108,7 +110,7 @@ public class MainMenu : MonoBehaviour
 
     public void BackToMainMenu()
     {
-        SoundController.SoundInstance.ButtonClick();
+        //SoundController.SoundInstance.ButtonClick(); //sound triggered in animated button script
         SceneManager.LoadSceneAsync("MainMenu");
     }
 }
