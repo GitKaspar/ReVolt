@@ -31,7 +31,7 @@ public class ClickedButtonAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timePassed += Time.deltaTime * AnimSpeed;
+        timePassed += Time.unscaledDeltaTime * AnimSpeed;
 
         if (timePassed >= 0.5f) 
         {
@@ -50,5 +50,10 @@ public class ClickedButtonAnimation : MonoBehaviour
 
         float modifier = AnimCurve.Evaluate(timePassed);
         transform.localScale = Vector3.LerpUnclamped(m_Start, m_End, modifier);
+    }
+
+    private void OnDisable()
+    {
+        transform.localScale = StartScale;
     }
 }

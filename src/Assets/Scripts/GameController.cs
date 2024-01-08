@@ -73,6 +73,7 @@ public class GameController : MonoBehaviour
 
     public void BackToGame()
     {
+        isPaused = false;
         PausePanel.SetActive(false);
         Time.timeScale = 1;
     }
@@ -119,7 +120,7 @@ public class GameController : MonoBehaviour
 
     public void BackToMainMenu()
     {
-        SoundController.SoundInstance.ButtonClick();
+        //SoundController.SoundInstance.ButtonClick(); //-> done in AnimatedButton
         SceneManager.LoadSceneAsync("MainMenu");
     }
 
@@ -130,7 +131,7 @@ public class GameController : MonoBehaviour
 
     public void ToWorkshop()
     {
-        SoundController.SoundInstance.ButtonClick();
+        //SoundController.SoundInstance.ButtonClick(); //-> done in AnimatedButton
         SceneManager.LoadSceneAsync("UpgradeScreen");
     }
 

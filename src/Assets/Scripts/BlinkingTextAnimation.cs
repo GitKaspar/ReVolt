@@ -35,7 +35,7 @@ public class BlinkingTextAnimation : MonoBehaviour
             timeStamp = 0f;
         }
 
-        timeStamp += Time.deltaTime;
+        timeStamp += Time.unscaledDeltaTime;
     }
 
     private void OnEnable()
