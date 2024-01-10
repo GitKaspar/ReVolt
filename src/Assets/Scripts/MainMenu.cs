@@ -9,7 +9,8 @@ public class MainMenu : MonoBehaviour
 {
     public GameObject InstructionsPanel;
     public GameObject Story;
-    public GameObject Keys;
+    public GameObject KeysPC;
+    public GameObject KeysController;
     public GameObject ContinueButton;
     public TextMeshProUGUI PlayText;
 
@@ -23,7 +24,8 @@ public class MainMenu : MonoBehaviour
     {
         InstructionsPanel.SetActive(false);
         Story.SetActive(false);
-        Keys.SetActive(false);
+        KeysPC.SetActive(false);
+        KeysController.SetActive(false);
 
         sceneLoadedNum++;
 
@@ -76,7 +78,8 @@ public class MainMenu : MonoBehaviour
         ProgressManager.Instance.ResetProgress();
         InstructionsPanel.SetActive(true);
         Story.SetActive(true);
-        Keys.SetActive(false);
+        KeysPC.SetActive(false);
+        KeysController.SetActive(false);
 
 
     }
@@ -103,7 +106,8 @@ public class MainMenu : MonoBehaviour
         {
             InstructionsPanel.SetActive(true);
             Story.SetActive(true);
-            Keys.SetActive(false);
+            KeysPC.SetActive(false);
+            KeysController.SetActive(false);
         }
         else
         {
@@ -117,7 +121,17 @@ public class MainMenu : MonoBehaviour
         //SoundController.SoundInstance.ButtonClick(); //sound triggered in animated button script
         InstructionsPanel.SetActive(true);
         Story.SetActive(false);
-        Keys.SetActive(true);
+        KeysPC.SetActive(true);
+        KeysController.SetActive(false);
+    }
+
+    public void NextAgain()
+    {
+        //SoundController.SoundInstance.ButtonClick(); //sound triggered in animated button script
+        InstructionsPanel.SetActive(true);
+        Story.SetActive(false);
+        KeysPC.SetActive(false);
+        KeysController.SetActive(true);
     }
 
     public void BackToMainMenu()
