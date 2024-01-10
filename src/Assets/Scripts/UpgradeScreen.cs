@@ -9,6 +9,7 @@ public class UpgradeScreen : MonoBehaviour
     private void Start()
     {
         ProgressManager.Instance.workshopVisited = true;
+        AudioListener.pause = false;
     }
 
     public void OnSpeedUpgradeClick()

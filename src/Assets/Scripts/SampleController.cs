@@ -19,6 +19,8 @@ public class SampleController : MonoBehaviour
         Events.OnEndGame += OnEndGame;
         Events.OnDropDone += OnDropDone;
         Attack.catchPlayer += EndGame;
+
+        Time.timeScale = 1;
     }
 
     private void OnDestroy()
@@ -54,11 +56,4 @@ public class SampleController : MonoBehaviour
     {
         SceneManager.LoadSceneAsync("MainMenu");
     }
-
-    private void OnLevelWasLoaded(int level)
-    {
-        Time.timeScale = 1;
-    }
-
-
 }

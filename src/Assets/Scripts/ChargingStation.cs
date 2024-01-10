@@ -36,8 +36,16 @@ public class ChargingStation : MonoBehaviour
     {
         if (playerInRange && !isCharging)
         {
-            isCharging = true;
-            source = SoundController.SoundInstance.Charge.Play();
+            if (battery.CurrentCapacity != battery.MaxCapacity)
+            {
+                isCharging = true;
+                source = SoundController.SoundInstance.Charge.Play();
+            }
+            else
+            {
+                SoundController.SoundInstance.ChargeDone.Play();
+            }
+
         }
     }
 
@@ -56,31 +64,6 @@ public class ChargingStation : MonoBehaviour
         {
             Charge();
         }
-
-        /*
-        if (playerInRange)
-        {
-
-            if (Input.GetButtonDown("Charge") && !isCharging)
-            {
-                isCharging = true;
-                source = SoundController.SoundInstance.Charge.Play();
-            }
-
-            if (isCharging)
-            {
-                Charge();
-            }
-
-        }
-
-        if (Input.GetButtonUp("Charge"))
-        {
-            isCharging = false;
-            if (source != null) source.Stop();
-        }
-        */
-
     }
 
     private void OnTriggerEnter(Collider other)
@@ -112,6 +95,13 @@ public class ChargingStation : MonoBehaviour
 
         battery.CurrentCapacity += ChargingRate * Time.deltaTime;
         battery.CurrentCapacity = Mathf.Min(battery.MaxCapacity, battery.CurrentCapacity);
+
+        if (battery.CurrentCapacity == battery.MaxCapacity)
+        {
+            isCharging = false;
+            if (source != null) source.Stop();
+            SoundController.SoundInstance.ChargeDone.Play();
+        }
 
         if (batteryLow) Events.BatteryLow(false);
     }

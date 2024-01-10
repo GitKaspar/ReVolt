@@ -17,6 +17,8 @@ public class GameController : MonoBehaviour
     private bool isRunning;
     private bool isPaused;
 
+    private AudioSource ambienceMusicSource;
+
     public GameObject EndPanel;
     public GameObject PausePanel;
     public GameObject KeyPanel;
@@ -59,7 +61,29 @@ public class GameController : MonoBehaviour
             GameObject.Instantiate(SoundControllerPrefab, transform);
         }
 
+        ambienceMusicSource = SoundController.SoundInstance.AmbientMusic.Play();
+        ambienceMusicSource.ignoreListenerPause = true;
+
         isRunning = true;
+    }
+
+    private void Start()
+    {
+        Time.timeScale = 1;
+        AudioListener.pause = false;
+    }
+
+    private void OnDestroy()
+    {
+        if (ambienceMusicSource != null)
+        {
+            ambienceMusicSource.Stop();
+            ambienceMusicSource.ignoreListenerPause = false;
+        }
+
+        Events.OnEndGame -= OnEndGame;
+        Events.OnDropDone -= OnDropDone;
+        actions.Pause.performed -= Pause_performed;
     }
 
     private void Pause_performed(InputAction.CallbackContext obj)
@@ -78,12 +102,6 @@ public class GameController : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    private void OnDestroy()
-    {
-        Events.OnEndGame -= OnEndGame;
-        Events.OnDropDone -= OnDropDone;
-    }
-
     public void OnDropDone(Drop drop)
     {
         numDropsDone++;
@@ -94,12 +112,11 @@ public class GameController : MonoBehaviour
         }
     }
 
-
-
     public void OnEndGame(bool isWin)
     {
         isRunning = false;
         Time.timeScale = 0;
+        AudioListener.pause = true;
         ControlsInstance.Disable(); //Disable player input actions
 
         if (isWin)
@@ -124,11 +141,6 @@ public class GameController : MonoBehaviour
         SceneManager.LoadSceneAsync("MainMenu");
     }
 
-    private void OnLevelWasLoaded(int level)
-    {
-        Time.timeScale = 1;
-    }
-
     public void ToWorkshop()
     {
         //SoundController.SoundInstance.ButtonClick(); //-> done in AnimatedButton
@@ -146,6 +158,7 @@ public class GameController : MonoBehaviour
     {
         if (isPaused)
         {
+            AudioListener.pause = true;
             Time.timeScale = 0;
             KeyPanel.SetActive(false);
             PausePanel.SetActive(true);
@@ -153,17 +166,9 @@ public class GameController : MonoBehaviour
         }
         else
         {
+            AudioListener.pause = false;
             BackToGame();
             KeyPanel.SetActive(false);
-        }
-    }
-
-
-    private void Start()
-    {
-        if(SceneManager.GetActiveScene().name == "MainMenu")
-        {
-            SoundController.SoundInstance.MenuMusic.Play();
         }
     }
 
@@ -172,6 +177,4 @@ public class GameController : MonoBehaviour
     {
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
     }
-
-
 }

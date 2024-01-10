@@ -18,5 +18,7 @@ public class FrontLight : MonoBehaviour
     {
         _enabled = !_enabled;
         Light.enabled = _enabled;
+
+        SoundController.SoundInstance.Flashlight.Play();
     }
 }

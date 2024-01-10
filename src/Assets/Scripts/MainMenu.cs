@@ -16,6 +16,8 @@ public class MainMenu : MonoBehaviour
 
     public static int sceneLoadedNum = 0;
 
+    private AudioSource menuMusicSource;
+
 
     private void Awake()
     {
@@ -26,6 +28,8 @@ public class MainMenu : MonoBehaviour
         sceneLoadedNum++;
 
         Time.timeScale = 1f; //bruh, otherwise game frozen
+        AudioListener.pause = false;
+        menuMusicSource = SoundController.SoundInstance.MenuMusic.Play();
     }
 
     private void Start()
@@ -34,6 +38,14 @@ public class MainMenu : MonoBehaviour
         {
             ContinueButton.SetActive(true);
             PlayText.text = "play new";
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (menuMusicSource != null)
+        {
+            menuMusicSource.Stop();
         }
     }
 
@@ -111,6 +123,7 @@ public class MainMenu : MonoBehaviour
     public void BackToMainMenu()
     {
         //SoundController.SoundInstance.ButtonClick(); //sound triggered in animated button script
-        SceneManager.LoadSceneAsync("MainMenu");
+        //SceneManager.LoadSceneAsync("MainMenu");
+        InstructionsPanel.SetActive(false);
     }
 }

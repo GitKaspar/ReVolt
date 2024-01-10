@@ -25,6 +25,9 @@ public class Jump : MonoBehaviour
             fwd.y = 0;
             fwd = fwd.normalized;
             rb.AddForce(fwd * forwardForce + Vector3.up * upForce, ForceMode.VelocityChange);
+
+            SoundController.SoundInstance.Jump.Play();
+
             timeLast = Time.time;
         }
     }
