@@ -100,6 +100,7 @@ public class GameController : MonoBehaviour
         isPaused = false;
         PausePanel.SetActive(false);
         Time.timeScale = 1;
+        Cursor.visible = false;
     }
 
     public void OnDropDone(Drop drop)
@@ -162,7 +163,8 @@ public class GameController : MonoBehaviour
             Time.timeScale = 0;
             KeyPanel.SetActive(false);
             PausePanel.SetActive(true);
-            
+            Cursor.visible = true;
+
         }
         else
         {

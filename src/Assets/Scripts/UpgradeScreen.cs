@@ -10,6 +10,7 @@ public class UpgradeScreen : MonoBehaviour
     {
         ProgressManager.Instance.workshopVisited = true;
         AudioListener.pause = false;
+        Cursor.visible = true;
     }
 
     public void OnSpeedUpgradeClick()
@@ -45,5 +46,6 @@ public class UpgradeScreen : MonoBehaviour
     {
         string nextSceneName = ProgressManager.Instance.GetNextLevelName();
         SceneManager.LoadSceneAsync(nextSceneName);
+        Cursor.visible = false;
     }
 }

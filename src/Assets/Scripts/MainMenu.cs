@@ -32,6 +32,7 @@ public class MainMenu : MonoBehaviour
         Time.timeScale = 1f; //bruh, otherwise game frozen
         AudioListener.pause = false;
         menuMusicSource = SoundController.SoundInstance.MenuMusic.Play();
+        Cursor.visible = true;
     }
 
     private void Start()
@@ -49,6 +50,8 @@ public class MainMenu : MonoBehaviour
         {
             menuMusicSource.Stop();
         }
+
+        Cursor.visible = false;
     }
 
     public void ContinueGame()
