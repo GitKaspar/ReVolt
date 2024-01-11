@@ -8,11 +8,13 @@ using TMPro;
 public class MainMenu : MonoBehaviour
 {
     public GameObject InstructionsPanel;
+    public GameObject CreditsPanel;
     public GameObject Story;
     public GameObject KeysPC;
     public GameObject KeysController;
     public GameObject ContinueButton;
     public TextMeshProUGUI PlayText;
+    public TextMeshProUGUI displayBio;
 
 
     public static int sceneLoadedNum = 0;
@@ -23,6 +25,7 @@ public class MainMenu : MonoBehaviour
     private void Awake()
     {
         InstructionsPanel.SetActive(false);
+        CreditsPanel.SetActive(false);
         Story.SetActive(false);
         KeysPC.SetActive(false);
         KeysController.SetActive(false);
@@ -119,6 +122,27 @@ public class MainMenu : MonoBehaviour
         
     }
 
+    public void OpenCredits()
+    {
+        displayBio.text = "Who are you curious about?";
+        CreditsPanel.SetActive(true);
+    }
+
+    public void NicolasButton()
+    {
+        displayBio.text = "Nicolas is german lol";
+    }
+
+    public void KasparButton()
+    {
+        displayBio.text = "Kaspar studies history lol";
+    }
+
+    public void TristanButton()
+    {
+        displayBio.text = "Tristan is lol";
+    }
+
     public void Next()
     {
         //SoundController.SoundInstance.ButtonClick(); //sound triggered in animated button script
@@ -142,5 +166,6 @@ public class MainMenu : MonoBehaviour
         //SoundController.SoundInstance.ButtonClick(); //sound triggered in animated button script
         //SceneManager.LoadSceneAsync("MainMenu");
         InstructionsPanel.SetActive(false);
+        CreditsPanel.SetActive(false);
     }
 }
