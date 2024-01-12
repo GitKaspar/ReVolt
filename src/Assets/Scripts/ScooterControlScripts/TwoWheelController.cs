@@ -185,6 +185,13 @@ public class TwoWheelController : MonoBehaviour
         //Assuming that wheel 1 is the rear wheel.
         if (handbrake > 0f)
         {
+            if (CurrentSpeed > 5f) //to quicken long decelerations
+            {
+                Vector3 accelVector = -2 * m_Rigidbody.transform.forward.normalized;
+                accelVector.y = -0.1f; //traction
+                m_Rigidbody.AddForce(accelVector, ForceMode.Acceleration);
+            }
+
             var hbTorque = handbrake*m_MaxHandbrakeTorque;
             m_WheelColliders[0].brakeTorque = hbTorque;
             m_WheelColliders[1].brakeTorque = hbTorque;
@@ -253,6 +260,13 @@ public class TwoWheelController : MonoBehaviour
             }
             else //Decelerate
             {
+                if (m_targetSpeed - CurrentSpeed > 5f) //to quicken long decelerations
+                {
+                    Vector3 accelVector = -1 * m_Rigidbody.transform.forward.normalized;
+                    accelVector.y = -0.1f; //traction
+                    m_Rigidbody.AddForce(accelVector, ForceMode.Acceleration);
+                }
+
                 for (int i = 0; i < 2; i++)
                 {
                     m_WheelColliders[i].motorTorque = 0f;
