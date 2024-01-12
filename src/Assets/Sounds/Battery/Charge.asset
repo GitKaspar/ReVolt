@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ceaa7f418387f747884842c14af07df, type: 3}
   m_Name: Charge
   m_EditorClassIdentifier: 
-  VolumeMin: 1
-  VolumeMax: 1
+  VolumeMin: 0.5
+  VolumeMax: 0.5
   PitchMin: 1
   PitchMax: 1
   Cooldown: 0.1
   Loop: 1
   Clips:
-  - {fileID: 8300000, guid: cd1e51fd119fc034baff057559c568e4, type: 3}
+  - {fileID: 8300000, guid: 40c5d0b02dcde144e986d267e7967330, type: 3}

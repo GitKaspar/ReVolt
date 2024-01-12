@@ -75,6 +75,7 @@ public class GameController : MonoBehaviour
 
     private void OnDestroy()
     {
+        Cursor.visible = false;
         if (ambienceMusicSource != null)
         {
             ambienceMusicSource.Stop();
@@ -119,6 +120,7 @@ public class GameController : MonoBehaviour
         Time.timeScale = 0;
         AudioListener.pause = true;
         ControlsInstance.Disable(); //Disable player input actions
+        Cursor.visible = true;
 
         if (isWin)
         {

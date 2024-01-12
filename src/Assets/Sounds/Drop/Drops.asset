@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ceaa7f418387f747884842c14af07df, type: 3}
   m_Name: Drops
   m_EditorClassIdentifier: 
-  VolumeMin: 1
-  VolumeMax: 1
+  VolumeMin: 0.5
+  VolumeMax: 0.5
   PitchMin: 1
   PitchMax: 1
   Cooldown: 0.1
+  Loop: 0
   Clips:
-  - {fileID: 8300000, guid: 274afec1bd6cf5046a92905b412ed75a, type: 3}
-  - {fileID: 8300000, guid: 36cd44d21340abc4d826bb4d0e6ebdac, type: 3}
+  - {fileID: 8300000, guid: 66424f968e6702643b2ee02525c8d7c8, type: 3}
+  - {fileID: 8300000, guid: bbc6bf410c8dd2f4c83af3b1abad6a36, type: 3}

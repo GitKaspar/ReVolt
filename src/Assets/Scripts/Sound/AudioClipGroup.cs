@@ -6,9 +6,9 @@ using UnityEngine;
 
 public class AudioClipGroup : ScriptableObject
 {
-    [Range(0, 2)]
+    [Range(0, 1)]
     public float VolumeMin = 1;
-    [Range(0, 2)]
+    [Range(0, 1)]
     public float VolumeMax = 1;
     [Range(0, 2)]
     public float PitchMin = 1;

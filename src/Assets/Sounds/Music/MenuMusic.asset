@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ceaa7f418387f747884842c14af07df, type: 3}
   m_Name: MenuMusic
   m_EditorClassIdentifier: 
-  VolumeMin: 0.15
-  VolumeMax: 0.2
+  VolumeMin: 0.5
+  VolumeMax: 0.5
   PitchMin: 1
   PitchMax: 1
   Cooldown: 0.1
   Loop: 1
   Clips:
-  - {fileID: 8300000, guid: 8d99fa0362fa1ad4a8ad484cdb1dc4e1, type: 3}
+  - {fileID: 8300000, guid: 262796ce2ae2fdd439c31f6fdb253a01, type: 3}

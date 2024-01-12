@@ -259,6 +259,7 @@ public class Attack : State
         agent.isStopped = true;
         catchPlayer?.Invoke(); // Action is invoked, when we enter the Attack state.
         audioSource.loop = false;
+        audioSource.ignoreListenerPause = true;
         audioSource.clip = SoundController.SoundInstance.Lasers.Clips[UnityEngine.Random.Range(0, SoundController.SoundInstance.Lasers.Clips.Count)];
         audioSource.Play();
         // shoot.Play();
@@ -288,6 +289,7 @@ public class Attack : State
     public override void Exit()
     {
         // anim.ResetTrigger("isShooting");
+        audioSource.ignoreListenerPause = false;
         base.Exit();
     }
 }

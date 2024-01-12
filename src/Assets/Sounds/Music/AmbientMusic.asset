@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ceaa7f418387f747884842c14af07df, type: 3}
   m_Name: AmbientMusic
   m_EditorClassIdentifier: 
-  VolumeMin: 0.3
+  VolumeMin: 0.5
   VolumeMax: 0.5
   PitchMin: 1
   PitchMax: 1
   Cooldown: 0.1
   Loop: 1
   Clips:
-  - {fileID: 8300000, guid: 6dc4be81296344087a45172d7ba5e06f, type: 3}
+  - {fileID: 8300000, guid: c57eddd3203f12d4faaf87cf9f5d8ba1, type: 3}

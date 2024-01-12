@@ -12,14 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ceaa7f418387f747884842c14af07df, type: 3}
   m_Name: Laser
   m_EditorClassIdentifier: 
-  VolumeMin: 1
-  VolumeMax: 1
+  VolumeMin: 0.5
+  VolumeMax: 0.5
   PitchMin: 1
   PitchMax: 1
   Cooldown: 0.1
+  Loop: 0
   Clips:
-  - {fileID: 8300000, guid: bdbe33fef308d9e4da80f030d4e71844, type: 3}
-  - {fileID: 8300000, guid: d0f71efc21de8c3419edc84a4e2690fd, type: 3}
-  - {fileID: 8300000, guid: d43eb0371614b68459dc586cacebc551, type: 3}
-  - {fileID: 8300000, guid: dbe13a33b9de1074cbc507a9ba9e0917, type: 3}
-  - {fileID: 8300000, guid: b732a387151a86f45a3ff5a8f9741ec9, type: 3}
+  - {fileID: 8300000, guid: 75d97f5abc6e7e54ebe96b1bbb5a95ef, type: 3}
+  - {fileID: 8300000, guid: 4c09d03cb059847468760e4da6d4f3f3, type: 3}
+  - {fileID: 8300000, guid: a35b1a4046c3d1243b4cf3e632015640, type: 3}
+  - {fileID: 8300000, guid: 1532c67f303ca134f80e3c2c9533cf21, type: 3}
+  - {fileID: 8300000, guid: 1cb90173436e2ac4fb511d450207f2af, type: 3}
