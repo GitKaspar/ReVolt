@@ -32,13 +32,14 @@ public class State
     protected NavMeshAgent agent;
     protected Light droneLight;
     protected AudioSource audioSource;
+    protected float speedModifier;
 
     float visDist = 20.0f;
     float visAngle = 60.0f; // NPC näeb tegelikult kaks korda sama palju
     float shootDist = 3.0f;
 
 
-    public State(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player, Light _droneLight, AudioSource _audioSource)
+    public State(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player, Light _droneLight, AudioSource _audioSource, float _speedModifier)
     {
         npc = _npc;
         agent = _agent;
@@ -46,6 +47,7 @@ public class State
         player = _player;
         droneLight = _droneLight;
         audioSource = _audioSource;
+        speedModifier = _speedModifier; 
         stage = EVENT.ENTER;
     }
 
@@ -101,8 +103,8 @@ public class State
 
 public class Idle : State
 {
-    public Idle(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player, Light _droneLight, AudioSource _audioSource)
-        : base(_npc, _agent, _anim, _player, _droneLight, _audioSource)
+    public Idle(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player, Light _droneLight, AudioSource _audioSource, float _speedModifier)
+        : base(_npc, _agent, _anim, _player, _droneLight, _audioSource, _speedModifier)
     {
         name = STATE.IDLE;
     }
@@ -121,13 +123,13 @@ public class Idle : State
     {
         if (CanSeePlayer())
         {
-            nextState = new Pursue(npc, agent, anim, player, droneLight, audioSource);
+            nextState = new Pursue(npc, agent, anim, player, droneLight, audioSource, speedModifier);
             stage = EVENT.EXIT;
         }
 
         else if (UnityEngine.Random.Range(0, 100) < 10) // See, et tüüp hakkab patrullima, on juhuslik, 10% tõenäosus
         {
-            nextState = new Patrol(npc, agent, anim, player, droneLight, audioSource);
+            nextState = new Patrol(npc, agent, anim, player, droneLight, audioSource, speedModifier);
             stage = EVENT.EXIT;
         }
     }
@@ -144,11 +146,11 @@ public class Patrol : State
     private AI droneAI;
     private Checkpoint checkpoint;
 
-    public Patrol(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player, Light _droneLight, AudioSource _audioSource)
-        : base(_npc, _agent, _anim, _player, _droneLight, _audioSource)
+    public Patrol(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player, Light _droneLight, AudioSource _audioSource, float _speedModifier)
+        : base(_npc, _agent, _anim, _player, _droneLight, _audioSource, _speedModifier)
     {
         name = STATE.PATROL;
-        agent.speed = 8.0f;
+        agent.speed = 6.0f * speedModifier;
         agent.isStopped = false;
     }
 
@@ -178,12 +180,12 @@ public class Patrol : State
 
         if (CanSeePlayer())
         {
-            nextState = new Pursue(npc, agent, anim, player, droneLight, audioSource);
+            nextState = new Pursue(npc, agent, anim, player, droneLight, audioSource, speedModifier);
             stage = EVENT.EXIT;
         }
         else if (IsScared())
         {
-            nextState = new RunAway(npc, agent, anim, player, droneLight, audioSource);
+            nextState = new RunAway(npc, agent, anim, player, droneLight, audioSource, speedModifier);
             stage = EVENT.EXIT;
         }
     }
@@ -196,11 +198,12 @@ public class Patrol : State
 
 public class Pursue : State
 {
-    public Pursue(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player, Light _droneLight, AudioSource _audioSource)
-        : base(_npc, _agent, _anim, _player, _droneLight, _audioSource)
+    public Pursue(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player, Light _droneLight, AudioSource _audioSource, float _speedModifier)
+        : base(_npc, _agent, _anim, _player, _droneLight, _audioSource, _speedModifier)
     {
         name = STATE.PURSUE;
-        agent.speed = 15.0f;
+        agent.speed = 12.0f * speedModifier;
+        agent.angularSpeed = agent.angularSpeed * 3;
         agent.isStopped = false;
     }
 
@@ -220,12 +223,12 @@ public class Pursue : State
         {
             if (CanAttackPlayer())
             {
-                nextState = new Attack(npc, agent, anim, player, droneLight, audioSource);
+                nextState = new Attack(npc, agent, anim, player, droneLight, audioSource, speedModifier);
                 stage = EVENT.EXIT;
             }
             else if (!CanSeePlayer())
             {
-                nextState = new Patrol(npc, agent, anim, player, droneLight, audioSource);
+                nextState = new Patrol(npc, agent, anim, player, droneLight, audioSource, speedModifier);
                 stage = EVENT.EXIT;
             }
         }
@@ -240,13 +243,13 @@ public class Pursue : State
 
 public class Attack : State
 {
-    float rotationSpeed = 2.0f;
+    float rotationSpeed = 4.0f;
     // AudioSource shoot;
 
     public static event Action catchPlayer;
 
-    public Attack(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player, Light _droneLight, AudioSource _audioSource)
-        : base(_npc, _agent, _anim, _player, _droneLight, _audioSource)
+    public Attack(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player, Light _droneLight, AudioSource _audioSource, float _speedModifier)
+        : base(_npc, _agent, _anim, _player, _droneLight, _audioSource, _speedModifier)
 
     {
         name = STATE.ATTACK;
@@ -280,7 +283,7 @@ public class Attack : State
 
         if (!CanAttackPlayer())
         {
-            nextState = new Idle(npc, agent, anim, player, droneLight, audioSource); // Seda saab siin muuta, et anda talle teine käitumine. Idle on turvaline, kuna viib kõigi teisteni.
+            nextState = new Idle(npc, agent, anim, player, droneLight, audioSource, speedModifier); // Seda saab siin muuta, et anda talle teine käitumine. Idle on turvaline, kuna viib kõigi teisteni.
             // shoot.Stop();
             stage = EVENT.EXIT;
         }
@@ -299,8 +302,8 @@ public class RunAway : State
 {
     GameObject safeBox;
 
-    public RunAway(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player, Light _droneLight, AudioSource _audioSource)
-        : base(_npc, _agent, _anim, _player, _droneLight, _audioSource)
+    public RunAway(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player, Light _droneLight, AudioSource _audioSource, float _speedModifier)
+        : base(_npc, _agent, _anim, _player, _droneLight, _audioSource, _speedModifier)
 
     {
         name = STATE.RUNAWAY;
@@ -313,7 +316,7 @@ public class RunAway : State
         // anim.SetTrigger("isRunning");
         agent.isStopped = false;
         droneLight.color = Color.yellow;
-        agent.speed = 15;
+        agent.speed = 15 * speedModifier;
         audioSource.loop = true;
         audioSource.clip = SoundController.SoundInstance.Alarm1;
         audioSource.Play();
@@ -325,7 +328,7 @@ public class RunAway : State
     {
         if (agent.remainingDistance < 1.0f)
         {
-            nextState = new Idle(npc, agent, anim, player, droneLight, audioSource);
+            nextState = new Idle(npc, agent, anim, player, droneLight, audioSource, speedModifier);
             stage = EVENT.EXIT;
         }
     }

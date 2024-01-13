@@ -13,6 +13,7 @@ public class AI : MonoBehaviour
 
     public Transform player;
     public Checkpoint InitialCheckpoint;
+    public float SpeedModifier;
 
     void Start()
     {
@@ -20,7 +21,7 @@ public class AI : MonoBehaviour
         anim = this.GetComponent<Animator>();
         droneLight = this.GetComponentInChildren<Light>();
         audioSource = this.GetComponent<AudioSource>();
-        currentState = new Idle(this.gameObject, agent, anim, player, droneLight, audioSource);
+        currentState = new Idle(this.gameObject, agent, anim, player, droneLight, audioSource, SpeedModifier);
     }
 
     void Update()

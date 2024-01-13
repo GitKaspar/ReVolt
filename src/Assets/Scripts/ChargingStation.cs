@@ -14,6 +14,7 @@ public class ChargingStation : MonoBehaviour
     private bool batteryLow = false;
     private string chargeButton = "c";
 
+
     private void Awake()
     {
         Events.OnBatteryLow += OnBatteryLow;
