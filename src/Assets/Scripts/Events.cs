@@ -12,6 +12,10 @@ public static class Events
     public static event Action OnLevelBeat;
     public static void LevelBeat() => OnLevelBeat?.Invoke();
 
+    //Controls
+    public static event Action<string> OnControlSchemeChange;
+    public static void ControlSchemeChange(string newScheme) => OnControlSchemeChange?.Invoke(newScheme);
+
 
     //Requesting and Setting Attributes
     public static event Func<float> OnRequestCurrentSpeed;

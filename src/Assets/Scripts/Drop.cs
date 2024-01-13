@@ -18,6 +18,29 @@ public class Drop : MonoBehaviour
     public GameObject NewspaperPrefab;
     private Transform player;
 
+    private string dropButton = "e";
+    private void Awake()
+    {
+        Events.OnControlSchemeChange += ChangeButton;
+    }
+
+    private void OnDestroy()
+    {
+        Events.OnControlSchemeChange -= ChangeButton;
+    }
+
+    private void ChangeButton(string newScheme)
+    {
+        if (newScheme == "KeyboardMouse")
+        {
+            dropButton = "e";
+        }
+        else if (newScheme == "Gamepad")
+        {
+            dropButton = "A";
+        }
+    }
+
     private void Start()
     {
         source = GetComponent<AudioSource>();
@@ -42,7 +65,7 @@ public class Drop : MonoBehaviour
             droppable = true;
             player = other.transform;
 
-            GameController.GameControllerInstance.PromtText.text = "press 'e' to drop";
+            GameController.GameControllerInstance.PromtText.text = "press '" + dropButton + "' to drop";
             GameController.GameControllerInstance.PromtPanel.SetActive(true);
         }
     }

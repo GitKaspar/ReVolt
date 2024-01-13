@@ -12,10 +12,12 @@ public class ChargingStation : MonoBehaviour
     private AudioSource source;
 
     private bool batteryLow = false;
+    private string chargeButton = "c";
 
     private void Awake()
     {
         Events.OnBatteryLow += OnBatteryLow;
+        Events.OnControlSchemeChange += ChangeButton;
         isCharging = false;
 
         actions = ControlsInstance.GetActions();
@@ -23,14 +25,25 @@ public class ChargingStation : MonoBehaviour
         actions.Charge.canceled += Charge_canceled;
     }
 
-
-
     private void OnDestroy()
     {
         Events.OnBatteryLow -= OnBatteryLow;
+        Events.OnControlSchemeChange -= ChangeButton;
     }
 
     public void OnBatteryLow(bool isLow) => batteryLow = isLow;
+
+    private void ChangeButton(string newScheme)
+    {
+        if (newScheme == "KeyboardMouse")
+        {
+            chargeButton = "c";
+        }
+        else if (newScheme == "Gamepad")
+        {
+            chargeButton = "B/Circle";
+        }
+    }
 
     private void Charge_started(InputAction.CallbackContext ctx)
     {
@@ -72,7 +85,7 @@ public class ChargingStation : MonoBehaviour
         {
             playerInRange = true;
             battery = other.GetComponent<Battery>();
-            GameController.GameControllerInstance.PromtText.text = "press 'c' to charge";
+            GameController.GameControllerInstance.PromtText.text = "hold '" + chargeButton + "' to charge";
             GameController.GameControllerInstance.PromtPanel.SetActive(true);
         }
     }
