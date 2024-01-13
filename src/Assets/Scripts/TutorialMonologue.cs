@@ -62,10 +62,13 @@ public class TutorialMonologue : MonoBehaviour
             }
         }
 
-        if (scooterBattery.CurrentCapacity >= 80f && outOfBattery && !again)
+        if (scooterBattery.CurrentCapacity >= 80f && outOfBattery)
         {
             outOfBattery = false;
+            if (!again)
+            {
                 StartCoroutine(TextBlock(2));
+            }
         }
         if (Player.GetComponent<Rigidbody>().velocity.magnitude >= 18f)
         { DisplayText(TutorialPanel, TutorialSubtext, "Whee!");
