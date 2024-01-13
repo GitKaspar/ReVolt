@@ -24,6 +24,8 @@ public class SoundController : MonoBehaviour
 
     public AudioClipGroup Jump;
 
+    public AudioClipGroup Collisions;
+
     public AudioClipGroup Upgrade;
     public AudioClipGroup WorkshopMusic;
 

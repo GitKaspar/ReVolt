@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7614643114934312325}
   - component: {fileID: 4156500767967589158}
   - component: {fileID: 3158178314729901627}
+  - component: {fileID: 5536433845751743801}
   - component: {fileID: 2776588964135214219}
   - component: {fileID: 5185128436665262042}
   - component: {fileID: 8209087535730848552}
@@ -124,6 +125,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   increaseSmoothing: 6
   decreaseSmoothing: 5
+--- !u!114 &5536433845751743801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27806118869586007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e9ef8bcf9ee4c64f97131735e581cae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ImpactLevels:
+  - 1000
+  - 10000
+  - 100000
+  Collisions: {fileID: 11400000, guid: 6f6676d451aa41b43ad9d8e3dd1fa311, type: 2}
+  MaxVolumeLevel: 0.5
 --- !u!136 &2776588964135214219
 CapsuleCollider:
   m_ObjectHideFlags: 0

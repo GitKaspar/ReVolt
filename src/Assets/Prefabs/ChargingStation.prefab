@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 2732410899277608506}
   - component: {fileID: 3505014167292729686}
   - component: {fileID: 7524793926560260644}
+  - component: {fileID: 1914113949636755139}
+  - component: {fileID: 7900647376051904473}
   m_Layer: 0
   m_Name: ChargingStation
   m_TagString: Untagged
@@ -119,3 +121,45 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 35
   m_Center: {x: 0.00000047683716, y: 0, z: 5.0786057}
+--- !u!65 &1914113949636755139
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2646487536766585423}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 7.86, y: 8.12, z: 2.06}
+  m_Center: {x: 0, y: 0, z: 0.93}
+--- !u!65 &7900647376051904473
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2646487536766585423}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.15, y: 5.11, z: 8.66}
+  m_Center: {x: 0, y: 0, z: 6.18}

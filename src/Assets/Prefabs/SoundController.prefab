@@ -70,6 +70,7 @@ MonoBehaviour:
   MenuMusic: {fileID: 11400000, guid: 677c1b30584574e499ebc61486054d95, type: 2}
   Flashlight: {fileID: 11400000, guid: 70d338c0624634e4ba356822d65462c6, type: 2}
   Jump: {fileID: 11400000, guid: bc92b420a46ddb14384e746383a289d5, type: 2}
+  Collisions: {fileID: 11400000, guid: 6f6676d451aa41b43ad9d8e3dd1fa311, type: 2}
   Upgrade: {fileID: 11400000, guid: 69fbe18343d99d04f8f2aafb1543b2f9, type: 2}
   WorkshopMusic: {fileID: 11400000, guid: 9073371be8fdd4240a277a172d2a8e20, type: 2}
 --- !u!82 &2156533838729328775
