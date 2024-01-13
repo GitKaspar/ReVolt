@@ -29,10 +29,7 @@ public class UpgradeStats : MonoBehaviour
         Instance = this;
 
 #if UNITY_EDITOR
-        foreach (Stat stat in StatList)
-        {
-            stat.ResetLevel();
-        }
+        ResetAll();
 #endif
     }
 
@@ -98,5 +95,13 @@ public class UpgradeStats : MonoBehaviour
 
         Debug.Log("Stat not found");
         return -1;
+    }
+
+    public void ResetAll()
+    {
+        foreach (Stat stat in StatList)
+        {
+            stat.ResetLevel();
+        }
     }
 }

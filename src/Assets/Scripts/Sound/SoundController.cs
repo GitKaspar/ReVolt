@@ -24,6 +24,9 @@ public class SoundController : MonoBehaviour
 
     public AudioClipGroup Jump;
 
+    public AudioClipGroup Upgrade;
+    public AudioClipGroup WorkshopMusic;
+
     private AudioSource buttonAudioSource;
 
     private void Awake()

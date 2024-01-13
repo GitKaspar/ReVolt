@@ -24,6 +24,7 @@ public class ProgressManager : MonoBehaviour
         Instance = this;
 
         Events.OnLevelBeat += OnProgress;
+        Time.timeScale = 1f;
     }
 
     private void OnDestroy()
@@ -61,5 +62,7 @@ public class ProgressManager : MonoBehaviour
     public void ResetProgress()
     {
         currentLevel = -1;
+        workshopVisited = false;
+        UpgradeStats.Instance.ResetAll();
     }
 }

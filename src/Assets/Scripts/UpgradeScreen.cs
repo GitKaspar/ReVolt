@@ -8,9 +8,9 @@ public class UpgradeScreen : MonoBehaviour
 
     private void Start()
     {
-        ProgressManager.Instance.workshopVisited = true;
         AudioListener.pause = false;
         Cursor.visible = true;
+        SoundController.SoundInstance.WorkshopMusic.Play();
     }
 
     public void OnSpeedUpgradeClick()
@@ -30,8 +30,7 @@ public class UpgradeScreen : MonoBehaviour
 
     public void PlayAudio()
     {
-        AudioSource audioSource = GetComponent<AudioSource>();
-        audioSource.Play();
+        AudioSource audioSource = SoundController.SoundInstance.Upgrade.Play();
         StartCoroutine(WaitForSound(audioSource));
     }
 
@@ -44,6 +43,7 @@ public class UpgradeScreen : MonoBehaviour
 
     public void LoadNextScene()
     {
+        ProgressManager.Instance.workshopVisited = true;
         string nextSceneName = ProgressManager.Instance.GetNextLevelName();
         SceneManager.LoadSceneAsync(nextSceneName);
         Cursor.visible = false;
