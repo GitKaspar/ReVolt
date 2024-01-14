@@ -4900,7 +4900,7 @@ MonoBehaviour:
   MatDropped: {fileID: 2100000, guid: d58b212acb9879142b6e11601db7157c, type: 2}
   MatOpen: {fileID: 2100000, guid: b2bf438340b459442bb3913a7288c420, type: 2}
   done: 0
-  NewspaperPrefab: {fileID: 4240737704247654000, guid: c0e51a2b841e3e14b9e50189b20ab51b, type: 3}
+  NewspaperPrefab: {fileID: 5584906680006321945, guid: bc04a5008d0ac6a48ada2396113e87d0, type: 3}
 --- !u!82 &4322250935903283936
 AudioSource:
   m_ObjectHideFlags: 0

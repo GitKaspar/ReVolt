@@ -87,7 +87,7 @@ public class Drop : MonoBehaviour
         source.PlayOneShot(chosenClip);
         Events.DropDone(this);
 
-        GameObject newspaper = Instantiate(NewspaperPrefab, player.position + Vector3.up * 1.5f, Quaternion.Euler(90,0,0));
+        GameObject newspaper = Instantiate(NewspaperPrefab, player.position + Vector3.up * 1.5f, Quaternion.identity);
         newspaper.GetComponent<Rigidbody>().AddForce((transform.position - player.position + Vector3.up) * 20, ForceMode.Impulse); //throw newspaper at drop
 
         Renderer[] renderers = GetComponentsInChildren<Renderer>();
