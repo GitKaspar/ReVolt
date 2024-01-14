@@ -6,27 +6,28 @@ using TMPro;
 public class TutorialMonologue : MonoBehaviour
 {
    public GameObject TutorialPanel;
-   public TextMeshProUGUI TutorialText;
-   public TextMeshProUGUI TutorialSubtext;
-    public GameObject Player;
+   public TextMeshProUGUI DiegeticText;
+   public TextMeshProUGUI InstructionText;
+   public GameObject Player;
    private Battery scooterBattery;
-    private bool outOfBattery;
-    private bool again;
-    private bool alerted;
-    private bool passed; 
+   private int tutorialIndex;
 
-   private string[] tutorialStates =
+   private string[] tutorialPhrases =
     {
-        "Scooter should be ready to go now. Time to see, what this baby can do.",
+        "Scooter's ready. Time to see, what this baby can do!",
+        "",
+        "Whoa. Easy there!", // Lower battery (not drained), higher speed
         "Damn! Out of battery.",
         "Much better.",
         "Careful now! It's that damn police robot!", // Epic line, grandpa!
         "Out of battery. Again...",
         "Whew. Close one."
     };
-   private string[] tutorialSubtext =
+   private string[] tutorialInstructions =
     {
-        "Full speed ahead.",
+        "Mouse wheel up/right trigger increase scooter speed. Use W/left stick up to accelerate.",
+        "A and D/left stick are used for steering.", // When to trigger? Player has some speed, but hasn't run out of battery yet.
+        "Mouse wheel down/left trigger decrease scooter speed. S/left stick down lower speed. Space/left bumper.",
         "Might be able to use ye olde blue charging station down the road.",
         "Gotta remember to keep that battery charged.",
         "Gotta avoid its scanner light.", 
@@ -37,17 +38,45 @@ public class TutorialMonologue : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        passed = false;
-        outOfBattery = false;
-        alerted = false;
-        again = false;
-        StartCoroutine(TextBlock(0));
+        tutorialIndex = 0;
         scooterBattery = Player.GetComponent<Battery>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!TutorialPanel.activeSelf)
+        {
+            switch (tutorialIndex)
+            {
+                case 0:
+                    {
+                        StartCoroutine(TextBlock(tutorialIndex, 1f));
+                        tutorialIndex++;
+                    }
+                    break;
+                case 1:
+                    {
+                        if (scooterBattery.CurrentCapacity < 80)
+                        {
+                            StartCoroutine (TextBlock(tutorialIndex, 0));
+                            tutorialIndex++;
+                            // Probleem: sõnum jääb pikaks ajaks nähtavale. Vaja see pärast aja möödumist kaotada.
+                        }
+                    }
+                    break;
+                case 2:
+                    {
+
+                    }
+                    break;
+            }
+        } 
+
+
+
+        /*
+
         if (scooterBattery.CurrentCapacity < 1f && !outOfBattery)
         {
             if (!again)
@@ -67,23 +96,24 @@ public class TutorialMonologue : MonoBehaviour
             outOfBattery = false;
             if (!again)
             {
-                StartCoroutine(TextBlock(2));
+                StartCoroutine(TextBlock(2 ));
             }
         }
         if (Player.GetComponent<Rigidbody>().velocity.magnitude >= 18f)
-        { DisplayText(TutorialPanel, TutorialSubtext, "Whee!");
-            DisplayText(TutorialPanel, TutorialText, "");
+        { DisplayText(TutorialPanel, DiegeticText, "Whee!");
+            DisplayText(TutorialPanel, InstructionText, "");
         }
         if (Player.transform.position.x < 430f && Player.transform.position.z > 420 && !alerted)
         { 
             alerted = true;    
-            StartCoroutine(TextBlock(3));
+            StartCoroutine(TextBlock(3, ));
         }
         if (Player.transform.position.x < 370f && Player.transform.position.z < 410 && !passed && alerted)
         { 
             passed = true;
             StartCoroutine(TextBlock(5));
         }
+        */
     }
 
     private void DisplayText(GameObject TextPanel, TextMeshProUGUI textField, string textToDisplay)
@@ -94,20 +124,26 @@ public class TutorialMonologue : MonoBehaviour
         }
     }
 
-    private IEnumerator TextBlock(int i)
+    private IEnumerator TextBlock(int stateIndex, float timeToWait)
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(timeToWait);
 
-        DisplayText(TutorialPanel, TutorialText, tutorialStates[i]);
+        DisplayText(TutorialPanel, DiegeticText, tutorialPhrases[stateIndex]);
 
         yield return new WaitForSeconds(2);
 
-        DisplayText(TutorialPanel, TutorialSubtext, tutorialSubtext[i]);
+        DisplayText(TutorialPanel, InstructionText, tutorialInstructions[stateIndex]);
 
-        yield return new WaitForSeconds(6);
+        yield return new WaitForSeconds(4);
 
-        DisplayText(TutorialPanel, TutorialSubtext, "");
+        DisplayText(TutorialPanel, DiegeticText, "");
+        DisplayText(TutorialPanel, InstructionText, "");
 
+        TutorialPanel.SetActive(false);
+    }
+
+    void Confirm()
+    {
         TutorialPanel.SetActive(false);
     }
 
