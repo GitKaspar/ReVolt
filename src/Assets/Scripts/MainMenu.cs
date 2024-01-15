@@ -47,6 +47,12 @@ public class MainMenu : MonoBehaviour
             ContinueButton.SetActive(true);
             PlayText.text = "play new";
         }
+
+        if (ProgressManager.Instance.GetNextLevelName() == null)
+        {
+            ContinueButton.SetActive(false);
+            PlayText.text = "play again";
+        }
     }
 
     private void OnDestroy()
@@ -110,17 +116,10 @@ public class MainMenu : MonoBehaviour
     public void Instructions()
     {
         //SoundController.SoundInstance.ButtonClick(); //sound triggered in animated button script
-        if (sceneLoadedNum < 2)
-        {
-            InstructionsPanel.SetActive(true);
-            Story.SetActive(true);
-            KeysPC.SetActive(false);
-            KeysController.SetActive(false);
-        }
-        else
-        {
-            NextMessage();
-        }
+        InstructionsPanel.SetActive(true);
+        Story.SetActive(false);
+        KeysPC.SetActive(true);
+        KeysController.SetActive(false);
         
     }
 
