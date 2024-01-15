@@ -44,7 +44,7 @@ public class TutorialManager : MonoBehaviour
         "Scooter's ready. Time to see, what this baby can do!",
         "",
         "Whoa. Easy there!",
-        "Damn! Out of battery.",
+        "Damn! Out of battery!",
         "Much better.",
         "This looks like a dead end.",
         "One of the drops is near.",
@@ -53,15 +53,15 @@ public class TutorialManager : MonoBehaviour
     };
    private string[] tutorialInstructions =
     {
-        "Mouse wheel up/right trigger increase scooter speed. Use W/left stick up to accelerate.",
-        "A and D/left stick are used for steering.",
-        "Mouse wheel down/left trigger decrease scooter speed. Press space/left bumper to break.", // Kind of convoluted
+        "Mouse wheel up/RT increase scooter speed. Use W/left stick to ove forward.",
+        "A & D/left stick are used for steering.",
+        "Mouse wheel down/LT decrease scooter speed. Press space/LB to break.", // Kind of convoluted
         "Look for the blue charging stations to charge scooter battery.",
         "Remember to keep the battery charged or scooter speed will be severely limited.",
-        "Use S/left stick down to move backwards. Alrernatively, you can jump low obstacles with Shift/Y button.",
-        "Distance to nearest drop is displayed in the top left. Go towards the purple drop location and press the corresponding key.",
-        "Avoid being seen by its scanner light to not get detected.", 
-        "Drones will chase you down and impound your scooter, resulting in GAME OVER. Finish the last drop to complete the level."
+        "Use S/left stick down to move backwards. Alrernatively, you can jump low obstacles with Shift/Y.",
+        "When near a drop, the drop indicator bar at the top right will fill up in relation to how close you are. Go towards the pink drop location.",
+        "Stay out of the drone's light cone to avoid detection. You can also sneak up on drones to disable them, but it's a high risk action.", 
+        "Drones will chase you down when they see you and imprison you, resulting in GAME OVER. Finish the last drop to complete the level."
     };
 
     // Start is called before the first frame update

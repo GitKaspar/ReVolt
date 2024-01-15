@@ -131,17 +131,20 @@ public class MainMenu : MonoBehaviour
 
     public void NicolasButton()
     {
-        displayBio.text = "Nicolas is german lol";
+        List<string> nicolasBios = new List<string>() { "a german", "computer science BA", "most played video game: NBA2k14", "likes dad jokes (is not a dad)", "rode an electric scooter for the first time in 2023", "big sports guy"};
+        displayBio.text = nicolasBios[Random.Range(0, nicolasBios.Count)];
     }
 
     public void KasparButton()
     {
-        displayBio.text = "Kaspar studies history lol";
+        List<string> kaspariBios = new List<string>() { "once got a pea stuck up his nose", "will welcome your soul in Oblivion!", "would like to tell you the Good News", "is a bloody peasant"};
+        displayBio.text = kaspariBios[Random.Range(0, kaspariBios.Count)];
     }
 
     public void TristanButton()
     {
-        displayBio.text = "Tristan is lol";
+        List<string> tristanBios = new List<string>() { "a philosophy student", "sober for 3+ months already", "beverage guy and matcha bf", "likes downloading games more than playing them", "nintendo switch enthusiast", "pc"};
+        displayBio.text = tristanBios[Random.Range(0, tristanBios.Count)];
     }
 
     public void NextKeysPC()
