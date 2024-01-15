@@ -13,7 +13,7 @@ public class AI : MonoBehaviour
 
     public Transform player;
     public Checkpoint InitialCheckpoint;
-    public float SpeedModifier;
+    public float SpeedModifier = 1f;
 
     void Start()
     {

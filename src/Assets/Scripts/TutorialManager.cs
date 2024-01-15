@@ -21,34 +21,39 @@ public class TutorialManager : MonoBehaviour
 
     public GameObject DropBox2;
     private TriggerBox triggerBoxComponent3;
+    
+    public GameObject DroneBox1;
+    private TriggerBox triggerBoxComponent4;
 
+    public GameObject DroneBox2;
+    private TriggerBox triggerBoxComponent5;
 
+    public GameObject ClearBox;
+    private TriggerBox triggerBoxComponent6;
 
    private string[] tutorialPhrases =
     {
         "Scooter's ready. Time to see, what this baby can do!",
         "",
-        "Whoa. Easy there!", // Lower battery (not drained), higher speed
+        "Whoa. Easy there!",
         "Damn! Out of battery.",
         "Much better.",
-        "This looks like a dead end.", // When to trigger? Index 4 and a collision space?
+        "This looks like a dead end.",
         "One of the drops is near.",
-        "Careful now! It's that damn police robot!", // Epic line, grandpa!
-        "Out of battery. Again...",
-        "Whew. Close one."
+        "Careful now! Police drone ahead!",
+        "Phew. Close call. One more drop tonight."
     };
    private string[] tutorialInstructions =
     {
         "Mouse wheel up/right trigger increase scooter speed. Use W/left stick up to accelerate.",
-        "A and D/left stick are used for steering.", // When to trigger? Player has some speed, but hasn't run out of battery yet.
+        "A and D/left stick are used for steering.",
         "Mouse wheel down/left trigger decrease scooter speed. Press space/left bumper to break.", // Kind of convoluted
         "Look for the blue charging stations to charge scooter battery.",
         "Remember to keep the battery charged or scooter speed will be severely limited.",
         "Use S/left stick down to move backwards. Alrernatively, you can jump low obstacles with Shift/Y button.",
         "Distance to nearest drop is displayed in the top left. Go towards the purple drop location and press the corresponding key.",
-        "Gotta avoid its scanner light.", 
-        "Where art thou, my charging station?",
-        "We'll get them soon enough. Gotta make my drop."
+        "Avoid being seen by its scanner light to not get detected.", 
+        "Drones will chase you down and impound your scooter, resulting in GAME OVER. Finish the last drop to complete the level."
     };
 
     // Start is called before the first frame update
@@ -58,10 +63,16 @@ public class TutorialManager : MonoBehaviour
         scooterBattery = Player.GetComponent<Battery>();
 
         jumpComponent = Player.GetComponent<Jump>();
+
         triggerBoxComponent1 = DeadEndBox.GetComponent<TriggerBox>();
 
         triggerBoxComponent2 = DropBox1.GetComponent<TriggerBox>();
         triggerBoxComponent3 = DropBox2.GetComponent<TriggerBox>();
+        
+        triggerBoxComponent4 = DroneBox1.GetComponent<TriggerBox>();
+        triggerBoxComponent5 = DroneBox2.GetComponent<TriggerBox>();
+
+        triggerBoxComponent6 = ClearBox.GetComponent<TriggerBox>();
     }
 
     // Update is called once per frame
@@ -81,7 +92,7 @@ public class TutorialManager : MonoBehaviour
                     break;
                 case 1:
                     {
-                        if (scooterBattery.CurrentCapacity < 70)
+                        if (scooterBattery.CurrentCapacity < 75)
                         {
                             StartCoroutine (TextBlock(tutorialIndex, 0, 0));
                             tutorialIndex++;
@@ -131,54 +142,30 @@ public class TutorialManager : MonoBehaviour
                     {
                         if (triggerBoxComponent2.HasEntered || triggerBoxComponent3.HasEntered)
                         {
-
+                            StartCoroutine(TextBlock(tutorialIndex, 0, 2f));
+                            tutorialIndex++;
+                        }
+                    }
+                    break;
+                    case 7: {
+                        if (triggerBoxComponent4.HasEntered || triggerBoxComponent5.HasEntered)
+                        {
+                            StartCoroutine(TextBlock(tutorialIndex, 0, 1.5f));
+                            tutorialIndex++;
+                        }
+                    }
+                    break;
+                    case 8:
+                    {
+                        if (triggerBoxComponent6.HasEntered)
+                        {
+                            StartCoroutine(TextBlock(tutorialIndex, 0, 1.5f));
+                            tutorialIndex++;
                         }
                     }
                     break;
             }
         } 
-
-
-
-        /*
-
-        if (scooterBattery.CurrentCapacity < 1f && !outOfBattery)
-        {
-            if (!again)
-            {
-                outOfBattery = true;
-                again = true;
-                StartCoroutine(TextBlock(1));
-            } else
-            {
-                outOfBattery = true;
-                StartCoroutine(TextBlock(4));
-            }
-        }
-
-        if (scooterBattery.CurrentCapacity >= 80f && outOfBattery)
-        {
-            outOfBattery = false;
-            if (!again)
-            {
-                StartCoroutine(TextBlock(2 ));
-            }
-        }
-        if (Player.GetComponent<Rigidbody>().velocity.magnitude >= 18f)
-        { DisplayText(TutorialPanel, DiegeticText, "Whee!");
-            DisplayText(TutorialPanel, InstructionText, "");
-        }
-        if (Player.transform.position.x < 430f && Player.transform.position.z > 420 && !alerted)
-        { 
-            alerted = true;    
-            StartCoroutine(TextBlock(3, ));
-        }
-        if (Player.transform.position.x < 370f && Player.transform.position.z < 410 && !passed && alerted)
-        { 
-            passed = true;
-            StartCoroutine(TextBlock(5));
-        }
-        */
     }
 
     private void DisplayText(GameObject TextPanel, TextMeshProUGUI textField, string textToDisplay)
@@ -209,5 +196,4 @@ public class TutorialManager : MonoBehaviour
 
         TutorialPanel.SetActive(false);
     }
-
 }
