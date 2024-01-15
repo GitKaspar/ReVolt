@@ -146,7 +146,7 @@ public class Idle : State
         }
         else if (CanDisable())
         {
-            if (Input.GetKeyUp(KeyCode.E))
+            if (ControlsInstance.GetActions().DisableDrone.IsPressed())//if (Input.GetKeyUp(KeyCode.E))
             {
                 nextState = new Disabled(npc, agent, anim, player, droneLight, audioSource, speedModifier);
                 stage = EVENT.EXIT;
@@ -212,7 +212,7 @@ public class Patrol : State
             stage = EVENT.EXIT;
         }
         else if (CanDisable()) {
-            if (Input.GetKeyUp(KeyCode.E)) {
+            if (ControlsInstance.GetActions().DisableDrone.IsPressed()) {
                 nextState = new Disabled(npc, agent, anim, player, droneLight, audioSource, speedModifier);
                 stage = EVENT.EXIT;
             }
