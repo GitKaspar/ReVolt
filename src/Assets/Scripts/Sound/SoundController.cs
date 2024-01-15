@@ -31,6 +31,8 @@ public class SoundController : MonoBehaviour
 
     public AudioClip DroneShutDown;
 
+    public AudioClipGroup Riot;
+
     private AudioSource buttonAudioSource;
 
     private void Awake()

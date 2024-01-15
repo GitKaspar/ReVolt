@@ -119,7 +119,6 @@ public class GameController : MonoBehaviour
     public void OnEndGame(bool isWin)
     {
         isRunning = false;
-        Time.timeScale = 0;
         AudioListener.pause = true;
         ControlsInstance.Disable(); //Disable player input actions
         Cursor.visible = true;
@@ -130,11 +129,15 @@ public class GameController : MonoBehaviour
 
             if (ProgressManager.Instance.currentLevel == ProgressManager.Instance.GameLevels.Length - 1) //entire game beat -> fade to black ending
             {
+                ambienceMusicSource.Stop();
+                ambienceMusicSource.ignoreListenerPause = false;
+                Time.timeScale = 0.5f;
                 ButtonsParent.SetActive(false);
                 FadeBlackPanel.SetActive(true);
             }
             else
             {
+                Time.timeScale = 0;
                 WorkshopButton.SetActive(true);
                 RetryButton.SetActive(false);
             }

@@ -61,4 +61,10 @@ public class AudioClipGroup : ScriptableObject
         if (AudioSourcePool.Instance == null) return;
         Stop(AudioSourcePool.Instance.GetSource());
     }
+
+    public void SetVolume(float volume)
+    {
+        VolumeMin = volume;
+        VolumeMax = volume;
+    }
 }

@@ -74,6 +74,7 @@ MonoBehaviour:
   Upgrade: {fileID: 11400000, guid: 69fbe18343d99d04f8f2aafb1543b2f9, type: 2}
   WorkshopMusic: {fileID: 11400000, guid: 9073371be8fdd4240a277a172d2a8e20, type: 2}
   DroneShutDown: {fileID: 8300000, guid: 49b22e2e97327434b938ebea431250a1, type: 3}
+  Riot: {fileID: 11400000, guid: 8911e1192974fa8428b3a8d299861243, type: 2}
 --- !u!82 &2156533838729328775
 AudioSource:
   m_ObjectHideFlags: 0
