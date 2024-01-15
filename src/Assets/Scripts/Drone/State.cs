@@ -400,11 +400,9 @@ public class Disabled : State
 
     public override void Update()
     {
-        /*if (agent.remainingDistance < 1.0f)
-        {
-            nextState = new Idle(npc, agent, anim, player, droneLight, audioSource, speedModifier);
-            
-        }*/
+        AI agentAI = agent.gameObject.GetComponent<AI>();
+        agentAI.enabled = false;
+        agent.SetDestination(agent.transform.position);
         stage = EVENT.EXIT;
     }
 
