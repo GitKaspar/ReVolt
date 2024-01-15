@@ -107,6 +107,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DisableDrone"",
+                    ""type"": ""Button"",
+                    ""id"": ""22ddfaa5-c93d-4e61-9e9e-6a81135b50fa"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -384,6 +393,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6071b151-24ff-4e5c-b977-e8f7e6b34f27"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""DisableDrone"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bd13458e-1497-4a13-9e03-59fa61c8d4a0"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""DisableDrone"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -429,6 +460,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player_Charge = m_Player.FindAction("Charge", throwIfNotFound: true);
         m_Player_Drop = m_Player.FindAction("Drop", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+        m_Player_DisableDrone = m_Player.FindAction("DisableDrone", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -499,6 +531,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Charge;
     private readonly InputAction m_Player_Drop;
     private readonly InputAction m_Player_Pause;
+    private readonly InputAction m_Player_DisableDrone;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -512,6 +545,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Charge => m_Wrapper.m_Player_Charge;
         public InputAction @Drop => m_Wrapper.m_Player_Drop;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
+        public InputAction @DisableDrone => m_Wrapper.m_Player_DisableDrone;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -548,6 +582,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @DisableDrone.started += instance.OnDisableDrone;
+            @DisableDrone.performed += instance.OnDisableDrone;
+            @DisableDrone.canceled += instance.OnDisableDrone;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -579,6 +616,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @DisableDrone.started -= instance.OnDisableDrone;
+            @DisableDrone.performed -= instance.OnDisableDrone;
+            @DisableDrone.canceled -= instance.OnDisableDrone;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -625,5 +665,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnCharge(InputAction.CallbackContext context);
         void OnDrop(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnDisableDrone(InputAction.CallbackContext context);
     }
 }
