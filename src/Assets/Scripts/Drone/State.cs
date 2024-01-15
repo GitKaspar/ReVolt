@@ -94,7 +94,7 @@ public class State
     {
         Vector3 direction = npc.transform.position - player.position;
         float angle = Vector3.Angle(direction, npc.transform.forward);
-        if (direction.magnitude < 1.5f && angle < visAngle)
+        if (direction.magnitude < 2.5f && angle < visAngle)
         {
             return true;
         }

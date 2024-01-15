@@ -13,25 +13,33 @@ public class TutorialManager : MonoBehaviour
     private Battery scooterBattery;
    private int tutorialIndex;
 
-    public GameObject DeadEndBox;
+    public GameObject DeadEndBox1;
     private TriggerBox triggerBoxComponent1;
 
-    public GameObject DropBox1;
+    public GameObject DeadEndBox2;
     private TriggerBox triggerBoxComponent2;
 
-    public GameObject DropBox2;
+
+    public GameObject DropBox1;
     private TriggerBox triggerBoxComponent3;
+
+    public GameObject DropBox2;
+    private TriggerBox triggerBoxComponent4;
     
     public GameObject DroneBox1;
-    private TriggerBox triggerBoxComponent4;
-
-    public GameObject DroneBox2;
     private TriggerBox triggerBoxComponent5;
 
-    public GameObject ClearBox;
+    public GameObject DroneBox2;
     private TriggerBox triggerBoxComponent6;
 
-   private string[] tutorialPhrases =
+    public GameObject ClearBox1;
+    private TriggerBox triggerBoxComponent7;
+
+    public GameObject ClearBox2;
+    private TriggerBox triggerBoxComponent8;
+
+
+    private string[] tutorialPhrases =
     {
         "Scooter's ready. Time to see, what this baby can do!",
         "",
@@ -64,15 +72,18 @@ public class TutorialManager : MonoBehaviour
 
         //jumpComponent = Player.GetComponent<Jump>();
 
-        triggerBoxComponent1 = DeadEndBox.GetComponent<TriggerBox>();
+        triggerBoxComponent1 = DeadEndBox1.GetComponent<TriggerBox>();
+        triggerBoxComponent2 = DeadEndBox1.GetComponent<TriggerBox>();
 
-        triggerBoxComponent2 = DropBox1.GetComponent<TriggerBox>();
-        triggerBoxComponent3 = DropBox2.GetComponent<TriggerBox>();
+        triggerBoxComponent3 = DropBox1.GetComponent<TriggerBox>();
+        triggerBoxComponent4 = DropBox2.GetComponent<TriggerBox>();
         
-        triggerBoxComponent4 = DroneBox1.GetComponent<TriggerBox>();
-        triggerBoxComponent5 = DroneBox2.GetComponent<TriggerBox>();
+        triggerBoxComponent5 = DroneBox1.GetComponent<TriggerBox>();
+        triggerBoxComponent6 = DroneBox2.GetComponent<TriggerBox>();
 
-        triggerBoxComponent6 = ClearBox.GetComponent<TriggerBox>();
+        triggerBoxComponent7 = ClearBox1.GetComponent<TriggerBox>();
+        triggerBoxComponent8 = ClearBox2.GetComponent<TriggerBox>();
+
     }
 
     // Update is called once per frame
@@ -128,7 +139,7 @@ public class TutorialManager : MonoBehaviour
                     break;
                     case 5: 
                     {
-                        if (triggerBoxComponent1.HasEntered) 
+                        if (triggerBoxComponent1.HasEntered || triggerBoxComponent2.HasEntered) 
                         {
                             //jumpComponent.upForce = 6f;
                             //jumpComponent.forwardForce = 2f;
@@ -139,7 +150,7 @@ public class TutorialManager : MonoBehaviour
                     break;
                     case 6: 
                     {
-                        if (triggerBoxComponent2.HasEntered || triggerBoxComponent3.HasEntered)
+                        if (triggerBoxComponent3.HasEntered || triggerBoxComponent4.HasEntered)
                         {
                             StartCoroutine(TextBlock(tutorialIndex, 0, 2f));
                             tutorialIndex++;
@@ -147,7 +158,7 @@ public class TutorialManager : MonoBehaviour
                     }
                     break;
                     case 7: {
-                        if (triggerBoxComponent4.HasEntered || triggerBoxComponent5.HasEntered)
+                        if (triggerBoxComponent5.HasEntered || triggerBoxComponent6.HasEntered)
                         {
                             StartCoroutine(TextBlock(tutorialIndex, 0, 1.5f));
                             tutorialIndex++;
@@ -156,7 +167,7 @@ public class TutorialManager : MonoBehaviour
                     break;
                     case 8:
                     {
-                        if (triggerBoxComponent6.HasEntered)
+                        if (triggerBoxComponent7.HasEntered || triggerBoxComponent8.HasEntered)
                         {
                             StartCoroutine(TextBlock(tutorialIndex, 0, 1.5f));
                             tutorialIndex++;
