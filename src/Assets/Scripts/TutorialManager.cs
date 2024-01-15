@@ -21,8 +21,12 @@ public class TutorialManager : MonoBehaviour
 
     public GameObject DropBox2;
     private TriggerBox triggerBoxComponent3;
+    
+    public GameObject DroneBox1;
+    private TriggerBox triggerBoxComponent4;
 
-
+    public GameObject DroneBox2;
+    private TriggerBox triggerBoxComponent5;
 
    private string[] tutorialPhrases =
     {
@@ -33,7 +37,7 @@ public class TutorialManager : MonoBehaviour
         "Much better.",
         "This looks like a dead end.", // When to trigger? Index 4 and a collision space?
         "One of the drops is near.",
-        "Careful now! It's that damn police robot!", // Epic line, grandpa!
+        "Careful now! Police drone ahead!", // Epic line, grandpa!
         "Out of battery. Again...",
         "Whew. Close one."
     };
@@ -46,7 +50,7 @@ public class TutorialManager : MonoBehaviour
         "Remember to keep the battery charged or scooter speed will be severely limited.",
         "Use S/left stick down to move backwards. Alrernatively, you can jump low obstacles with Shift/Y button.",
         "Distance to nearest drop is displayed in the top left. Go towards the purple drop location and press the corresponding key.",
-        "Gotta avoid its scanner light.", 
+        "Avoid being seen by its scanner light to not get detected.", 
         "Where art thou, my charging station?",
         "We'll get them soon enough. Gotta make my drop."
     };
@@ -62,6 +66,8 @@ public class TutorialManager : MonoBehaviour
 
         triggerBoxComponent2 = DropBox1.GetComponent<TriggerBox>();
         triggerBoxComponent3 = DropBox2.GetComponent<TriggerBox>();
+        triggerBoxComponent4 = DroneBox1.GetComponent<TriggerBox>();
+        triggerBoxComponent5 = DroneBox2.GetComponent<TriggerBox>();
     }
 
     // Update is called once per frame
@@ -81,7 +87,7 @@ public class TutorialManager : MonoBehaviour
                     break;
                 case 1:
                     {
-                        if (scooterBattery.CurrentCapacity < 70)
+                        if (scooterBattery.CurrentCapacity < 75)
                         {
                             StartCoroutine (TextBlock(tutorialIndex, 0, 0));
                             tutorialIndex++;
@@ -131,7 +137,16 @@ public class TutorialManager : MonoBehaviour
                     {
                         if (triggerBoxComponent2.HasEntered || triggerBoxComponent3.HasEntered)
                         {
-
+                            StartCoroutine(TextBlock(tutorialIndex, 0, 2f));
+                            tutorialIndex++;
+                        }
+                    }
+                    break;
+                    case 7: {
+                        if (triggerBoxComponent4.HasEntered || triggerBoxComponent5.HasEntered)
+                        {
+                            StartCoroutine(TextBlock(tutorialIndex, 0, 1.5f));
+                            tutorialIndex++;
                         }
                     }
                     break;

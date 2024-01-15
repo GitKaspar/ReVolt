@@ -14,7 +14,7 @@ public class AnimContr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        /* Disabled so people couldn't access this.
         if (Input.GetKeyDown(KeyCode.Keypad2))
         {
             anim.Play("ShutDown");
@@ -29,5 +29,6 @@ public class AnimContr : MonoBehaviour
         {
             anim.Play("Destroyed");
         }
+        */
     }
 }

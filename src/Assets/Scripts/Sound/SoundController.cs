@@ -29,6 +29,8 @@ public class SoundController : MonoBehaviour
     public AudioClipGroup Upgrade;
     public AudioClipGroup WorkshopMusic;
 
+    public AudioClip DroneShutDown;
+
     private AudioSource buttonAudioSource;
 
     private void Awake()

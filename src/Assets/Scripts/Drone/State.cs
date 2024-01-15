@@ -13,7 +13,8 @@ public class State
         PURSUE,
         ATTACK,
         SLEEP,
-        RUNAWAY
+        RUNAWAY,
+        DISABLED
     };
 
     public enum EVENT
@@ -34,9 +35,9 @@ public class State
     protected AudioSource audioSource;
     protected float speedModifier;
 
-    float visDist = 20.0f;
+    float visDist = 25.0f;
     float visAngle = 60.0f; // NPC näeb tegelikult kaks korda sama palju
-    float shootDist = 3.0f;
+    float shootDist = 1.0f;
 
 
     public State(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player, Light _droneLight, AudioSource _audioSource, float _speedModifier)
@@ -93,7 +94,18 @@ public class State
     {
         Vector3 direction = npc.transform.position - player.position;
         float angle = Vector3.Angle(direction, npc.transform.forward);
-        if (direction.magnitude < 2.0f && angle < visAngle)
+        if (direction.magnitude < 1.5f && angle < visAngle)
+        {
+            return true;
+        }
+        return false;
+    } 
+    
+    public bool CanDisable()
+    {
+        Vector3 direction = npc.transform.position - player.position;
+        float angle = Vector3.Angle(direction, npc.transform.forward);
+        if (direction.magnitude < 5.0f && angle < visAngle)
         {
             return true;
         }
@@ -132,6 +144,14 @@ public class Idle : State
             nextState = new Patrol(npc, agent, anim, player, droneLight, audioSource, speedModifier);
             stage = EVENT.EXIT;
         }
+        else if (CanDisable())
+        {
+            if (Input.GetKeyUp(KeyCode.E))
+            {
+                nextState = new Disabled(npc, agent, anim, player, droneLight, audioSource, speedModifier);
+                stage = EVENT.EXIT;
+            }
+        }
     }
 
     public override void Exit()
@@ -168,15 +188,18 @@ public class Patrol : State
     {
         if (checkpoint == null)
         {
-            Debug.Log("Ja ongi null.");
+            Debug.Log("Ja ongi null");
             return;
         }
-        if (agent.remainingDistance < 1)
+        else
         {
-            checkpoint = checkpoint.GetNextCheckpoint();
+            if (agent.remainingDistance < 1)
+            {
+                checkpoint = checkpoint.GetNextCheckpoint();
+            }
+            agent.SetDestination(checkpoint.transform.position);
         }
 
-        agent.SetDestination(checkpoint.transform.position);
 
         if (CanSeePlayer())
         {
@@ -187,6 +210,12 @@ public class Patrol : State
         {
             nextState = new RunAway(npc, agent, anim, player, droneLight, audioSource, speedModifier);
             stage = EVENT.EXIT;
+        }
+        else if (CanDisable()) {
+            if (Input.GetKeyUp(KeyCode.E)) {
+                nextState = new Disabled(npc, agent, anim, player, droneLight, audioSource, speedModifier);
+                stage = EVENT.EXIT;
+            }
         }
     }
     public override void Exit()
@@ -203,7 +232,8 @@ public class Pursue : State
     {
         name = STATE.PURSUE;
         agent.speed = 12.0f * speedModifier;
-        agent.angularSpeed = agent.angularSpeed * 3;
+        agent.angularSpeed = agent.angularSpeed * 180;
+        agent.acceleration = agent.acceleration * 5;
         agent.isStopped = false;
     }
 
@@ -214,6 +244,7 @@ public class Pursue : State
         audioSource.clip = SoundController.SoundInstance.Alarm1;
         audioSource.Play();
         base.Enter();
+        Debug.Log(agent.angularSpeed);
     }
 
     public override void Update()
@@ -236,6 +267,8 @@ public class Pursue : State
 
     public override void Exit()
     {
+        agent.acceleration = agent.acceleration * 0.2f;
+        agent.angularSpeed = agent.angularSpeed / 180;
         // anim.ResetTrigger("isRunning");
         base.Exit();
     }
@@ -331,6 +364,48 @@ public class RunAway : State
             nextState = new Idle(npc, agent, anim, player, droneLight, audioSource, speedModifier);
             stage = EVENT.EXIT;
         }
+    }
+
+    public override void Exit()
+    {
+        // anim.ResetTrigger("isRunning");
+        base.Exit();
+    }
+}
+
+public class Disabled : State
+
+{
+
+    public Disabled(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player, Light _droneLight, AudioSource _audioSource, float _speedModifier)
+        : base(_npc, _agent, _anim, _player, _droneLight, _audioSource, _speedModifier)
+
+    {
+        name = STATE.DISABLED;
+    }
+
+    public override void Enter()
+    {
+        // anim.SetTrigger("isRunning");
+        anim.SetTrigger("isDestroyed");
+        agent.isStopped = true;
+        droneLight.enabled = false; ;
+        agent.speed = 0;
+        audioSource.clip = SoundController.SoundInstance.DroneShutDown;
+        audioSource.loop = false;
+        audioSource.Play();
+ // Asukoha määrab juba siin - mitte Update meetodis
+        base.Enter();
+    }
+
+    public override void Update()
+    {
+        /*if (agent.remainingDistance < 1.0f)
+        {
+            nextState = new Idle(npc, agent, anim, player, droneLight, audioSource, speedModifier);
+            
+        }*/
+        stage = EVENT.EXIT;
     }
 
     public override void Exit()
