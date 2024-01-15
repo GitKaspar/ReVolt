@@ -19,11 +19,13 @@ public class GameController : MonoBehaviour
 
     private AudioSource ambienceMusicSource;
 
+    public GameObject FadeBlackPanel;
     public GameObject EndPanel;
     public GameObject PausePanel;
     public GameObject KeyPanel;
     public GameObject WorkshopButton;
     public GameObject RetryButton;
+    public GameObject ButtonsParent;
     public TextMeshProUGUI ResultText;
     public GameObject SoundControllerPrefab;
 
@@ -125,8 +127,17 @@ public class GameController : MonoBehaviour
         if (isWin)
         {
             ResultText.text = "Win";
-            WorkshopButton.SetActive(true);
-            RetryButton.SetActive(false);
+
+            if (ProgressManager.Instance.currentLevel == ProgressManager.Instance.GameLevels.Length - 1) //entire game beat -> fade to black ending
+            {
+                ButtonsParent.SetActive(false);
+                FadeBlackPanel.SetActive(true);
+            }
+            else
+            {
+                WorkshopButton.SetActive(true);
+                RetryButton.SetActive(false);
+            }
 
             //Set up what to load next
             ProgressManager.Instance.workshopVisited = false;
