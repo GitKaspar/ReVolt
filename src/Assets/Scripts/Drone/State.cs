@@ -35,7 +35,7 @@ public class State
     protected AudioSource audioSource;
     protected float speedModifier;
 
-    float visDist = 25.0f;
+    float visDist = 20.0f;
     float visAngle = 60.0f; // NPC näeb tegelikult kaks korda sama palju
     float shootDist = 1.0f;
 
@@ -170,7 +170,7 @@ public class Patrol : State
         : base(_npc, _agent, _anim, _player, _droneLight, _audioSource, _speedModifier)
     {
         name = STATE.PATROL;
-        agent.speed = 6.0f * speedModifier;
+        agent.speed = 4.0f * speedModifier;
         agent.isStopped = false;
     }
 

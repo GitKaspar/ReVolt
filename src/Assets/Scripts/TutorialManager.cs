@@ -62,7 +62,7 @@ public class TutorialManager : MonoBehaviour
         tutorialIndex = 0;
         scooterBattery = Player.GetComponent<Battery>();
 
-        jumpComponent = Player.GetComponent<Jump>();
+        //jumpComponent = Player.GetComponent<Jump>();
 
         triggerBoxComponent1 = DeadEndBox.GetComponent<TriggerBox>();
 
@@ -84,8 +84,8 @@ public class TutorialManager : MonoBehaviour
             {
                 case 0:
                     {
-                        jumpComponent.forwardForce = 0;
-                        jumpComponent.upForce = 0;
+                        //jumpComponent.forwardForce = 0;
+                        //jumpComponent.upForce = 0;
                         StartCoroutine(TextBlock(tutorialIndex, 2f, 4f));
                         tutorialIndex++;
                     }
@@ -130,9 +130,8 @@ public class TutorialManager : MonoBehaviour
                     {
                         if (triggerBoxComponent1.HasEntered) 
                         {
-                            Debug.Log("Box reports positive contact");
-                            jumpComponent.upForce = 6f;
-                            jumpComponent.forwardForce = 2f;
+                            //jumpComponent.upForce = 6f;
+                            //jumpComponent.forwardForce = 2f;
                             StartCoroutine(TextBlock(tutorialIndex, 0, 2f));
                             tutorialIndex++;
                         }
