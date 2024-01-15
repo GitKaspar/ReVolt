@@ -137,7 +137,7 @@ public class GameController : MonoBehaviour
             }
             else
             {
-                Time.timeScale = 0;
+                Time.timeScale = 0.1f;
                 WorkshopButton.SetActive(true);
                 RetryButton.SetActive(false);
             }
@@ -147,7 +147,11 @@ public class GameController : MonoBehaviour
             Events.LevelBeat();
         }
         else
+        {
+            Time.timeScale = 0;
             ResultText.text = "Busted";
+
+        }
         
         EndPanel.SetActive(true);
     }
