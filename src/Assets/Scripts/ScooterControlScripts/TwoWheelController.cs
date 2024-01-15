@@ -289,7 +289,6 @@ public class TwoWheelController : MonoBehaviour
         //Reverse (possible only if currently standing)
         if (CurrentSpeed <= k_ReversingThreshold & drive < -0.5f)
         {
-            Debug.Log("Reversing");
             for (int i = 0; i < 2; i++)
             {
                 m_WheelColliders[i].brakeTorque = 0f;

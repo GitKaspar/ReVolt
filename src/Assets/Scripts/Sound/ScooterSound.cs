@@ -31,13 +31,14 @@ public class ScooterSound : MonoBehaviour
 
         currentSpeed = scooterRigidbody.velocity.magnitude;
         currentVolumeLevel = CurveFactor((currentSpeed / maxSpeed)) * MaxVolumeLevel;
-        currentPitch = currentVolumeLevel * maxPitch;  
+        currentPitch = currentVolumeLevel * maxPitch;
         scooterAudioSource.volume = currentVolumeLevel;
         scooterAudioSource.pitch = currentPitch;
      }
 
     private float CurveFactor(float factor)
     {
+        if (factor > 1) return 1;
         return 1 - (1 - factor) * Mathf.Sqrt((1 - factor));
     }
 }
