@@ -12,6 +12,9 @@ public class ProgressManager : MonoBehaviour
     public int currentLevel = -1;
     public bool workshopVisited { get; set; }
 
+    //[HideInInspector]
+    public string revolutionMessage;
+
     private void Awake()
     {
         if (Instance != null)
@@ -64,5 +67,6 @@ public class ProgressManager : MonoBehaviour
         currentLevel = -1;
         workshopVisited = false;
         UpgradeStats.Instance.ResetAll();
+        revolutionMessage = "";
     }
 }

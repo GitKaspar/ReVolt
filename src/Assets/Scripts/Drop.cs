@@ -87,8 +87,14 @@ public class Drop : MonoBehaviour
         source.PlayOneShot(chosenClip);
         Events.DropDone(this);
 
-        GameObject newspaper = Instantiate(NewspaperPrefab, player.position + Vector3.up * 1.5f, Quaternion.identity);
-        newspaper.GetComponent<Rigidbody>().AddForce((transform.position - player.position + Vector3.up) * 20, ForceMode.Impulse); //throw newspaper at drop
+        bool toTheRight = Vector3.Dot((transform.position - player.position), player.transform.right) > 0;
+        GameObject newspaper = Instantiate(NewspaperPrefab, player.position + Vector3.up + (toTheRight ? player.transform.right : player.transform.right * -1) * 0.25f, Quaternion.identity);
+        Rigidbody rb = newspaper.GetComponent<Rigidbody>();
+        rb.AddForce((transform.position - player.position + Vector3.up) * 20, ForceMode.Impulse); //throw newspaper at drop
+        if (toTheRight) //throw to side, so paper doesn't collide with scooter
+            rb.AddForce(player.transform.right * 30, ForceMode.Impulse);       
+        else 
+            rb.AddForce(player.transform.right * -30, ForceMode.Impulse);
 
         Renderer[] renderers = GetComponentsInChildren<Renderer>();
 

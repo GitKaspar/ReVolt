@@ -5,12 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class UpgradeScreen : MonoBehaviour
 {
+    private AudioSource musicSource;
 
     private void Start()
     {
         AudioListener.pause = false;
         Cursor.visible = true;
-        SoundController.SoundInstance.WorkshopMusic.Play();
+        musicSource = SoundController.SoundInstance.WorkshopMusic.Play();
     }
 
     public void OnSpeedUpgradeClick()
@@ -45,7 +46,8 @@ public class UpgradeScreen : MonoBehaviour
     {
         ProgressManager.Instance.workshopVisited = true;
         string nextSceneName = ProgressManager.Instance.GetNextLevelName();
-        SceneManager.LoadSceneAsync(nextSceneName);
         Cursor.visible = false;
+        musicSource.Stop();
+        SceneManager.LoadSceneAsync(nextSceneName);
     }
 }

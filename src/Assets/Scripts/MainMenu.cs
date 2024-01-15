@@ -9,6 +9,7 @@ public class MainMenu : MonoBehaviour
 {
     public GameObject InstructionsPanel;
     public GameObject CreditsPanel;
+    public GameObject MessagePanel;
     public GameObject Story;
     public GameObject KeysPC;
     public GameObject KeysController;
@@ -26,6 +27,7 @@ public class MainMenu : MonoBehaviour
     {
         InstructionsPanel.SetActive(false);
         CreditsPanel.SetActive(false);
+        MessagePanel.SetActive(false);
         Story.SetActive(false);
         KeysPC.SetActive(false);
         KeysController.SetActive(false);
@@ -117,7 +119,7 @@ public class MainMenu : MonoBehaviour
         }
         else
         {
-            Next();
+            NextMessage();
         }
         
     }
@@ -143,18 +145,25 @@ public class MainMenu : MonoBehaviour
         displayBio.text = "Tristan is lol";
     }
 
-    public void Next()
+    public void NextKeysPC()
     {
         //SoundController.SoundInstance.ButtonClick(); //sound triggered in animated button script
+        MessagePanel.SetActive(false);
         InstructionsPanel.SetActive(true);
         Story.SetActive(false);
         KeysPC.SetActive(true);
         KeysController.SetActive(false);
     }
+    public void NextMessage()
+    {
+        InstructionsPanel.SetActive(false);
+        MessagePanel.SetActive(true);
+    }
 
-    public void NextAgain()
+    public void NextKeysController()
     {
         //SoundController.SoundInstance.ButtonClick(); //sound triggered in animated button script
+        MessagePanel.SetActive(false);
         InstructionsPanel.SetActive(true);
         Story.SetActive(false);
         KeysPC.SetActive(false);
@@ -167,5 +176,6 @@ public class MainMenu : MonoBehaviour
         //SceneManager.LoadSceneAsync("MainMenu");
         InstructionsPanel.SetActive(false);
         CreditsPanel.SetActive(false);
+        MessagePanel.SetActive(false);
     }
 }

@@ -40,6 +40,8 @@ public class SaveManager : MonoBehaviour
 
         UpgradeStats.Instance.SetCurrentLevel(StatName.Speed, data.speedLevel);
         UpgradeStats.Instance.SetCurrentLevel(StatName.Battery, data.batteryLevel);
+
+        ProgressManager.Instance.revolutionMessage = data.revolutionMessage;
     }
 
 }
