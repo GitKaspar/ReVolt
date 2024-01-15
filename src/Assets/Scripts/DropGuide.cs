@@ -3,14 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DropGuide : MonoBehaviour
 {
     public Transform player;
+    public Image GuideImage;
     private Drop[] drops;
 
-    public TextMeshProUGUI playerCoordinatesText;
-    public TextMeshProUGUI closestDropText;
+    public float MaxRadius = 100;
+
+    //public TextMeshProUGUI playerCoordinatesText;
+    //public TextMeshProUGUI closestDropText;
 
     private void Awake()
     {
@@ -20,12 +24,16 @@ public class DropGuide : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 closestDrop = ComputeClosestDrop();
+        float currentDistance = ComputeClosestDistance();
 
-        playerCoordinatesText.text = "(" + Mathf.Round(player.position.x) + ", " + Mathf.Round(player.position.z) + ")";
-        closestDropText.text = "(" + Mathf.Round(closestDrop.x) + ", " + Mathf.Round(closestDrop.z) + ")";
+        GuideImage.fillAmount = 1 - currentDistance / MaxRadius;
+        //Vector3 closestDrop = ComputeClosestDrop();
+
+        //playerCoordinatesText.text = "(" + Mathf.Round(player.position.x) + ", " + Mathf.Round(player.position.z) + ")";
+        //closestDropText.text = "(" + Mathf.Round(closestDrop.x) + ", " + Mathf.Round(closestDrop.z) + ")";
     }
 
+    /*
     private Vector3 ComputeClosestDrop()
     {
         float closestDistance = float.PositiveInfinity;
@@ -46,5 +54,25 @@ public class DropGuide : MonoBehaviour
 
         Vector3 closestPos = drops[closestDrop].transform.position;
         return closestPos;
+    }
+    */
+
+    private float ComputeClosestDistance()
+    {
+        float closestDistance = float.PositiveInfinity;
+
+        for (int i = 0; i < drops.Length; i++)
+        {
+            if (!drops[i].done)
+            {
+                float curDistance = Vector3.Distance(player.position, drops[i].transform.position);
+                if (curDistance < closestDistance)
+                {
+                    closestDistance = curDistance;
+                }
+            }
+        }
+
+        return closestDistance;
     }
 }
