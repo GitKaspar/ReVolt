@@ -28,6 +28,9 @@ public class TutorialManager : MonoBehaviour
     public GameObject DroneBox2;
     private TriggerBox triggerBoxComponent5;
 
+    public GameObject ClearBox;
+    private TriggerBox triggerBoxComponent6;
+
    private string[] tutorialPhrases =
     {
         "Scooter's ready. Time to see, what this baby can do!",
@@ -38,8 +41,7 @@ public class TutorialManager : MonoBehaviour
         "This looks like a dead end.", // When to trigger? Index 4 and a collision space?
         "One of the drops is near.",
         "Careful now! Police drone ahead!", // Epic line, grandpa!
-        "Out of battery. Again...",
-        "Whew. Close one."
+        "Phew. Close call. One more drop tonight."
     };
    private string[] tutorialInstructions =
     {
@@ -51,8 +53,7 @@ public class TutorialManager : MonoBehaviour
         "Use S/left stick down to move backwards. Alrernatively, you can jump low obstacles with Shift/Y button.",
         "Distance to nearest drop is displayed in the top left. Go towards the purple drop location and press the corresponding key.",
         "Avoid being seen by its scanner light to not get detected.", 
-        "Where art thou, my charging station?",
-        "We'll get them soon enough. Gotta make my drop."
+        "Drones will chase you down and impound your scooter, resulting in GAME OVER. Finish the last drop to complete the level."
     };
 
     // Start is called before the first frame update
@@ -62,12 +63,16 @@ public class TutorialManager : MonoBehaviour
         scooterBattery = Player.GetComponent<Battery>();
 
         jumpComponent = Player.GetComponent<Jump>();
+
         triggerBoxComponent1 = DeadEndBox.GetComponent<TriggerBox>();
 
         triggerBoxComponent2 = DropBox1.GetComponent<TriggerBox>();
         triggerBoxComponent3 = DropBox2.GetComponent<TriggerBox>();
+        
         triggerBoxComponent4 = DroneBox1.GetComponent<TriggerBox>();
         triggerBoxComponent5 = DroneBox2.GetComponent<TriggerBox>();
+
+        triggerBoxComponent6 = ClearBox.GetComponent<TriggerBox>();
     }
 
     // Update is called once per frame
@@ -144,6 +149,15 @@ public class TutorialManager : MonoBehaviour
                     break;
                     case 7: {
                         if (triggerBoxComponent4.HasEntered || triggerBoxComponent5.HasEntered)
+                        {
+                            StartCoroutine(TextBlock(tutorialIndex, 0, 1.5f));
+                            tutorialIndex++;
+                        }
+                    }
+                    break;
+                    case 8:
+                    {
+                        if (triggerBoxComponent6.HasEntered)
                         {
                             StartCoroutine(TextBlock(tutorialIndex, 0, 1.5f));
                             tutorialIndex++;
