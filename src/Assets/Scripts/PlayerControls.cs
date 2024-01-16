@@ -474,7 +474,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         set => asset.bindingMask = value;
     }
 
-    public ReadOnlyArray<UnityEngine.InputSystem.InputDevice>? devices
+    public ReadOnlyArray<InputDevice>? devices
     {
         get => asset.devices;
         set => asset.devices = value;
