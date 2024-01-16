@@ -53,13 +53,13 @@ public class TutorialManager : MonoBehaviour
     };
    private string[] tutorialInstructions =
     {
-        "Mouse wheel up/RT increase scooter speed. Use W/left stick to ove forward.",
+        "Mouse wheel up/RT increase scooter speed. Use W/left stick to move forward.",
         "A & D/left stick are used for steering.",
         "Mouse wheel down/LT decrease scooter speed. Press space/LB to break.", // Kind of convoluted
         "Look for the blue charging stations to charge scooter battery.",
         "Remember to keep the battery charged or scooter speed will be severely limited.",
         "Use S/left stick down to move backwards. Alrernatively, you can jump low obstacles with Shift/Y.",
-        "When near a drop, the drop indicator bar at the top right will fill up in relation to how close you are. Go towards the pink drop location.",
+        "When near a drop, the drop indicator bar at the top left will fill up in relation to how close you are. Go towards the pink drop location.",
         "Stay out of the drone's light cone to avoid detection. You can also sneak up on drones to disable them, but it's a high risk action.", 
         "Drones will chase you down when they see you and imprison you, resulting in GAME OVER. Finish the last drop to complete the level."
     };
