@@ -31,7 +31,7 @@ public class UpgradeScreen : MonoBehaviour
     public void OnStealthUpgradeClick()
     {
         UpgradeStats.Instance.UpgradeStat(StatName.Stealth);
-        Debug.Log("Powerbank docked! New value: " + UpgradeStats.Instance.GetCurrentValue(StatName.Stealth));
+        Debug.Log("Invisibility cloak discovered New value: " + UpgradeStats.Instance.GetCurrentValue(StatName.Stealth));
         PlayAudio();
     }
 
