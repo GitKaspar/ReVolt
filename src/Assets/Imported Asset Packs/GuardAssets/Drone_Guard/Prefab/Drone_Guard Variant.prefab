@@ -198,6 +198,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drone_Guard Variant
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 5090c1d92c3e3034a85460b495fcf820, type: 3}
+      propertyPath: m_TagString
+      value: Drone
+      objectReference: {fileID: 0}
     - target: {fileID: 4640101262243217197, guid: 5090c1d92c3e3034a85460b495fcf820, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.0064
@@ -299,6 +303,7 @@ MonoBehaviour:
   player: {fileID: 0}
   InitialCheckpoint: {fileID: 0}
   SpeedModifier: 1
+  StealthModifier: 0
 --- !u!135 &8939370539295451794
 SphereCollider:
   m_ObjectHideFlags: 0
