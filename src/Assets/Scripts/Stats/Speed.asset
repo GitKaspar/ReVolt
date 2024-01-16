@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 0
   Levels:
-  - 20
-  - 25
-  - 30
+  - 18
+  - 21
+  - 24
