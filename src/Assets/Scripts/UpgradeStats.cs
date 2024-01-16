@@ -9,8 +9,6 @@ public enum StatName
     Battery,
     Stealth
 }
-
-
 public class UpgradeStats : MonoBehaviour
 {
     public static UpgradeStats Instance;

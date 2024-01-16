@@ -5,21 +5,21 @@ using UnityEngine;
 public class DroneManager : MonoBehaviour
 {
     public GameObject Player;
-    private AudioSource playerAudioSource;
-
-    // Get stat from stat manager. Placeholder
-    public float StealthFloat = 1;
+    private ScooterSound scooterSound;
+    private float stealthFloat;
 
     void Awake()
     {
-        playerAudioSource = Player.GetComponent<AudioSource>();
-        playerAudioSource.volume = playerAudioSource.volume * StealthFloat;
+
+        float stealthFloat = UpgradeStats.Instance.GetCurrentValue(StatName.Stealth);
+        scooterSound = Player.GetComponent<ScooterSound>();
+        scooterSound.StealthModifier = stealthFloat; 
 
         // This seems to work.
         AI[] droneAIs = FindObjectsOfType<AI>();
         foreach (AI droneAI in droneAIs)
         {
-            droneAI.StealthModifier = StealthFloat;
+            droneAI.StealthModifier = stealthFloat;
         }
     }
 }
