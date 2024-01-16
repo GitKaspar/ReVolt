@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour
 
     private bool isRunning;
     private bool isPaused;
+    private string currentControlScheme;
 
     private AudioSource ambienceMusicSource;
 
@@ -23,6 +24,8 @@ public class GameController : MonoBehaviour
     public GameObject EndPanel;
     public GameObject PausePanel;
     public GameObject KeyPanel;
+    public GameObject PCKeys;
+    public GameObject ControllerKeys;
     public GameObject WorkshopButton;
     public GameObject RetryButton;
     public GameObject ButtonsParent;
@@ -57,6 +60,7 @@ public class GameController : MonoBehaviour
 
         Events.OnEndGame += OnEndGame;
         Events.OnDropDone += OnDropDone;
+        Events.OnControlSchemeChange += ChangeControls;
 
         if (SoundController.SoundInstance == null)
         {
@@ -86,7 +90,16 @@ public class GameController : MonoBehaviour
 
         Events.OnEndGame -= OnEndGame;
         Events.OnDropDone -= OnDropDone;
+        Events.OnControlSchemeChange -= ChangeControls;
         actions.Pause.performed -= Pause_performed;
+    }
+
+    private void ChangeControls(string newScheme)
+    {
+        if (!isPaused)
+        {
+            currentControlScheme = newScheme;
+        }
     }
 
     private void Pause_performed(InputAction.CallbackContext obj)
@@ -171,8 +184,18 @@ public class GameController : MonoBehaviour
     public void Instructions()
     {
         KeyPanel.SetActive(true);
+        if (currentControlScheme == "KeyboardMouse")
+        {
+            PCKeys.SetActive(true);
+            ControllerKeys.SetActive(false);
+        }
+        else if (currentControlScheme == "Gamepad")
+        {
+            PCKeys.SetActive(false);
+            ControllerKeys.SetActive(true);
+        }
+
         PausePanel.SetActive(false);
-        isPaused = false;
     }
 
     public void Pause()
