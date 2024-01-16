@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/TutorialScene.unity
     guid: 473cc00a35c7c5743a8edd4b63f3b6e6
   - enabled: 1
-    path: Assets/Scenes/Milestone2Scene.unity
+    path: Assets/Scenes/OldScenes/Milestone2Scene.unity
     guid: 11a4dd94eb567cf4ea03896e47859983
   - enabled: 1
     path: Assets/Scenes/UpgradeScreen.unity
