@@ -14,6 +14,9 @@ public class ScooterSound : MonoBehaviour
     private float currentVolumeLevel = 0;
     private float currentPitch;
     private float maxPitch = 2;
+
+    [HideInInspector]
+    public float StealthModifier;
     
 
     void Start()
@@ -32,8 +35,8 @@ public class ScooterSound : MonoBehaviour
         currentSpeed = scooterRigidbody.velocity.magnitude;
         currentVolumeLevel = CurveFactor((currentSpeed / maxSpeed)) * MaxVolumeLevel;
         currentPitch = currentVolumeLevel * maxPitch;
-        scooterAudioSource.volume = currentVolumeLevel;
-        scooterAudioSource.pitch = currentPitch;
+        scooterAudioSource.volume = currentVolumeLevel * StealthModifier;
+        scooterAudioSource.pitch = currentPitch * StealthModifier;
      }
 
     private float CurveFactor(float factor)

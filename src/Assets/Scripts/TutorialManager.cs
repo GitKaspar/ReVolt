@@ -103,7 +103,7 @@ public class TutorialManager : MonoBehaviour
                     break;
                 case 1:
                     {
-                        if (scooterBattery.CurrentCapacity < 80)
+                        if (scooterBattery.CurrentCapacity < 85)
                         {
                             StartCoroutine (TextBlock(tutorialIndex, 0, 0));
                             tutorialIndex++;
@@ -112,7 +112,7 @@ public class TutorialManager : MonoBehaviour
                     break;
                 case 2:
                     {
-                        if(scooterBattery.CurrentCapacity < 60 && Player.GetComponent<Rigidbody>().velocity.magnitude > 15f)
+                        if(scooterBattery.CurrentCapacity < 40 && Player.GetComponent<Rigidbody>().velocity.magnitude > 15f)
                         {
                             StartCoroutine(TextBlock(tutorialIndex, 0, 2f));
                             tutorialIndex++;
