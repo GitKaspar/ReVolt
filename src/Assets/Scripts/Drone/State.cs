@@ -248,7 +248,6 @@ public class Pursue : State
         audioSource.clip = SoundController.SoundInstance.Alarm1;
         audioSource.Play();
         base.Enter();
-        Debug.Log(agent.angularSpeed);
     }
 
     public override void Update()
