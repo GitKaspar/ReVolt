@@ -14,6 +14,9 @@ public class AI : MonoBehaviour
     public Transform player;
     public Checkpoint InitialCheckpoint;
     public float SpeedModifier = 1f;
+    [Range(0.25f, 1)]
+    //[HideInInspector]
+    public float StealthModifier;
 
     void Start()
     {
@@ -21,7 +24,7 @@ public class AI : MonoBehaviour
         anim = this.GetComponent<Animator>();
         droneLight = this.GetComponentInChildren<Light>();
         audioSource = this.GetComponent<AudioSource>();
-        currentState = new Idle(this.gameObject, agent, anim, player, droneLight, audioSource, SpeedModifier);
+        currentState = new Idle(this.gameObject, agent, anim, player, droneLight, audioSource, SpeedModifier, StealthModifier);
     }
 
     void Update()
