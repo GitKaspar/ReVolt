@@ -28,6 +28,14 @@ public class UpgradeScreen : MonoBehaviour
         PlayAudio();
     }
 
+    public void OnStealthUpgradeClick()
+    {
+        UpgradeStats.Instance.UpgradeStat(StatName.Stealth);
+        Debug.Log("Powerbank docked! New value: " + UpgradeStats.Instance.GetCurrentValue(StatName.Stealth));
+        PlayAudio();
+    }
+
+
 
     public void PlayAudio()
     {

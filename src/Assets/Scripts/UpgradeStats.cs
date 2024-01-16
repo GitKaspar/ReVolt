@@ -6,7 +6,8 @@ using UnityEngine;
 public enum StatName
 {
     Speed, 
-    Battery
+    Battery,
+    Stealth
 }
 
 
