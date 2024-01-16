@@ -37,7 +37,7 @@ public class State
 
     float visDist = 20.0f;
     float visAngle = 60.0f; // NPC näeb tegelikult kaks korda sama palju
-    float shootDist = 1.0f;
+    float shootDist = 2.0f;
 
 
     public State(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player, Light _droneLight, AudioSource _audioSource, float _speedModifier)
@@ -170,7 +170,7 @@ public class Patrol : State
         : base(_npc, _agent, _anim, _player, _droneLight, _audioSource, _speedModifier)
     {
         name = STATE.PATROL;
-        agent.speed = 4.0f * speedModifier;
+        agent.speed = 4.5f * speedModifier;
         agent.isStopped = false;
     }
 
@@ -349,7 +349,7 @@ public class RunAway : State
         // anim.SetTrigger("isRunning");
         agent.isStopped = false;
         droneLight.color = Color.yellow;
-        agent.speed = 15 * speedModifier;
+        agent.speed = 12f * speedModifier;
         audioSource.loop = true;
         audioSource.clip = SoundController.SoundInstance.Alarm1;
         audioSource.Play();
