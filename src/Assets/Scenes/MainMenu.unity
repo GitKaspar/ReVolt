@@ -8798,7 +8798,7 @@ MonoBehaviour:
   - level5
   - level6
   WorkshopLevel: UpgradeScreen
-  currentLevel: 1
+  currentLevel: -1
   revolutionMessage: 
 --- !u!4 &2142770930
 Transform:

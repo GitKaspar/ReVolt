@@ -13,7 +13,11 @@ public class TriggerBox : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Player in da box!");
-        HasEntered = true;
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("Player in da " + gameObject.name + "box!");
+            HasEntered = true;
+        }
+
     }
 }
