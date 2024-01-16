@@ -37,7 +37,8 @@ public class TutorialManager : MonoBehaviour
         "damn! out of battery!",
         "much better.",
         "should go look for places to spread my message.",
-        "careful now! police drone ahead!"
+        "careful now! police drone ahead!",
+        ""
     };
    private string[] tutorialInstructions =
     {
@@ -48,7 +49,8 @@ public class TutorialManager : MonoBehaviour
         "look for the blue charging stations to charge scooter battery.",
         "remember to keep the battery charged or scooter speed will be severely limited.",
         "pay attention to the drop indicator bar at the top left. it will fill up more the closer you get to a drop. drops are marked in pink. find the closest one!",
-        "stay out of the drone's light cone to avoid detection. you can also sneak up on drones and disable them with 'q', but it's a high risk action."
+        "stay out of the drone's light cone to avoid detection. you can also sneak up on drones and disable them with 'q', but it's a high risk action.",
+        "use the mouse and 'right mouse button' to look around. press 'f' to toggle flashlight"
     };
 
     private string[] tutorialInstructionsGamePad =
@@ -60,7 +62,8 @@ public class TutorialManager : MonoBehaviour
         "look for the blue charging stations to charge scooter battery.",
         "remember to keep the battery charged or scooter speed will be severely limited.",
         "pay attention to the drop indicator bar at the top left. it will fill up more the closer you get to a drop. drops are marked in pink. find the closest one!",
-        "stay out of the drone's light cone to avoid detection. you can also sneak up on drones and disable them with 'X', but it's a high risk action."
+        "stay out of the drone's light cone to avoid detection. you can also sneak up on drones and disable them with 'X', but it's a high risk action.",
+        "use the right stick to look around. press 'RB' to toggle flashlight"
     };
 
     private void Awake()
@@ -161,44 +164,50 @@ public class TutorialManager : MonoBehaviour
                 case 7:
                     {
                         if (triggerBoxComponent2.HasEntered || triggerBoxComponent3.HasEntered)
+                            // Gets triggered too early! Player has not entered the trigger box, but the game believes he has?
                         {
                             StartCoroutine(TextBlock(tutorialIndex, 0, 2f));
                             tutorialIndex++;
                         }
                         break;
                     }
+                case 8:
+                    {
+                        StartCoroutine(TextBlock(tutorialIndex, 10f, 0));
+                        tutorialIndex++;
+                    }
+                    break;
             }
         }
     }
 
-    private void DisplayText(GameObject TextPanel, TextMeshProUGUI textField, string textToDisplay)
+    private void DisplayText(TextMeshProUGUI textField, string textToDisplay)
     {
         textField.text = textToDisplay;
-        if (TextPanel.activeSelf == false) { 
-            TextPanel.SetActive(true);
-        }
     }
 
     private IEnumerator TextBlock(int stateIndex, float timeToStart, float intervalTime)
     {
+        TutorialPanel.SetActive(true);
+
         yield return new WaitForSeconds(timeToStart); // Set to zero, if player says nothing (empty string)
 
-        DisplayText(TutorialPanel, DiegeticText, tutorialPhrases[stateIndex]);
+        DisplayText(DiegeticText, tutorialPhrases[stateIndex]);
 
         yield return new WaitForSeconds(intervalTime); // Set to zero, if player says nothing (empty string)
 
         if (keyboardUsed)
-            DisplayText(TutorialPanel, InstructionText, tutorialInstructions[stateIndex]);
+            DisplayText(InstructionText, tutorialInstructions[stateIndex]);
         else
-            DisplayText(TutorialPanel, InstructionText, tutorialInstructionsGamePad[stateIndex]);
+            DisplayText(InstructionText, tutorialInstructionsGamePad[stateIndex]);
 
         yield return new WaitForSeconds(3.5f);
 
-        DisplayText(TutorialPanel, DiegeticText, "");
+        DisplayText(DiegeticText, "");
 
         yield return new WaitForSeconds(intervalTime);
 
-        DisplayText(TutorialPanel, InstructionText, "");
+        DisplayText(InstructionText, "");
 
         TutorialPanel.SetActive(false);
     }
