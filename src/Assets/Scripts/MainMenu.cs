@@ -38,6 +38,28 @@ public class MainMenu : MonoBehaviour
         AudioListener.pause = false;
         menuMusicSource = SoundController.SoundInstance.MenuMusic.Play();
         Cursor.visible = true;
+
+        Events.OnDataLoaded += DataLoaded;
+    }
+
+    private void DataLoaded()
+    {
+        if (ProgressManager.Instance.currentLevel != -1)
+        {
+            ContinueButton.SetActive(true);
+            PlayText.text = "play new";
+        }
+        else
+        {
+            ContinueButton.SetActive(false);
+            PlayText.text = "play";
+        }
+
+        if (ProgressManager.Instance.GetNextLevelName() == null)
+        {
+            ContinueButton.SetActive(false);
+            PlayText.text = "play again";
+        }
     }
 
     private void Start()
@@ -63,6 +85,8 @@ public class MainMenu : MonoBehaviour
         }
 
         Cursor.visible = false;
+
+        Events.OnDataLoaded += DataLoaded;
     }
 
     public void ContinueGame()

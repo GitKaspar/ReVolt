@@ -24,6 +24,7 @@ public class SaveManager : MonoBehaviour
         if (data != null) 
         { 
             AssignSavedValues(data);
+            Events.DataLoaded();
         }
     }
 

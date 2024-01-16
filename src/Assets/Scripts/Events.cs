@@ -16,6 +16,9 @@ public static class Events
     public static event Action<string> OnControlSchemeChange;
     public static void ControlSchemeChange(string newScheme) => OnControlSchemeChange?.Invoke(newScheme);
 
+    public static event Action OnDataLoaded;
+    public static void DataLoaded() => OnDataLoaded?.Invoke();
+
 
     //Requesting and Setting Attributes
     public static event Func<float> OnRequestCurrentSpeed;
