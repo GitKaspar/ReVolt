@@ -42,7 +42,7 @@ public class ChargingStation : MonoBehaviour
         }
         else if (newScheme == "Gamepad")
         {
-            chargeButton = "B/Circle";
+            chargeButton = "B";
         }
     }
 

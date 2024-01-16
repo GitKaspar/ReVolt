@@ -2,16 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class TutorialManager : MonoBehaviour
 {
-   public GameObject TutorialPanel;
-   public TextMeshProUGUI DiegeticText;
-   public TextMeshProUGUI InstructionText;
-   public GameObject Player;
+    public GameObject TutorialPanel;
+    public TextMeshProUGUI DiegeticText;
+    public TextMeshProUGUI InstructionText;
+    public GameObject Player;
     private Jump jumpComponent;
     private Battery scooterBattery;
-   private int tutorialIndex;
+    private int tutorialIndex;
+    private bool keyboardUsed;
 
     public GameObject DeadEndBox;
     private TriggerBox triggerBoxComponent1;
@@ -52,16 +54,39 @@ public class TutorialManager : MonoBehaviour
     };
    private string[] tutorialInstructions =
     {
-        "mouse wheel up/RT increase scooter speed. use w/left stick to move forward.",
-        "a & d/left stick are used for steering.",
-        "mouse wheel down/LT decrease scooter speed. Press space/LB to break.", // Kind of convoluted
-        "use s/left stick down to move backwards. alrernatively, you can jump low obstacles with shift/Y.",
+        "hold down 'w' to move forward. scroll mouse wheel up to increase scooter speed.",
+        "use 'a'/'d' for steering.",
+        "scroll mouse wheel down to decrease scooter speed. press 'space' to break.", // Kind of convoluted
+        "use 's' to reverse. alternatively, you can jump low obstacles with 'shift'.",
         "look for the blue charging stations to charge scooter battery.",
         "remember to keep the battery charged or scooter speed will be severely limited.",
         "when near a drop, the drop indicator bar at the top left will fill up according to how close you are. go towards the pink drop location.",
-        "stay out of the drone's light cone to avoid detection. you can also sneak up on drones to disable them, but it's a high risk action.", 
+        "stay out of the drone's light cone to avoid detection. you can also sneak up on drones and disable them with 'q', but it's a high risk action.", 
         "drones will chase you down when they see you and imprison you, resulting in game over. finish the last drop to complete the level."
     };
+
+    private string[] tutorialInstructionsGamePad =
+    {
+        "hold left stick up to move forward. use 'RT' up to increase scooter speed.",
+        "move the left stick sideways for steering.",
+        "use 'LT' to decrease scooter speed. press 'LB' to break.", // Kind of convoluted
+        "hold left stick down to reverse. alternatively, you can jump low obstacles with 'Y'.",
+        "look for the blue charging stations to charge scooter battery.",
+        "remember to keep the battery charged or scooter speed will be severely limited.",
+        "when near a drop, the drop indicator bar at the top left will fill up according to how close you are. go towards the pink drop location.",
+        "stay out of the drone's light cone to avoid detection. you can also sneak up on drones and disable them with 'X', but it's a high risk action.",
+        "drones will chase you down when they see you and imprison you, resulting in game over. finish the last drop to complete the level."
+    };
+
+    private void Awake()
+    {
+        Events.OnControlSchemeChange += ChangeControls;
+    }
+
+    private void OnDestroy()
+    {
+        Events.OnControlSchemeChange -= ChangeControls;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -198,7 +223,10 @@ public class TutorialManager : MonoBehaviour
 
         yield return new WaitForSeconds(intervalTime); // Set to zero, if player says nothing (empty string)
 
-        DisplayText(TutorialPanel, InstructionText, tutorialInstructions[stateIndex]);
+        if (keyboardUsed)
+            DisplayText(TutorialPanel, InstructionText, tutorialInstructions[stateIndex]);
+        else
+            DisplayText(TutorialPanel, InstructionText, tutorialInstructionsGamePad[stateIndex]);
 
         yield return new WaitForSeconds(3.5f);
 
@@ -209,5 +237,17 @@ public class TutorialManager : MonoBehaviour
         DisplayText(TutorialPanel, InstructionText, "");
 
         TutorialPanel.SetActive(false);
+    }
+
+    private void ChangeControls(string newScheme)
+    {
+        if (newScheme == "KeyboardMouse")
+        {
+            keyboardUsed = true;
+        }
+        else if (newScheme == "Gamepad")
+        {
+            keyboardUsed = false;
+        }
     }
 }
