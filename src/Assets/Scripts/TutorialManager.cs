@@ -38,6 +38,9 @@ public class TutorialManager : MonoBehaviour
     public GameObject ClearBox2;
     private TriggerBox triggerBoxComponent8;
 
+    public GameObject DropIndicatorPanel;
+    public GameObject IndicatorImage;
+
 
     private string[] tutorialPhrases =
     {
@@ -84,6 +87,8 @@ public class TutorialManager : MonoBehaviour
         triggerBoxComponent7 = ClearBox1.GetComponent<TriggerBox>();
         triggerBoxComponent8 = ClearBox2.GetComponent<TriggerBox>();
 
+        DropIndicatorPanel.SetActive(false);
+        IndicatorImage.SetActive(false);
     }
 
     // Update is called once per frame
@@ -152,6 +157,8 @@ public class TutorialManager : MonoBehaviour
                     {
                         if (triggerBoxComponent3.HasEntered || triggerBoxComponent4.HasEntered)
                         {
+                            DropIndicatorPanel.SetActive(true);
+                            IndicatorImage.SetActive(true);
                             StartCoroutine(TextBlock(tutorialIndex, 0, 2f));
                             tutorialIndex++;
                         }
