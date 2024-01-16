@@ -14,9 +14,8 @@ public class AI : MonoBehaviour
     public Transform player;
     public Checkpoint InitialCheckpoint;
     public float SpeedModifier = 1f;
-    [Range(0.25f, 1)]
     //[HideInInspector]
-    public float StealthModifier;
+    public float StealthModifier = 1f;
 
     void Start()
     {
