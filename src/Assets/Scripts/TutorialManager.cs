@@ -13,30 +13,26 @@ public class TutorialManager : MonoBehaviour
     private Battery scooterBattery;
    private int tutorialIndex;
 
-    public GameObject DeadEndBox1;
+    public GameObject DeadEndBox;
     private TriggerBox triggerBoxComponent1;
 
-    public GameObject DeadEndBox2;
+    public GameObject DropBox1;
     private TriggerBox triggerBoxComponent2;
 
-
-    public GameObject DropBox1;
-    private TriggerBox triggerBoxComponent3;
-
     public GameObject DropBox2;
-    private TriggerBox triggerBoxComponent4;
+    private TriggerBox triggerBoxComponent3;
     
     public GameObject DroneBox1;
-    private TriggerBox triggerBoxComponent5;
+    private TriggerBox triggerBoxComponent4;
 
     public GameObject DroneBox2;
-    private TriggerBox triggerBoxComponent6;
+    private TriggerBox triggerBoxComponent5;
 
     public GameObject ClearBox1;
-    private TriggerBox triggerBoxComponent7;
+    private TriggerBox triggerBoxComponent6;
 
     public GameObject ClearBox2;
-    private TriggerBox triggerBoxComponent8;
+    private TriggerBox triggerBoxComponent7;
 
     public GameObject DropIndicatorPanel;
     public GameObject IndicatorImage;
@@ -44,27 +40,27 @@ public class TutorialManager : MonoBehaviour
 
     private string[] tutorialPhrases =
     {
-        "Scooter's ready. Time to see, what this baby can do!",
+        "scooter's ready. time to see, what this baby can do!",
         "",
-        "Whoa. Easy there!",
-        "Damn! Out of battery!",
-        "Much better.",
-        "This looks like a dead end.",
-        "One of the drops is near.",
-        "Careful now! Police drone ahead!",
-        "Phew. Close call. One more drop tonight."
+        "whoa. easy there!",
+        "this looks like a dead end.",
+        "damn! out of battery!",
+        "much better.",
+        "one of the drops is near.",
+        "careful now! police drone ahead!",
+        "phew. close call. one more drop tonight."
     };
    private string[] tutorialInstructions =
     {
-        "Mouse wheel up/RT increase scooter speed. Use W/left stick to move forward.",
-        "A & D/left stick are used for steering.",
-        "Mouse wheel down/LT decrease scooter speed. Press space/LB to break.", // Kind of convoluted
-        "Look for the blue charging stations to charge scooter battery.",
-        "Remember to keep the battery charged or scooter speed will be severely limited.",
-        "Use S/left stick down to move backwards. Alrernatively, you can jump low obstacles with Shift/Y.",
-        "When near a drop, the drop indicator bar at the top left will fill up in relation to how close you are. Go towards the pink drop location.",
-        "Stay out of the drone's light cone to avoid detection. You can also sneak up on drones to disable them, but it's a high risk action.", 
-        "Drones will chase you down when they see you and imprison you, resulting in GAME OVER. Finish the last drop to complete the level."
+        "mouse wheel up/RT increase scooter speed. use w/left stick to move forward.",
+        "a & d/left stick are used for steering.",
+        "mouse wheel down/LT decrease scooter speed. Press space/LB to break.", // Kind of convoluted
+        "use s/left stick down to move backwards. alrernatively, you can jump low obstacles with shift/Y.",
+        "look for the blue charging stations to charge scooter battery.",
+        "remember to keep the battery charged or scooter speed will be severely limited.",
+        "when near a drop, the drop indicator bar at the top left will fill up according to how close you are. go towards the pink drop location.",
+        "stay out of the drone's light cone to avoid detection. you can also sneak up on drones to disable them, but it's a high risk action.", 
+        "drones will chase you down when they see you and imprison you, resulting in game over. finish the last drop to complete the level."
     };
 
     // Start is called before the first frame update
@@ -75,17 +71,16 @@ public class TutorialManager : MonoBehaviour
 
         //jumpComponent = Player.GetComponent<Jump>();
 
-        triggerBoxComponent1 = DeadEndBox1.GetComponent<TriggerBox>();
-        triggerBoxComponent2 = DeadEndBox1.GetComponent<TriggerBox>();
+        triggerBoxComponent1 = DeadEndBox.GetComponent<TriggerBox>();
 
-        triggerBoxComponent3 = DropBox1.GetComponent<TriggerBox>();
-        triggerBoxComponent4 = DropBox2.GetComponent<TriggerBox>();
+        triggerBoxComponent2 = DropBox1.GetComponent<TriggerBox>();
+        triggerBoxComponent3 = DropBox2.GetComponent<TriggerBox>();
         
-        triggerBoxComponent5 = DroneBox1.GetComponent<TriggerBox>();
-        triggerBoxComponent6 = DroneBox2.GetComponent<TriggerBox>();
+        triggerBoxComponent4 = DroneBox1.GetComponent<TriggerBox>();
+        triggerBoxComponent5 = DroneBox2.GetComponent<TriggerBox>();
 
-        triggerBoxComponent7 = ClearBox1.GetComponent<TriggerBox>();
-        triggerBoxComponent8 = ClearBox2.GetComponent<TriggerBox>();
+        triggerBoxComponent6 = ClearBox1.GetComponent<TriggerBox>();
+        triggerBoxComponent7 = ClearBox2.GetComponent<TriggerBox>();
 
         DropIndicatorPanel.SetActive(false);
         IndicatorImage.SetActive(false);
@@ -102,13 +97,13 @@ public class TutorialManager : MonoBehaviour
                     {
                         //jumpComponent.forwardForce = 0;
                         //jumpComponent.upForce = 0;
-                        StartCoroutine(TextBlock(tutorialIndex, 2f, 4f));
+                        StartCoroutine(TextBlock(tutorialIndex, 2f, 3.5f));
                         tutorialIndex++;
                     }
                     break;
                 case 1:
                     {
-                        if (scooterBattery.CurrentCapacity < 75)
+                        if (scooterBattery.CurrentCapacity < 80)
                         {
                             StartCoroutine (TextBlock(tutorialIndex, 0, 0));
                             tutorialIndex++;
@@ -117,7 +112,7 @@ public class TutorialManager : MonoBehaviour
                     break;
                 case 2:
                     {
-                        if(scooterBattery.CurrentCapacity < 30 && Player.GetComponent<Rigidbody>().velocity.magnitude > 15f)
+                        if(scooterBattery.CurrentCapacity < 60 && Player.GetComponent<Rigidbody>().velocity.magnitude > 15f)
                         {
                             StartCoroutine(TextBlock(tutorialIndex, 0, 2f));
                             tutorialIndex++;
@@ -126,25 +121,7 @@ public class TutorialManager : MonoBehaviour
                     break;
                     case 3:
                     {
-                        if(scooterBattery.CurrentCapacity < 1f)
-                        {
-                            StartCoroutine(TextBlock(tutorialIndex, 0, 2f));
-                            tutorialIndex++;
-                        }
-                    }
-                    break;
-                    case 4:
-                    {
-                        if(scooterBattery.CurrentCapacity > 80)
-                        {
-                            StartCoroutine(TextBlock(tutorialIndex, 0, 2f));
-                            tutorialIndex++;
-                        }
-                    } 
-                    break;
-                    case 5: 
-                    {
-                        if (triggerBoxComponent1.HasEntered || triggerBoxComponent2.HasEntered) 
+                        if (triggerBoxComponent1.HasEntered)
                         {
                             //jumpComponent.upForce = 6f;
                             //jumpComponent.forwardForce = 2f;
@@ -153,9 +130,29 @@ public class TutorialManager : MonoBehaviour
                         }
                     }
                     break;
+                    case 4:
+                    {
+                        if (scooterBattery.CurrentCapacity < 1f)
+                        {
+                            StartCoroutine(TextBlock(tutorialIndex, 0, 2f));
+                            tutorialIndex++;
+                        }
+
+                    } 
+                    break;
+                    case 5: 
+                    {
+                        if (scooterBattery.CurrentCapacity > 80)
+                        {
+                            StartCoroutine(TextBlock(tutorialIndex, 0, 2f));
+                            tutorialIndex++;
+                        }
+
+                    }
+                    break;
                     case 6: 
                     {
-                        if (triggerBoxComponent3.HasEntered || triggerBoxComponent4.HasEntered)
+                        if (triggerBoxComponent2.HasEntered || triggerBoxComponent3.HasEntered)
                         {
                             DropIndicatorPanel.SetActive(true);
                             IndicatorImage.SetActive(true);
@@ -165,18 +162,18 @@ public class TutorialManager : MonoBehaviour
                     }
                     break;
                     case 7: {
-                        if (triggerBoxComponent5.HasEntered || triggerBoxComponent6.HasEntered)
+                        if (triggerBoxComponent4.HasEntered || triggerBoxComponent5.HasEntered)
                         {
-                            StartCoroutine(TextBlock(tutorialIndex, 0, 1.5f));
+                            StartCoroutine(TextBlock(tutorialIndex, 0, 2f));
                             tutorialIndex++;
                         }
                     }
                     break;
                     case 8:
                     {
-                        if (triggerBoxComponent7.HasEntered || triggerBoxComponent8.HasEntered)
+                        if (triggerBoxComponent6.HasEntered || triggerBoxComponent7.HasEntered)
                         {
-                            StartCoroutine(TextBlock(tutorialIndex, 0, 1.5f));
+                            StartCoroutine(TextBlock(tutorialIndex, 0, 2f));
                             tutorialIndex++;
                         }
                     }
@@ -203,7 +200,7 @@ public class TutorialManager : MonoBehaviour
 
         DisplayText(TutorialPanel, InstructionText, tutorialInstructions[stateIndex]);
 
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(3.5f);
 
         DisplayText(TutorialPanel, DiegeticText, "");
 
