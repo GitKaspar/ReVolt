@@ -183,7 +183,6 @@ public class Patrol : State
         droneAI = agent.GetComponent<AI>();
         checkpoint = droneAI.InitialCheckpoint;
         droneLight.color = Color.cyan;
-        droneLight.range = droneLight.range * stealthModifier;
         audioSource.loop = true;
         audioSource.clip = SoundController.SoundInstance.Scan1;
         audioSource.Play();
@@ -249,7 +248,6 @@ public class Pursue : State
         audioSource.clip = SoundController.SoundInstance.Alarm1;
         audioSource.Play();
         base.Enter();
-        Debug.Log(agent.angularSpeed);
     }
 
     public override void Update()
