@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3836185427041130600}
   - component: {fileID: 1532934433432754047}
   - component: {fileID: 262560579289941808}
+  - component: {fileID: 7208651406324465151}
   m_Layer: 0
   m_Name: zhiguli_blue
   m_TagString: Untagged
@@ -83,3 +84,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7208651406324465151
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2230858610040820757}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.804807, y: 1.4281348, z: 4.2462225}
+  m_Center: {x: 8.746847e-11, y: -0.011874795, z: 0.6626462}
