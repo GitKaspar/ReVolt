@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1353476811890882346}
   - component: {fileID: 2701046268126876129}
   - component: {fileID: 5074940397151047491}
+  - component: {fileID: 3352069921688241683}
   m_Layer: 0
   m_Name: zhiguli_gray
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -1.2070792, y: 0.75291866, z: -0.23824048}
-  m_LocalScale: {x: 0.46, y: 0.46, z: 0.46}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -105,3 +106,24 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.8025193, y: 1.429787, z: 4.121102}
   m_Center: {x: -0.000000029873156, y: -0.03802863, z: 0.07176638}
+--- !u!65 &3352069921688241683
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3933092132764587793}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.8025193, y: 1.4297869, z: 4.1211014}
+  m_Center: {x: 0.000007600449, y: -0.03803006, z: 0.07176637}
