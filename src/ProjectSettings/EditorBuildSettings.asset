@@ -12,8 +12,20 @@ EditorBuildSettings:
     path: Assets/Scenes/TutorialScene.unity
     guid: 473cc00a35c7c5743a8edd4b63f3b6e6
   - enabled: 1
-    path: Assets/Scenes/OldScenes/Milestone2Scene.unity
-    guid: 11a4dd94eb567cf4ea03896e47859983
+    path: Assets/Scenes/Milestone2SceneDescaled.unity
+    guid: a0c88f9d9afa27e43b6d31a0b82aff7d
+  - enabled: 1
+    path: Assets/Scenes/level3.unity
+    guid: 09cd37cb711fcd54c9f4a4dd6fffb888
+  - enabled: 1
+    path: Assets/Scenes/level4.unity
+    guid: 5c2161a73921a124e8dfc7d7b8c54192
+  - enabled: 1
+    path: Assets/Scenes/level5.unity
+    guid: 90982ad3e7ed4aa4696e64ffac46bb7f
+  - enabled: 1
+    path: Assets/Scenes/level6.unity
+    guid: 718ba5c1033937647848d98b34257c16
   - enabled: 1
     path: Assets/Scenes/UpgradeScreen.unity
     guid: 7d7db81ca330fd248bf590d7291cce53
