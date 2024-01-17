@@ -274,7 +274,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: f*ck putin, like really really hard bro
+  m_text: pineapple belongs on pizza
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3c04702309cbb854da18e2dae0d258f7, type: 2}
   m_sharedMaterial: {fileID: 1718362622444993031, guid: 3c04702309cbb854da18e2dae0d258f7, type: 2}
