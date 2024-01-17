@@ -27,6 +27,8 @@ public class TutorialManager : MonoBehaviour
     public GameObject DropIndicatorPanel;
     public GameObject IndicatorImage;
 
+    public GameObject ChargingStations;
+    public GameObject InvisibleWalls;
 
     private string[] tutorialPhrases =
     {
@@ -50,7 +52,8 @@ public class TutorialManager : MonoBehaviour
         "remember to keep the battery charged or scooter speed will be severely limited.",
         "pay attention to the drop indicator bar at the top left. it will fill up more the closer you get to a drop. drops are marked in pink. find the closest one!",
         "stay out of the drone's light cone to avoid detection. you can also sneak up on drones and disable them with 'q', but it's a high risk action.",
-        "use the mouse and 'right mouse button' to look around. press 'f' to toggle flashlight"
+        "use the mouse and 'right mouse button' to look around. press 'f' to toggle flashlight",
+        "find the last drop to finish the level"
     };
 
     private string[] tutorialInstructionsGamePad =
@@ -63,7 +66,8 @@ public class TutorialManager : MonoBehaviour
         "remember to keep the battery charged or scooter speed will be severely limited.",
         "pay attention to the drop indicator bar at the top left. it will fill up more the closer you get to a drop. drops are marked in pink. find the closest one!",
         "stay out of the drone's light cone to avoid detection. you can also sneak up on drones and disable them with 'X', but it's a high risk action.",
-        "use the right stick to look around. press 'RB' to toggle flashlight"
+        "use the right stick to look around. press 'RB' to toggle flashlight",
+        "find the last drop to finish the level"
     };
 
     private void Awake()
@@ -91,6 +95,8 @@ public class TutorialManager : MonoBehaviour
 
         DropIndicatorPanel.SetActive(false);
         IndicatorImage.SetActive(false);
+
+        ChargingStations.SetActive(false);
     }
 
     // Update is called once per frame
@@ -128,6 +134,7 @@ public class TutorialManager : MonoBehaviour
                     {
                         if (triggerBoxComponent1.HasEntered)
                         {
+                            InvisibleWalls.SetActive(false);
                             StartCoroutine(TextBlock(tutorialIndex, 0, 3f));
                             tutorialIndex++;
                         }
@@ -137,6 +144,7 @@ public class TutorialManager : MonoBehaviour
                     {
                         if (scooterBattery.CurrentCapacity < 1f)
                         {
+                            ChargingStations.SetActive(true);
                             StartCoroutine(TextBlock(tutorialIndex, 0, 2f));
                             tutorialIndex++;
                         }
@@ -172,6 +180,12 @@ public class TutorialManager : MonoBehaviour
                         break;
                     }
                 case 8:
+                    {
+                        StartCoroutine(TextBlock(tutorialIndex, 10f, 0));
+                        tutorialIndex++;
+                    }
+                    break;
+                case 9:
                     {
                         StartCoroutine(TextBlock(tutorialIndex, 10f, 0));
                         tutorialIndex++;
