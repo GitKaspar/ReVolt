@@ -37,46 +37,46 @@ public class TutorialManager : MonoBehaviour
 
     private string[] tutorialPhrases =
     {
-        "scooter's ready. time to see, what this baby can do!",
-        "whoa. easy there!",
+        "Scooter's ready. Time to see, what this baby can do!",
+        "Whoa. Easy there!",
          "",
-        "this looks like a dead end.",
-        "damn! out of battery!",
-        "much better.",
-        "should go look for places to spread my message.",
-        "careful now! police drone ahead!",
+        "this looks like a dead end",
+        "Damn! Out of battery!",
+        "much better",
+        "should keep a lookout for places to spread the word",
+        "Careful now! Police drone ahead!",
         "",
         "",
         ""
     };
    private string[] tutorialInstructions =
     {
-        "hold down 'w' to move forward. scroll mouse wheel up to increase scooter speed.",
-        "scroll mouse wheel down to decrease scooter speed. press 'space' to break.", // Kind of convoluted
-        "use 'a'/'d' for steering.",
-        "use 's' to reverse. alternatively, you can jump low obstacles with 'shift'.",
-        "look for the blue charging stations to charge scooter battery.",
-        "remember to keep the battery charged or scooter speed will be severely limited.",
-        "pay attention to the drop indicator bar at the top left. it will fill up more the closer you get to a drop. drops are marked in pink. find the closest one!",
-        "stay out of the drone's light cone to avoid detection. you can also sneak up on drones and disable them with 'q', but it's a high risk action.",
-        "use the mouse and 'right mouse button' to look around. press 'f' to toggle flashlight",
+        "Hold down 'w' to move forward. Scroll mouse wheel up to increase scooter speed.",
+        "Scroll mouse wheel down to decrease scooter speed. Press 'space' to break.", // Kind of convoluted
+        "use 'a'/'d' for steering",
+        "Use 's' to reverse. Alternatively, you can jump low obstacles with 'shift'.",
+        "look for the blue charging stations to charge scooter battery",
+        "remember to keep the battery charged or scooter speed will be severely limited",
+        "Pay attention to the drop indicator bar at the top left. It will fill up more the closer you get to a drop. Drops are marked in pink. Find the closest one!",
+        "Stay out of the drone's light cone to avoid detection. You can also sneak up on drones and disable them with 'q', but it's a high risk action.",
+        "Use the mouse and 'right mouse button' to look around. Press 'f' to toggle flashlight",
         "find the last drop to finish the level",
-        "you got busted, but we got you. go finish up delivering to the drops. and don't get caught this time!"
+        "You got busted, but we got you. go finish up delivering to the drops. And don't get caught this time!"
     };
 
     private string[] tutorialInstructionsGamePad =
     {
-        "hold left stick up to move forward. use 'RT' up to increase scooter speed.",
-        "use 'LT' to decrease scooter speed. press 'LB' to break.", // Kind of convoluted
-        "move the left stick sideways for steering.",
-        "hold left stick down to reverse. alternatively, you can jump low obstacles with 'Y'.",
-        "look for the blue charging stations to charge scooter battery.",
-        "remember to keep the battery charged or scooter speed will be severely limited.",
-        "pay attention to the drop indicator bar at the top left. it will fill up more the closer you get to a drop. drops are marked in pink. find the closest one!",
-        "stay out of the drone's light cone to avoid detection. you can also sneak up on drones and disable them with 'X', but it's a high risk action.",
-        "use the right stick to look around. press 'RB' to toggle flashlight",
+        "Hold left stick up to move forward. Use 'RT' up to increase scooter speed.",
+        "Use 'LT' to decrease scooter speed. Press 'LB' to break.", // Kind of convoluted
+        "move the left stick sideways for steering",
+        "Hold left stick down to reverse. Alternatively, you can jump low obstacles with 'Y'.",
+        "look for the blue charging stations to charge scooter battery",
+        "remember to keep the battery charged or scooter speed will be severely limited",
+        "Pay attention to the drop indicator bar at the top left. It will fill up more the closer you get to a drop. Drops are marked in pink. Find the closest one!",
+        "Stay out of the drone's light cone to avoid detection. You can also sneak up on drones and disable them with 'X', but it's a high risk action.",
+        "Use the right stick to look around. Press 'RB' to toggle flashlight",
         "find the last drop to finish the level",
-        "you got busted, but we got you. go finish up delivering to the drops. and don't get caught this time!"
+        "You got busted, but we got you. Go finish up delivering to the drops. And don't get caught this time!"
     };
 
     private void Awake()
