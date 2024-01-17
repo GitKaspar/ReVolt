@@ -24,6 +24,10 @@ public class ChargingStation : MonoBehaviour
         actions = ControlsInstance.GetActions();
         actions.Charge.started += Charge_started;
         actions.Charge.canceled += Charge_canceled;
+
+        Debug.Log(ChargingRate);
+        ChargingRate *= UpgradeStats.Instance.GetCurrentValue(StatName.Battery) / UpgradeStats.Instance.GetLevelValue(StatName.Battery, 0);
+        Debug.Log(ChargingRate);
     }
 
     private void OnDestroy()
