@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using UnityEngine.UI;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -30,6 +31,10 @@ public class TutorialManager : MonoBehaviour
     public GameObject ChargingStations;
     public GameObject InvisibleWalls;
 
+    private static bool[] dropsDone;
+    private static int staticTutorialIndex;
+    private static bool isRetry = false;
+
     private string[] tutorialPhrases =
     {
         "scooter's ready. time to see, what this baby can do!",
@@ -40,6 +45,8 @@ public class TutorialManager : MonoBehaviour
         "much better.",
         "should go look for places to spread my message.",
         "careful now! police drone ahead!",
+        "",
+        "",
         ""
     };
    private string[] tutorialInstructions =
@@ -53,7 +60,8 @@ public class TutorialManager : MonoBehaviour
         "pay attention to the drop indicator bar at the top left. it will fill up more the closer you get to a drop. drops are marked in pink. find the closest one!",
         "stay out of the drone's light cone to avoid detection. you can also sneak up on drones and disable them with 'q', but it's a high risk action.",
         "use the mouse and 'right mouse button' to look around. press 'f' to toggle flashlight",
-        "find the last drop to finish the level"
+        "find the last drop to finish the level",
+        "you got busted, but we got you. go finish up delivering to the drops. and don't get caught this time!"
     };
 
     private string[] tutorialInstructionsGamePad =
@@ -67,36 +75,81 @@ public class TutorialManager : MonoBehaviour
         "pay attention to the drop indicator bar at the top left. it will fill up more the closer you get to a drop. drops are marked in pink. find the closest one!",
         "stay out of the drone's light cone to avoid detection. you can also sneak up on drones and disable them with 'X', but it's a high risk action.",
         "use the right stick to look around. press 'RB' to toggle flashlight",
-        "find the last drop to finish the level"
+        "find the last drop to finish the level",
+        "you got busted, but we got you. go finish up delivering to the drops. and don't get caught this time!"
     };
 
     private void Awake()
     {
         Events.OnControlSchemeChange += ChangeControls;
+        Events.OnEndGame += StoreProgress;
+        Events.OnDropDone += DropDone;
+    }
+
+    private void DropDone(Drop drop)
+    {
+        if (dropsDone == null) dropsDone = new bool[2];
+        Drop[] drops = GetComponent<GameController>().Drops;
+        for (int i = 0; i < drops.Length; i++)
+        {
+            if (drops[i] == drop)
+                dropsDone[i] = true;
+        }
+    }
+
+    private void StoreProgress(bool isWin)
+    {
+        if (!isWin)
+        {
+            isRetry = true;
+            staticTutorialIndex = tutorialIndex;
+        }
     }
 
     private void OnDestroy()
     {
         Events.OnControlSchemeChange -= ChangeControls;
+        Events.OnEndGame -= StoreProgress;
+        Events.OnDropDone -= DropDone;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        tutorialIndex = 0;
-        scooterBattery = Player.GetComponent<Battery>();
-
-        //jumpComponent = Player.GetComponent<Jump>();
-
         triggerBoxComponent1 = DeadEndBox.GetComponent<TriggerBox>();
-        
         triggerBoxComponent2 = DroneBox1.GetComponent<TriggerBox>();
         triggerBoxComponent3 = DroneBox2.GetComponent<TriggerBox>();
+        scooterBattery = Player.GetComponent<Battery>();
 
-        DropIndicatorPanel.SetActive(false);
-        IndicatorImage.SetActive(false);
+        if (isRetry)
+        {
+            tutorialIndex = staticTutorialIndex;
+            Drop[] drops = GetComponent<GameController>().Drops;
+            for (int i = 0; i < drops.Length; i++)
+            {
+                if (dropsDone[i])
+                {
+                    Player.transform.position = drops[i].transform.position + Vector3.up + Vector3.forward;
+                    drops[i].DoTutorialRetryDrop(Player.transform);
+                }
+            }
 
-        ChargingStations.SetActive(false);
+            DropIndicatorPanel.SetActive(true);
+            IndicatorImage.SetActive(true);
+            ChargingStations.SetActive(true);
+            InvisibleWalls.SetActive(false);
+
+            StartCoroutine(TextBlock(10, 1f, 2f));
+
+        }
+        else
+        {
+            tutorialIndex = 0;
+            DropIndicatorPanel.SetActive(false);
+            IndicatorImage.SetActive(false);
+            ChargingStations.SetActive(false);
+        }
+
     }
 
     // Update is called once per frame
@@ -108,7 +161,7 @@ public class TutorialManager : MonoBehaviour
             {
                 case 0:
                     {
-                        StartCoroutine(TextBlock(tutorialIndex, 2f, 3f));
+                        StartCoroutine(TextBlock(tutorialIndex, 1f, 3f));
                         tutorialIndex++;
                     }
                     break;

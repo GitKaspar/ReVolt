@@ -22,6 +22,7 @@ public class Drop : MonoBehaviour
     private void Awake()
     {
         Events.OnControlSchemeChange += ChangeButton;
+        source = GetComponent<AudioSource>();
     }
 
     private void OnDestroy()
@@ -43,8 +44,6 @@ public class Drop : MonoBehaviour
 
     private void Start()
     {
-        source = GetComponent<AudioSource>();
-
         actions = ControlsInstance.GetActions();
         actions.Drop.performed += OnDrop;
     }
@@ -80,7 +79,7 @@ public class Drop : MonoBehaviour
         }
     }
 
-    private void DoDrop()
+    public void DoDrop()
     {
         done = true;
         AudioClip chosenClip = SoundController.SoundInstance.Drops.Clips[Random.Range(0, SoundController.SoundInstance.Drops.Clips.Count)];
@@ -95,6 +94,31 @@ public class Drop : MonoBehaviour
             rb.AddForce(player.transform.right * 30, ForceMode.Impulse);       
         else 
             rb.AddForce(player.transform.right * -30, ForceMode.Impulse);
+
+        Renderer[] renderers = GetComponentsInChildren<Renderer>();
+
+        foreach (var rend in renderers)
+        {
+            rend.enabled = false;
+            //rend.material = MatDropped;
+        }
+    }
+
+    public void DoTutorialRetryDrop(Transform player)
+    {
+        done = true;
+        AudioClip chosenClip = SoundController.SoundInstance.Drops.Clips[Random.Range(0, SoundController.SoundInstance.Drops.Clips.Count)];
+        source.PlayOneShot(chosenClip);
+        Events.DropDone(this);
+
+        bool toTheRight = Vector3.Dot((transform.position - player.position), player.right) > 0;
+        GameObject newspaper = Instantiate(NewspaperPrefab, player.position + Vector3.up + (toTheRight ? player.right : player.right * -1) * 0.25f, Quaternion.identity);
+        Rigidbody rb = newspaper.GetComponent<Rigidbody>();
+        rb.AddForce((transform.position - player.position + Vector3.up) * 20, ForceMode.Impulse); //throw newspaper at drop
+        if (toTheRight) //throw to side, so paper doesn't collide with scooter
+            rb.AddForce(player.right * 30, ForceMode.Impulse);
+        else
+            rb.AddForce(player.right * -30, ForceMode.Impulse);
 
         Renderer[] renderers = GetComponentsInChildren<Renderer>();
 
