@@ -22,6 +22,9 @@ public class MainMenu : MonoBehaviour
 
     private AudioSource menuMusicSource;
 
+    private List<string> nicolasBios = new List<string>() { "is a computer science student", "his most played video game: NBA2k14", "likes dad jokes (is not a dad)", "rode an electric scooter for the first time in 2023", "big sports guy", "thanks the University of Tartu GameDev course" };
+    private List<string> kaspariBios = new List<string>() { "is a history student", "once got a pea stuck up his nose", "will welcome your soul in Oblivion!", "would like to tell you the Good News", "is a bloody peasant", "thanks the peer-reviewers of this game"};
+    private List<string> tristanBios = new List<string>() { "is a philosophy student", "sober for 3+ months already", "beverage guy and matcha bf", "likes downloading games more than playing them", "nintendo switch enthusiast", "pc", "thanks people uploading free assets to the internet" };
 
     private void Awake()
     {
@@ -155,20 +158,29 @@ public class MainMenu : MonoBehaviour
 
     public void NicolasButton()
     {
-        List<string> nicolasBios = new List<string>() { "a german", "computer science BA", "most played video game: NBA2k14", "likes dad jokes (is not a dad)", "rode an electric scooter for the first time in 2023", "big sports guy"};
-        displayBio.text = nicolasBios[Random.Range(0, nicolasBios.Count)];
+        string newText = nicolasBios[Random.Range(0, nicolasBios.Count)];
+        while (newText == displayBio.text) 
+            { newText = nicolasBios[Random.Range(0, nicolasBios.Count)]; }
+
+        displayBio.text = newText;
     }
 
     public void KasparButton()
     {
-        List<string> kaspariBios = new List<string>() { "once got a pea stuck up his nose", "will welcome your soul in Oblivion!", "would like to tell you the Good News", "is a bloody peasant"};
-        displayBio.text = kaspariBios[Random.Range(0, kaspariBios.Count)];
+        string newText = kaspariBios[Random.Range(0, kaspariBios.Count)];
+        while (newText == displayBio.text)
+        { newText = kaspariBios[Random.Range(0, kaspariBios.Count)]; }
+
+        displayBio.text = newText;
     }
 
     public void TristanButton()
     {
-        List<string> tristanBios = new List<string>() { "a philosophy student", "sober for 3+ months already", "beverage guy and matcha bf", "likes downloading games more than playing them", "nintendo switch enthusiast", "pc"};
-        displayBio.text = tristanBios[Random.Range(0, tristanBios.Count)];
+        string newText = tristanBios[Random.Range(0, tristanBios.Count)];
+        while (newText == displayBio.text)
+        { newText = tristanBios[Random.Range(0, tristanBios.Count)]; }
+
+        displayBio.text = newText;
     }
 
     public void NextKeysPC()
